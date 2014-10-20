@@ -30,7 +30,7 @@ echo \common\components\widgets\menu\MenuWidget::widget([
         [
             'label'=>Yii::t('themes', 'Users'),
             'icon'=>'<i class="fa fa-users"></i>',
-            'url'=>['/users/default/index']
+            'url'=>['/user']
         ],
         [
             'label'=>Yii::t('themes', 'System'),

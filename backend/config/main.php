@@ -6,20 +6,9 @@ return [
     'id' => 'app-backend',
     'name' => 'Yii2-Start',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'admin/default/index',
+    'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'default/index',
     'modules' => [
-        'admin' => [
-            'class' => 'backend\modules\admin\Module'
-        ],
-        'articles' => [
-            'class' => 'backend\modules\articles\Module',
-        ],
-        'category' => [
-            'class' => 'backend\modules\category\Module',
-        ],
-        'users' => [
-            'class' => 'backend\modules\users\Module',
-        ],
         'system' => [
             'class' => 'backend\modules\system\Module',
         ],
@@ -32,10 +21,11 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '' => 'admin/default/index',
-                '<_m:articles>' => '<_m>/articles',
-                '<_m:category>' => '<_m>/category',
-                '<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>'
+                '' => 'default/index',
+                'login' => 'login/login',
+                //'<_m:articles>' => '<_m>/articles',
+                //'<_m:category>' => '<_m>/category',
+                //'<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>'
             ]
         ],
         'view' => [
@@ -47,7 +37,7 @@ return [
             ]
         ],
         'user' => [
-            'loginUrl' => ['users/guest/login']
+            'loginUrl' => ['login']
         ],
         'assetManager' => [
             'bundles' => [
@@ -66,7 +56,7 @@ return [
             ]
         ],
         'errorHandler' => [
-            'errorAction' => 'admin/default/error'
+            'errorAction' => 'default/error'
         ],
         'i18n' => [
             'translations' => [
@@ -89,11 +79,7 @@ return [
                 'system' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@backend/modules/system/messages',
-                ],
-                'users' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/modules/users/messages',
-                ],
+                ]
             ]
         ]
     ],

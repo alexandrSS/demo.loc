@@ -46,6 +46,11 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_DEFAULT = 'user';
 
     /**
+     * @var string Temporary path where will be saved user's avatar
+     */
+    const AVATARS_TEMP_PATH = '@statics/temp/users/avatars';
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
