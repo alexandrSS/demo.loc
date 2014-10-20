@@ -254,19 +254,19 @@ class Box extends Widget
             YiiAsset::register($view);
             $view->registerJs(
                 "jQuery(document).on('click', '#batch-delete', function (evt) {" .
-                    "evt.preventDefault();" .
-                    "var keys = jQuery('#" . $this->grid . "').yiiGridView('getSelectedRows');" .
-                    "if (keys == '') {" .
-                        "alert('" . Yii::t('themes', 'You need to select at least one item.') . "');" .
-                    "} else {" .
-                        "if (confirm('" . Yii::t('themes', 'Are you sure you want to delete selected items?') . "')) {" .
-                            "jQuery.ajax({" .
-                                "type: 'POST'," .
-                                "url: jQuery(this).attr('href')," .
-                                "data: { ids: keys}" .
-                            "});" .
-                        "}" .
-                    "}" .
+                "evt.preventDefault();" .
+                "var keys = jQuery('#" . $this->grid . "').yiiGridView('getSelectedRows');" .
+                "if (keys == '') {" .
+                "alert('" . Yii::t('themes', 'You need to select at least one item.') . "');" .
+                "} else {" .
+                "if (confirm('" . Yii::t('themes', 'Are you sure you want to delete selected items?') . "')) {" .
+                "jQuery.ajax({" .
+                "type: 'POST'," .
+                "url: jQuery(this).attr('href')," .
+                "data: { ids: keys}" .
+                "});" .
+                "}" .
+                "}" .
                 "});"
             );
         }

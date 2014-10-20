@@ -13,8 +13,8 @@
 
 use backend\themes\admin\widgets\Box;
 
-$this->title = Yii::t('users', 'BACKEND_UPDATE_TITLE');
-$this->params['subtitle'] = Yii::t('users', 'BACKEND_UPDATE_SUBTITLE');
+$this->title = Yii::t('backend', 'BACKEND_UPDATE_TITLE');
+$this->params['subtitle'] = Yii::t('backend', 'BACKEND_UPDATE_SUBTITLE');
 $this->params['breadcrumbs'] = [
     [
         'label' => $this->title,

@@ -28,8 +28,7 @@
     "require-dev": {
     	"yiisoft/yii2-debug": "*",
     	"yiisoft/yii2-gii": "*",
-        "rubaxa/fileapi": "dev-master",
-        "creocoder/yii2-nested-set-behavior": "dev-master"
+        "rubaxa/fileapi": "*"
     },
     "config": {
         "process-timeout": 1800

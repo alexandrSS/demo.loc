@@ -17,14 +17,14 @@ class AppAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-	public $css = [
-		'css/style.css'
-	];
+    public $css = [
+        'css/style.css'
+    ];
 
     /**
      * @inheritdoc
      */
-	public $depends = [
-		'yii\bootstrap\BootstrapAsset'
-	];
+    public $depends = [
+        'yii\bootstrap\BootstrapAsset'
+    ];
 }

@@ -8,9 +8,10 @@
 
 use yii\helpers\Html;
 
-$this->title = Yii::t('admin', 'INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('admin', 'INDEX_SUBTITLE'); ?>
+$this->title = Yii::t('backend', 'INDEX_TITLE');
+$this->params['subtitle'] = Yii::t('backend', 'INDEX_SUBTITLE'); ?>
 <div class="jumbotron text-center">
-  <h1><?php echo Html::encode($this->title); ?></h1>
-  <p><?= Yii::t('admin', 'INDEX_JUMBOTRON_MSG') ?></p>
+    <h1><?php echo Html::encode($this->title); ?></h1>
+
+    <p><?= Yii::t('backend', 'INDEX_JUMBOTRON_MSG') ?></p>
 </div>

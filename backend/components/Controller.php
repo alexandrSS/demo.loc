@@ -6,7 +6,7 @@ use yii\filters\AccessControl;
 use Yii;
 
 /**
- * Main backend controller.
+ * Основной контроллер backend приложеннием
  */
 class Controller extends \yii\web\Controller
 {

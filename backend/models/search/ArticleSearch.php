@@ -3,6 +3,7 @@
 namespace backend\models\search;
 
 use yii\data\ActiveDataProvider;
+use backend\models\Article;
 
 /**
  * Article search model.

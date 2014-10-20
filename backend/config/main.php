@@ -8,11 +8,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'defaultRoute' => 'default/index',
-    'modules' => [
-        'system' => [
-            'class' => 'backend\modules\system\Module',
-        ],
-    ],
     'components' => [
         'request' => [
             'cookieValidationKey' => '7fdsf%dbYd&djsb#sn0mlsfo(kj^kf98dfh',
@@ -23,9 +18,6 @@ return [
             'rules' => [
                 '' => 'default/index',
                 'login' => 'login/login',
-                //'<_m:articles>' => '<_m>/articles',
-                //'<_m:category>' => '<_m>/category',
-                //'<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>'
             ]
         ],
         'view' => [
@@ -60,26 +52,14 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'admin' => [
+                'backend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/modules/admin/messages',
-                ],
-                'category' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/modules/category/messages',
-                ],
-                'articles' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/modules/articles/messages',
+                    'basePath' => '@backend/messages',
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@backend/themes/admin/messages',
                 ],
-                'system' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/modules/system/messages',
-                ]
             ]
         ]
     ],

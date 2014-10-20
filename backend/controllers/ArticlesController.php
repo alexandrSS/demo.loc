@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 use Yii;
 
 /**
- * Default backend controller.
+ * Контроллер
  */
 class ArticlesController extends Controller
 {
@@ -49,23 +49,23 @@ class ArticlesController extends Controller
         return [
             'imperavi-get' => [
                 'class' => ImperaviGet::className(),
-                'url' => $this->module->contentUrl,
-                'path' => $this->module->contentPath
+                'url' => Article::CONTENT_URL,
+                'path' => Article::CONTENT_PATH
             ],
             'imperavi-image-upload' => [
                 'class' => ImperaviUpload::className(),
-                'url' => $this->module->contentUrl,
-                'path' => $this->module->contentPath
+                'url' => Article::CONTENT_URL,
+                'path' => Article::CONTENT_PATH
             ],
             'imperavi-file-upload' => [
                 'class' => ImperaviUpload::className(),
-                'url' => $this->module->fileUrl,
-                'path' => $this->module->filePath,
+                'url' => Article::FILE_URL,
+                'path' => Article::FILE_PATH,
                 'uploadOnlyImage' => false
             ],
             'fileapi-upload' => [
                 'class' => FileAPIUpload::className(),
-                'path' => $this->module->imagesTempPath
+                'path' => Article::IMAGES_TEMP_PATH
             ]
         ];
     }
@@ -102,7 +102,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['update', 'id' => $model->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('articles', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -138,7 +138,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('articles', 'BACKEND_FLASH_FAIL_ADMIN_UPDATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_UPDATE'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {

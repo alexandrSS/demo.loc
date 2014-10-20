@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
             $form->field($user, 'status_id')->dropDownList(
                 $statusArray,
                 [
-                    'prompt' => Yii::t('users', 'BACKEND_PROMPT_STATUS')
+                    'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')
                 ]
             ) ?>
         </div>
@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
             $form->field($user, 'role')->dropDownList(
                 $roleArray,
                 [
-                    'prompt' => Yii::t('users', 'BACKEND_PROMPT_ROLE')
+                    'prompt' => Yii::t('backend', 'BACKEND_PROMPT_ROLE')
                 ]
             ) ?>
         </div>
@@ -80,7 +80,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $user->isNewRecord ? Yii::t('users', 'BACKEND_CREATE_SUBMIT') : Yii::t('users', 'BACKEND_UPDATE_SUBMIT'),
+    $user->isNewRecord ? Yii::t('backend', 'BACKEND_CREATE_SUBMIT') : Yii::t('backend', 'BACKEND_UPDATE_SUBMIT'),
     [
         'class' => $user->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

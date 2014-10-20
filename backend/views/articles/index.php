@@ -14,8 +14,8 @@ use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
-$this->title = Yii::t('articles', 'BACKEND_INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('articles', 'BACKEND_INDEX_SUBTITLE');
+$this->title = Yii::t('backend', 'BACKEND_INDEX_TITLE');
+$this->params['subtitle'] = Yii::t('backend', 'BACKEND_INDEX_SUBTITLE');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
@@ -46,62 +46,62 @@ $this->params['breadcrumbs'] = [
                         'attribute' => 'title',
                         'format' => 'html',
                         'value' => function ($model) {
-                                return Html::a(
-                                    $model['title'],
-                                    ['update', 'id' => $model['id']]
-                                );
-                            }
+                            return Html::a(
+                                $model['title'],
+                                ['update', 'id' => $model['id']]
+                            );
+                        }
                     ],
                     'views',
                     [
                         'attribute' => 'status_id',
                         'format' => 'html',
                         'value' => function ($model) {
-                                $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'label-success' : 'label-danger';
+                            $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'label-success' : 'label-danger';
 
-                                return '<span class="label ' . $class . '">' . $model->status . '</span>';
-                            },
+                            return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                        },
                         'filter' => Html::activeDropDownList(
-                                $searchModel,
-                                'status_id',
-                                $statusArray,
-                                [
-                                    'class' => 'form-control',
-                                    'prompt' => Yii::t('articles', 'BACKEND_PROMPT_STATUS')
-                                ]
-                            )
+                            $searchModel,
+                            'status_id',
+                            $statusArray,
+                            [
+                                'class' => 'form-control',
+                                'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')
+                            ]
+                        )
                     ],
                     [
                         'attribute' => 'created_at',
                         'format' => 'date',
                         'filter' => DatePicker::widget(
-                                [
-                                    'model' => $searchModel,
-                                    'attribute' => 'created_at',
-                                    'options' => [
-                                        'class' => 'form-control'
-                                    ],
-                                    'clientOptions' => [
-                                        'dateFormat' => 'dd.mm.yy',
-                                    ]
+                            [
+                                'model' => $searchModel,
+                                'attribute' => 'created_at',
+                                'options' => [
+                                    'class' => 'form-control'
+                                ],
+                                'clientOptions' => [
+                                    'dateFormat' => 'dd.mm.yy',
                                 ]
-                            )
+                            ]
+                        )
                     ],
                     [
                         'attribute' => 'updated_at',
                         'format' => 'date',
                         'filter' => DatePicker::widget(
-                                [
-                                    'model' => $searchModel,
-                                    'attribute' => 'updated_at',
-                                    'options' => [
-                                        'class' => 'form-control'
-                                    ],
-                                    'clientOptions' => [
-                                        'dateFormat' => 'dd.mm.yy',
-                                    ]
+                            [
+                                'model' => $searchModel,
+                                'attribute' => 'updated_at',
+                                'options' => [
+                                    'class' => 'form-control'
+                                ],
+                                'clientOptions' => [
+                                    'dateFormat' => 'dd.mm.yy',
                                 ]
-                            )
+                            ]
+                        )
                     ],
                     [
                         'class' => ActionColumn::className(),

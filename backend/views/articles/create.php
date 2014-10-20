@@ -10,8 +10,8 @@
 
 use backend\themes\admin\widgets\Box;
 
-$this->title = Yii::t('articles', 'BACKEND_CREATE_TITLE');
-$this->params['subtitle'] = Yii::t('articles', 'BACKEND_CREATE_SUBTITLE');
+$this->title = Yii::t('backend', 'BACKEND_CREATE_TITLE');
+$this->params['subtitle'] = Yii::t('backend', 'BACKEND_CREATE_SUBTITLE');
 $this->params['breadcrumbs'] = [
     [
         'label' => $this->title,
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'] = [
                         'icon' => 'fa-reply',
                         'options' => [
                             'class' => 'btn-default',
-                            'title' => Yii::t('articles', 'BACKEND_CANCEL_BTN_TITLE')
+                            'title' => Yii::t('backend', 'BACKEND_CANCEL_BTN_TITLE')
                         ]
                     ]
                 ]

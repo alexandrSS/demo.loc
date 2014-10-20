@@ -5,9 +5,6 @@ return [
     'timeZone' => 'Europe/Moscow',
     'language'=>'ru-RU',
     'modules' => [
-        'articles' => [
-            'class' => 'common\modules\articles\Module',
-        ],
         'category' => [
             'class' => 'common\modules\category\Module',
         ],
@@ -19,7 +16,7 @@ return [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'common\modules\users\models\User',
-            'loginUrl' => ['/users/guest/login']
+            'loginUrl' => ['login']
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

@@ -18,8 +18,7 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'options'=>['class'=>'treeview'],
             'items'=>[
                 ['label'=>Yii::t('themes', 'Articles'), 'url'=>['/articles'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                ['label'=>Yii::t('themes', 'Category'), 'url'=>['/category'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Static pages'), 'url'=>['/page/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                ['label'=>Yii::t('themes', 'Static pages'), 'url'=>['/pages'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 //['label'=>Yii::t('themes', 'Articles'), 'url'=>['/article/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 //['label'=>Yii::t('themes', 'Article Categories'), 'url'=>['/article-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 //['label'=>Yii::t('themes', 'Text Widgets'), 'url'=>['/widget-text/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
@@ -39,7 +38,7 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'items'=>[
                 [
                     'label'=>Yii::t('themes', 'System Information'),
-                    'url'=>['/system/system-information/index'],
+                    'url'=>['/system-information/index'],
                     'icon'=>'<i class="fa fa-angle-double-right"></i>'
                 ],
                 //['label'=>Yii::t('themes', 'Key-Value Storage'), 'url'=>['/key-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
@@ -47,16 +46,16 @@ echo \common\components\widgets\menu\MenuWidget::widget([
                 //['label'=>Yii::t('themes', 'File Manager'), 'url'=>['/file-manager/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 [
                     'label'=>Yii::t('themes', 'System Events'),
-                    'url'=>['/system/system-event/index'],
+                    'url'=>['/system-event/index'],
                     'icon'=>'<i class="fa fa-angle-double-right"></i>',
-                    'badge'=>\backend\modules\system\models\SystemEvent::find()->today()->count(),
+                    'badge'=>\backend\models\SystemEvent::find()->today()->count(),
                     'badgeBgClass'=>'bg-green',
                 ],
                 [
                     'label'=>Yii::t('themes', 'Logs'),
-                    'url'=>['/system/log/index'],
+                    'url'=>['/log/index'],
                     'icon'=>'<i class="fa fa-angle-double-right"></i>',
-                    'badge'=>\backend\modules\system\models\SystemLog::find()->count(),
+                    'badge'=>\backend\models\SystemLog::find()->count(),
                     'badgeBgClass'=>'bg-red',
                 ],
             ]

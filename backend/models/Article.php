@@ -19,7 +19,7 @@ use Yii;
  * @property integer $created_at Created time
  * @property integer $updated_at Updated time
  */
-class Article extends \common\modules\articles\models\Article
+class Article extends \common\models\Article
 {
     /**
      * @var string Jui created date
@@ -85,8 +85,8 @@ class Article extends \common\modules\articles\models\Article
     public static function getStatusArray()
     {
         return [
-            self::STATUS_UNPUBLISHED => Yii::t('articles', 'STATUS_UNPUBLISHED'),
-            self::STATUS_PUBLISHED => Yii::t('articles', 'STATUS_PUBLISHED')
+            self::STATUS_UNPUBLISHED => Yii::t('backend', 'STATUS_UNPUBLISHED'),
+            self::STATUS_PUBLISHED => Yii::t('backend', 'STATUS_PUBLISHED')
         ];
     }
 
@@ -107,17 +107,17 @@ class Article extends \common\modules\articles\models\Article
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('articles', 'ATTR_ID'),
-            'title' => Yii::t('articles', 'ATTR_TITLE'),
-            'alias' => Yii::t('articles', 'ATTR_ALIAS'),
-            'snippet' => Yii::t('articles', 'ATTR_SNIPPET'),
-            'content' => Yii::t('articles', 'ATTR_CONTENT'),
-            'views' => Yii::t('articles', 'ATTR_VIEWS'),
-            'status_id' => Yii::t('articles', 'ATTR_STATUS'),
-            'created_at' => Yii::t('articles', 'ATTR_CREATED'),
-            'updated_at' => Yii::t('articles', 'ATTR_UPDATED'),
-            'preview_url' => Yii::t('articles', 'ATTR_PREVIEW_URL'),
-            'image_url' => Yii::t('articles', 'ATTR_IMAGE_URL'),
+            'id' => Yii::t('backend', 'ATTR_ID'),
+            'title' => Yii::t('backend', 'ATTR_TITLE'),
+            'alias' => Yii::t('backend', 'ATTR_ALIAS'),
+            'snippet' => Yii::t('backend', 'ATTR_SNIPPET'),
+            'content' => Yii::t('backend', 'ATTR_CONTENT'),
+            'views' => Yii::t('backend', 'ATTR_VIEWS'),
+            'status_id' => Yii::t('backend', 'ATTR_STATUS'),
+            'created_at' => Yii::t('backend', 'ATTR_CREATED'),
+            'updated_at' => Yii::t('backend', 'ATTR_UPDATED'),
+            'preview_url' => Yii::t('backend', 'ATTR_PREVIEW_URL'),
+            'image_url' => Yii::t('backend', 'ATTR_IMAGE_URL'),
         ];
     }
 

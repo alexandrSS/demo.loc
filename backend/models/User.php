@@ -53,9 +53,9 @@ class User extends \common\modules\users\models\User
     public static function getStatusArray()
     {
         return [
-            self::STATUS_ACTIVE => Yii::t('users', 'STATUS_ACTIVE'),
-            self::STATUS_INACTIVE => Yii::t('users', 'STATUS_INACTIVE'),
-            self::STATUS_BANNED => Yii::t('users', 'STATUS_BANNED')
+            self::STATUS_ACTIVE => Yii::t('backend', 'STATUS_ACTIVE'),
+            self::STATUS_INACTIVE => Yii::t('backend', 'STATUS_INACTIVE'),
+            self::STATUS_BANNED => Yii::t('backend', 'STATUS_BANNED')
         ];
     }
 
@@ -115,14 +115,14 @@ class User extends \common\modules\users\models\User
     {
         return
             [
-                'username' => Yii::t('users', 'ATTR_USERNAME'),
-                'email' => Yii::t('users', 'ATTR_EMAIL'),
-                'role' => Yii::t('users', 'ATTR_ROLE'),
-                'status_id' => Yii::t('users', 'ATTR_STATUS'),
-                'created_at' => Yii::t('users', 'ATTR_CREATED'),
-                'updated_at' => Yii::t('users', 'ATTR_UPDATED'),
-                'password' => Yii::t('users', 'ATTR_PASSWORD'),
-                'repassword' => Yii::t('users', 'ATTR_REPASSWORD')
+                'username' => Yii::t('backend', 'ATTR_USERNAME'),
+                'email' => Yii::t('backend', 'ATTR_EMAIL'),
+                'role' => Yii::t('backend', 'ATTR_ROLE'),
+                'status_id' => Yii::t('backend', 'ATTR_STATUS'),
+                'created_at' => Yii::t('backend', 'ATTR_CREATED'),
+                'updated_at' => Yii::t('backend', 'ATTR_UPDATED'),
+                'password' => Yii::t('backend', 'ATTR_PASSWORD'),
+                'repassword' => Yii::t('backend', 'ATTR_REPASSWORD')
             ];
     }
 
@@ -137,9 +137,9 @@ class User extends \common\modules\users\models\User
                 $this->generateAuthKey();
                 $this->generateToken();
                 SystemEvent::log('users', self::EVENT_AFTER_SIGNUP, [
-                    'username'=>$this->username,
-                    'email'=>$this->email,
-                    'created_at'=>$this->created_at
+                    'username' => $this->username,
+                    'email' => $this->email,
+                    'created_at' => $this->created_at
                 ]);
             }
             return true;

@@ -2,7 +2,6 @@
 
 namespace backend\assets;
 
-
 use yii\web\AssetBundle;
 
 class Flot extends AssetBundle

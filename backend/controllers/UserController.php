@@ -98,7 +98,7 @@ class UserController extends Controller
                 if ($user->save(false)) {
                     return $this->redirect(['update', 'id' => $user->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -137,7 +137,7 @@ class UserController extends Controller
             if ($user->validate() && $profile->validate()) {
                 $user->populateRelation('profile', $profile);
                 if (!$user->save(false)) {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
                 }
                 return $this->refresh();
             } elseif (Yii::$app->request->isAjax) {

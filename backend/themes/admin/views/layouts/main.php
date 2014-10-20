@@ -9,8 +9,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use backend\modules\system\models\SystemLog;
-use backend\modules\system\models\SystemEvent;
+use backend\models\SystemLog;
+use backend\models\SystemEvent;
 
 ?>
 <?php $this->beginPage(); ?>
@@ -55,7 +55,7 @@ use backend\modules\system\models\SystemEvent;
                                     <ul class="menu">
                                         <?php foreach(SystemEvent::find()->today()->orderBy(['event_time'=>SORT_DESC])->limit(10)->all() as $eventRecord): ?>
                                             <li>
-                                                <a href="<?= Yii::$app->urlManager->createUrl(['/system/system-event/view', 'id'=>$eventRecord->id]) ?>">
+                                                <a href="<?= Yii::$app->urlManager->createUrl(['/system-event/view', 'id'=>$eventRecord->id]) ?>">
                                                     <i class="fa fa-bell"></i>
                                                     <?= $eventRecord->getName() ?>
                                                 </a>
@@ -64,7 +64,7 @@ use backend\modules\system\models\SystemEvent;
                                     </ul>
                                 </li>
                                 <li class="footer">
-                                    <?= Html::a(Yii::t('themes', 'View all'), ['/system/system-event/index']) ?>
+                                    <?= Html::a(Yii::t('themes', 'View all'), ['/system-event/index']) ?>
                                 </li>
                             </ul>
                         </li>
@@ -83,7 +83,7 @@ use backend\modules\system\models\SystemEvent;
                                     <ul class="menu">
                                         <?php foreach(SystemLog::find()->orderBy(['log_time'=>SORT_DESC])->limit(5)->all() as $logEntry): ?>
                                             <li>
-                                                <a href="<?= Yii::$app->urlManager->createUrl(['/system/log/view', 'id'=>$logEntry->id]) ?>">
+                                                <a href="<?= Yii::$app->urlManager->createUrl(['/log/view', 'id'=>$logEntry->id]) ?>">
                                                     <i class="fa fa-warning <?= $logEntry->level == \yii\log\Logger::LEVEL_ERROR ? 'bg-red' : 'bg-yellow' ?>"></i>
                                                     <?= $logEntry->category ?>
                                                 </a>
@@ -92,7 +92,7 @@ use backend\modules\system\models\SystemEvent;
                                     </ul>
                                 </li>
                                 <li class="footer">
-                                    <?= Html::a(Yii::t('themes', 'View all'), ['/system/log/index']) ?>
+                                    <?= Html::a(Yii::t('themes', 'View all'), ['/log/index']) ?>
                                 </li>
                             </ul>
                         </li>
@@ -118,14 +118,14 @@ use backend\modules\system\models\SystemEvent;
                                     <div class="pull-left">
                                         <?= Html::a(
                                             Yii::t('themes', 'Profile'),
-                                            ['/users/default/update', 'id' => Yii::$app->user->id],
+                                            ['/user/update', 'id' => Yii::$app->user->id],
                                             ['class' => 'btn btn-default btn-flat']
                                         ) ?>
                                     </div>
                                     <div class="pull-right">
                                         <?= Html::a(
                                             Yii::t('themes', 'Sign out'),
-                                            ['/users/user/logout'],
+                                            ['/login/logout'],
                                             ['class' => 'btn btn-default btn-flat']
                                         ) ?>
                                     </div>

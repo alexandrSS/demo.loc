@@ -7,7 +7,7 @@ Installation and getting started:
 1. Run the following commands to install Yii2 Demo:
 
     `
-    php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta2"
+    php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta3"
     `
 
     `

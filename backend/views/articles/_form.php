@@ -123,7 +123,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('articles', 'BACKEND_CREATE_SUBMIT') : Yii::t(
+    $model->isNewRecord ? Yii::t('backend', 'BACKEND_CREATE_SUBMIT') : Yii::t(
         'articles',
         'BACKEND_UPDATE_SUBMIT'
     ),

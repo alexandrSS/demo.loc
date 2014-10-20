@@ -17,8 +17,8 @@ use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
-$this->title = Yii::t('users', 'BACKEND_INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('users', 'BACKEND_INDEX_SUBTITLE');
+$this->title = Yii::t('backend', 'BACKEND_INDEX_TITLE');
+$this->params['subtitle'] = Yii::t('backend', 'BACKEND_INDEX_SUBTITLE');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
@@ -48,8 +48,8 @@ $this->params['breadcrumbs'] = [
                         'attribute' => 'username',
                         'format' => 'html',
                         'value' => function ($model) {
-                                return Html::a($model['username'], ['update', 'id' => $model['id']], ['data-pjax' => 0]);
-                            }
+                            return Html::a($model['username'], ['update', 'id' => $model['id']], ['data-pjax' => 0]);
+                        }
                     ],
                     'email',
                     [
@@ -64,63 +64,63 @@ $this->params['breadcrumbs'] = [
                         'attribute' => 'status_id',
                         'format' => 'html',
                         'value' => function ($model) {
-                                if ($model->status_id === $model::STATUS_ACTIVE) {
-                                    $class = 'label-success';
-                                } elseif ($model->status_id === $model::STATUS_INACTIVE) {
-                                    $class = 'label-warning';
-                                } else {
-                                    $class = 'label-danger';
-                                }
+                            if ($model->status_id === $model::STATUS_ACTIVE) {
+                                $class = 'label-success';
+                            } elseif ($model->status_id === $model::STATUS_INACTIVE) {
+                                $class = 'label-warning';
+                            } else {
+                                $class = 'label-danger';
+                            }
 
-                                return '<span class="label ' . $class . '">' . $model->status . '</span>';
-                            },
+                            return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                        },
                         'filter' => Html::activeDropDownList(
-                                $searchModel,
-                                'status_id',
-                                $statusArray,
-                                ['class' => 'form-control', 'prompt' => Yii::t('users', 'BACKEND_PROMPT_STATUS')]
-                            )
+                            $searchModel,
+                            'status_id',
+                            $statusArray,
+                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')]
+                        )
                     ],
                     [
                         'attribute' => 'role',
                         'filter' => Html::activeDropDownList(
-                                $searchModel,
-                                'role',
-                                $roleArray,
-                                ['class' => 'form-control', 'prompt' => Yii::t('users', 'BACKEND_PROMPT_ROLE')]
-                            )
+                            $searchModel,
+                            'role',
+                            $roleArray,
+                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'BACKEND_PROMPT_ROLE')]
+                        )
                     ],
                     [
                         'attribute' => 'created_at',
                         'format' => 'date',
                         'filter' => DatePicker::widget(
-                                [
-                                    'model' => $searchModel,
-                                    'attribute' => 'created_at',
-                                    'options' => [
-                                        'class' => 'form-control'
-                                    ],
-                                    'clientOptions' => [
-                                        'dateFormat' => 'dd.mm.yy',
-                                    ]
+                            [
+                                'model' => $searchModel,
+                                'attribute' => 'created_at',
+                                'options' => [
+                                    'class' => 'form-control'
+                                ],
+                                'clientOptions' => [
+                                    'dateFormat' => 'dd.mm.yy',
                                 ]
-                            )
+                            ]
+                        )
                     ],
                     [
                         'attribute' => 'updated_at',
                         'format' => 'date',
                         'filter' => DatePicker::widget(
-                                [
-                                    'model' => $searchModel,
-                                    'attribute' => 'updated_at',
-                                    'options' => [
-                                        'class' => 'form-control'
-                                    ],
-                                    'clientOptions' => [
-                                        'dateFormat' => 'dd.mm.yy',
-                                    ]
+                            [
+                                'model' => $searchModel,
+                                'attribute' => 'updated_at',
+                                'options' => [
+                                    'class' => 'form-control'
+                                ],
+                                'clientOptions' => [
+                                    'dateFormat' => 'dd.mm.yy',
                                 ]
-                            )
+                            ]
+                        )
                     ],
                     [
                         'class' => ActionColumn::className(),
