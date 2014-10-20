@@ -1,0 +1,43 @@
+{
+	"name": "alexandrSS/demo.loc",
+	"description": "Yii2-Start it's a small Yii 2 application template for your fast project start.",
+	"keywords": ["yii2", "yii 2", "application", "start", "bootstrap"],
+	"homepage": "https://github.com/alexandrSS/demo.loc",
+	"type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/alexandrSS/demo.loc/issues?q=is%3Aopen",
+        "source": "https://github.com/alexandrSS/demo.loc"
+    },
+    "authors": [
+        {
+            "name": "Alexandr Syrovatskii",
+            "email": "syrovatskii@gmail.com"
+        }
+    ],
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "*",
+		"yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-jui": "*",
+        "yiisoft/yii2-swiftmailer": "*",
+        "swiftmailer/swiftmailer": "*",
+        "bower-asset/jquery-ui": "*"
+    },
+    "require-dev": {
+    	"yiisoft/yii2-debug": "*",
+    	"yiisoft/yii2-gii": "*",
+        "rubaxa/fileapi": "dev-master",
+        "creocoder/yii2-nested-set-behavior": "dev-master"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
