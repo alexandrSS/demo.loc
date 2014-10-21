@@ -1,23 +1,43 @@
 <?php
 
-use yii\helpers\Html;
+use backend\themes\admin\widgets\Box;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pages */
 
-$this->title = Yii::t('backend', 'Update {modelClass}: ', [
-    'modelClass' => 'Pages',
-]) . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Pages'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
+$this->title = Yii::t('backend', 'Страницы');
+$this->params['subtitle'] = Yii::t('backend', 'Обновление страницы');
+$this->params['breadcrumbs'] = [
+    [
+        'label' => $this->title,
+        'url' => ['index'],
+    ],
+    $this->params['subtitle']
+];
 ?>
-<div class="pages-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+<div class="row">
+    <div class="col-sm-12">
+        <?php $box = Box::begin(
+            [
+                'title' => $this->params['subtitle'],
+                'renderBody' => false,
+                'options' => [
+                    'class' => 'box-success'
+                ],
+                'bodyOptions' => [
+                    'class' => 'table-responsive'
+                ],
+                'buttonsTemplate' => '{cancel} {delete}'
+            ]
+        );
+        echo $this->render(
+            '_form',
+            [
+                'model' => $model,
+                'statusArray' => $statusArray,
+                'box' => $box
+            ]
+        );
+        Box::end(); ?>
+    </div>
 </div>

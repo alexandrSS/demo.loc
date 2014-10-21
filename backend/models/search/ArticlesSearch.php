@@ -3,12 +3,12 @@
 namespace backend\models\search;
 
 use yii\data\ActiveDataProvider;
-use backend\models\Article;
+use backend\models\Articles;
 
 /**
  * Article search model.
  */
-class ArticleSearch extends Article
+class ArticlesSearch extends Articles
 {
     /**
      * @inheritdoc

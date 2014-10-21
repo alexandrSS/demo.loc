@@ -3,12 +3,12 @@
 namespace common\models\query;
 
 use yii\db\ActiveQuery;
-use common\models\Article;
+use common\models\Articles;
 
 /**
  * Class ArticleQuery
  */
-class ArticleQuery extends ActiveQuery
+class ArticlesQuery extends ActiveQuery
 {
     /**
      * Select published posts.
@@ -17,7 +17,7 @@ class ArticleQuery extends ActiveQuery
      */
     public function published()
     {
-        $this->andWhere(['status_id' => Article::STATUS_PUBLISHED]);
+        $this->andWhere(['status_id' => Articles::STATUS_PUBLISHED]);
 
         return $this;
     }
@@ -29,7 +29,7 @@ class ArticleQuery extends ActiveQuery
      */
     public function unpublished()
     {
-        $this->andWhere(['status_id' => Article::STATUS_UNPUBLISHED]);
+        $this->andWhere(['status_id' => Articles::STATUS_UNPUBLISHED]);
 
         return $this;
     }

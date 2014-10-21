@@ -19,7 +19,7 @@ use Yii;
  * @property integer $created_at Created time
  * @property integer $updated_at Updated time
  */
-class Article extends \common\models\Article
+class Articles extends \common\models\Articles
 {
     /**
      * @var string Jui created date

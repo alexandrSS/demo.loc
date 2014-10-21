@@ -1,42 +1,53 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+use backend\themes\admin\widgets\Box;
+use backend\themes\admin\widgets\GridView;
+use yii\grid\ActionColumn;
+use yii\grid\CheckboxColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Pages');
+$this->title = Yii::t('backend', 'Страницы');
+$this->params['subtitle'] = Yii::t('backend', 'Список страниц');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pages-index">
+<div class="row">
+    <div class="col-xs-12">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php Box::begin(
+            [
+                'title' => $this->params['subtitle'],
+                'bodyOptions' => [
+                    'class' => 'table-responsive'
+                ],
+                'buttonsTemplate' => '{create} {batch-delete}',
+                'grid' => 'articles-grid'
+            ]
+        ); ?>
 
-    <p>
-        <?= Html::a(Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'Pages',
-]), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'class' => CheckboxColumn::classname()
+                ],
+                'title',
+                'alias',
+                'content:ntext',
+                'status_id',
+                // 'created_at',
+                // 'updated_at',
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'class' => ActionColumn::className(),
+                    'template' => '{update} {delete}'
+                ]
+            ],
+        ]); ?>
 
-            'id',
-            'title',
-            'alias',
-            'content:ntext',
-            'status_id',
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+    </div>
 </div>

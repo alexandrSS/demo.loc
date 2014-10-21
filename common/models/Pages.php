@@ -1,7 +1,9 @@
 <?php
 
 namespace common\models;
-
+use common\behaviors\PurifierBehavior;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -18,6 +20,49 @@ use Yii;
 class Pages extends \yii\db\ActiveRecord
 {
     /**
+     * Unpublished status
+     */
+    const STATUS_UNPUBLISHED = 0;
+    /**
+     * Published status
+     */
+    const STATUS_PUBLISHED = 1;
+    /**
+     * Whether posts need to be moderated before publishing
+     */
+    const MODERATION = true;
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'timestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+            ],
+            'sluggableBehavior' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                'slugAttribute' => 'alias'
+            ],
+            'purifierBehavior' => [
+                'class' => PurifierBehavior::className(),
+                'attributes' => [
+                    self::EVENT_BEFORE_VALIDATE => [
+                        'content' => [
+                            'HTML.AllowedElements' => '',
+                            'AutoFormat.RemoveEmpty' => true
+                        ]
+                    ]
+                ],
+                'textAttributes' => [
+                    self::EVENT_BEFORE_VALIDATE => ['title', 'alias']
+                ]
+            ]
+        ];
+    }
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -31,10 +76,20 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'alias', 'content', 'created_at', 'updated_at'], 'required'],
-            [['content'], 'string'],
+            // Required
+            [['title', 'alias'], 'required'],
+            // Trim
+            [['title', 'content'], 'trim'],
             [['status_id', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'alias'], 'string', 'max' => 100]
+            [['title', 'alias'], 'string', 'max' => 100],
+            // CreatedAtJui and UpdatedAtJui
+            [['createdAtJui', 'updatedAtJui'], 'date', 'format' => 'd.m.Y'],
+            // Status
+            [
+            'status_id',
+                'default',
+                'value' => self::MODERATION ? self::STATUS_PUBLISHED : self::STATUS_UNPUBLISHED
+            ]
         ];
     }
 }

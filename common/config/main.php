@@ -60,24 +60,16 @@ return [
             ],
         ],
 
-        'formatter'=>[
-            'class'=>'yii\i18n\Formatter'
+        'formatter' => [
+            'dateFormat' => 'dd.MM.y',
+            'datetimeFormat' => 'HH:mm:ss dd.MM.y'
         ],
+
         'i18n' => [
             'translations' => [
-                'articles' => [
+                'backend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/modules/articles/messages',
-                    'fileMap' => [
-                        'articles' => 'articles.php',
-                    ],
-                ],
-                'category' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/modules/category/messages',
-                    'fileMap' => [
-                        'articles' => 'articles.php',
-                    ],
+                    'basePath' => '@backend/messages',
                 ],
                 'fileapi' => [
                     'class' => 'yii\i18n\PhpMessageSource',

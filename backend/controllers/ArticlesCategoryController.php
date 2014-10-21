@@ -3,18 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Pages;
-use backend\models\search\PagesSearch;
+use backend\models\ArticlesCategory;
+use backend\models\search\ArticlesCategorySearch;
 use backend\components\Controller;
-use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * PagesController implements the CRUD actions for Pages model.
+ * ArticlesCategoryController implements the CRUD actions for ArticlesCategory model.
  */
-class PagesController extends Controller
+class ArticlesCategoryController extends Controller
 {
     public function behaviors()
     {
@@ -34,32 +34,34 @@ class PagesController extends Controller
     }
 
     /**
-     * Lists all Pages models.
+     * Lists all ArticlesCategory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PagesSearch();
+        $searchModel = new ArticlesCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $statusArray = Pages::getStatusArray();
+        $parentList = ArticlesCategory::getParentListArray();
+        $statusArray = ArticlesCategory::getStatusArray();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'parentList' => $parentList,
             'statusArray' => $statusArray
         ]);
     }
 
     /**
-     * Creates a new Pages model.
+     * Creates a new ArticlesCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pages(['scenario' => 'admin-create']);
-        $statusArray = Pages::getStatusArray();
-
+        $model = new ArticlesCategory(['scenario' => 'admin-create']);
+        $statusArray = ArticlesCategory::getStatusArray();
+        $parentList = ArticlesCategory::getParentListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -79,13 +81,14 @@ class PagesController extends Controller
             'create',
             [
                 'model' => $model,
-                'statusArray' => $statusArray
+                'statusArray' => $statusArray,
+                'parentList' => $parentList,
             ]
         );
     }
 
     /**
-     * Updates an existing Pages model.
+     * Updates an existing ArticlesCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +97,8 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
         $model->setScenario('admin-update');
-        $statusArray = Pages::getStatusArray();
+        $statusArray = ArticlesCategory::getStatusArray();
+        $parentList = ArticlesCategory::getParentListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -114,7 +118,8 @@ class PagesController extends Controller
             'update',
             [
                 'model' => $model,
-                'statusArray' => $statusArray
+                'statusArray' => $statusArray,
+                'parentList' => $parentList,
             ]
         );
     }
@@ -124,18 +129,18 @@ class PagesController extends Controller
      *
      * @param integer|array $id Post ID
      *
-     * @return \vova07\articles\models\backend\Pages Model
+     * @return \vova07\Articless\models\backend\Articles Model
      *
      * @throws HttpException 404 error if post not found
      */
     protected function findModel($id)
     {
         if (is_array($id)) {
-            /** @var \vova07\articles\models\backend\Pages $model */
-            $model = Pages::findAll($id);
+            /** @var \vova07\Articless\models\backend\Articles $model */
+            $model = ArticlesCategory::findAll($id);
         } else {
-            /** @var \vova07\articles\models\backend\Pages $model */
-            $model = Pages::findOne($id);
+            /** @var \vova07\Articless\models\backend\Articles $model */
+            $model = ArticlesCategory::findOne($id);
         }
         if ($model !== null) {
             return $model;

@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use backend\components\Controller;
-use backend\models\Article;
-use backend\models\search\ArticleSearch;
+use backend\models\Articles;
+use backend\models\search\ArticlesSearch;
 use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
 use backend\widget\imperavi\actions\GetAction as ImperaviGet;
 use backend\widget\imperavi\actions\UploadAction as ImperaviUpload;
@@ -49,23 +49,23 @@ class ArticlesController extends Controller
         return [
             'imperavi-get' => [
                 'class' => ImperaviGet::className(),
-                'url' => Article::CONTENT_URL,
-                'path' => Article::CONTENT_PATH
+                'url' => Articles::CONTENT_URL,
+                'path' => Articles::CONTENT_PATH
             ],
             'imperavi-image-upload' => [
                 'class' => ImperaviUpload::className(),
-                'url' => Article::CONTENT_URL,
-                'path' => Article::CONTENT_PATH
+                'url' => Articles::CONTENT_URL,
+                'path' => Articles::CONTENT_PATH
             ],
             'imperavi-file-upload' => [
                 'class' => ImperaviUpload::className(),
-                'url' => Article::FILE_URL,
-                'path' => Article::FILE_PATH,
+                'url' => Articles::FILE_URL,
+                'path' => Articles::FILE_PATH,
                 'uploadOnlyImage' => false
             ],
             'fileapi-upload' => [
                 'class' => FileAPIUpload::className(),
-                'path' => Article::IMAGES_TEMP_PATH
+                'path' => Articles::IMAGES_TEMP_PATH
             ]
         ];
     }
@@ -75,9 +75,9 @@ class ArticlesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
+        $searchModel = new ArticlesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
-        $statusArray = Article::getStatusArray();
+        $statusArray = Articles::getStatusArray();
 
         return $this->render(
             'index',
@@ -94,8 +94,8 @@ class ArticlesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Article(['scenario' => 'admin-create']);
-        $statusArray = Article::getStatusArray();
+        $model = new Articles(['scenario' => 'admin-create']);
+        $statusArray = Articles::getStatusArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -131,7 +131,7 @@ class ArticlesController extends Controller
     {
         $model = $this->findModel($id);
         $model->setScenario('admin-update');
-        $statusArray = Article::getStatusArray();
+        $statusArray = Articles::getStatusArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -161,18 +161,18 @@ class ArticlesController extends Controller
      *
      * @param integer|array $id Post ID
      *
-     * @return \vova07\articles\models\backend\Article Model
+     * @return \vova07\Articless\models\backend\Articles Model
      *
      * @throws HttpException 404 error if post not found
      */
     protected function findModel($id)
     {
         if (is_array($id)) {
-            /** @var \vova07\articles\models\backend\Article $model */
-            $model = Article::findAll($id);
+            /** @var \vova07\Articless\models\backend\Articles $model */
+            $model = Articles::findAll($id);
         } else {
-            /** @var \vova07\articles\models\backend\Article $model */
-            $model = Article::findOne($id);
+            /** @var \vova07\Articless\models\backend\Articles $model */
+            $model = Articles::findOne($id);
         }
         if ($model !== null) {
             return $model;

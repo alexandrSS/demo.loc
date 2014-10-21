@@ -17,6 +17,7 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'icon'=>'<i class="fa fa-edit"></i>',
             'options'=>['class'=>'treeview'],
             'items'=>[
+                ['label'=>Yii::t('themes', 'Articles category'), 'url'=>['/articles-category'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 ['label'=>Yii::t('themes', 'Articles'), 'url'=>['/articles'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 ['label'=>Yii::t('themes', 'Static pages'), 'url'=>['/pages'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 //['label'=>Yii::t('themes', 'Articles'), 'url'=>['/article/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],

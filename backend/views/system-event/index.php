@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use backend\themes\admin\widgets\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\system\models\search\SystemEventSearch */

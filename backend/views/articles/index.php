@@ -14,8 +14,8 @@ use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
-$this->title = Yii::t('backend', 'BACKEND_INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('backend', 'BACKEND_INDEX_SUBTITLE');
+$this->title = Yii::t('backend', 'Статьи');
+$this->params['subtitle'] = Yii::t('backend', 'Список статей');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'] = [
                             $statusArray,
                             [
                                 'class' => 'form-control',
-                                'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')
+                                'prompt' => Yii::t('backend', 'Выберите статус')
                             ]
                         )
                     ],

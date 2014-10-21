@@ -21,7 +21,7 @@ return [
     'Are you sure you want to delete this item?' => 'Вы уверены, что хотите удалить этот пункт?',
     'Article Categories' => 'Категории стататей',
     'Articles' => 'Статьи',
-    'Articles' => 'Статьи',
+    'Articles category' => 'Категории статей',
     'Cancel' => 'Отмена',
     'Carousel Widgets' => 'Виджет карусель',
     'Content' => 'Контент',

@@ -4,7 +4,7 @@ namespace common\models;
 
 use common\behaviors\PurifierBehavior;
 use common\widget\fileapi\behaviors\UploadBehavior;
-use common\models\query\ArticleQuery;
+use common\models\query\ArticlesQuery;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -25,7 +25,7 @@ use Yii;
  * @property integer $created_at Created time
  * @property integer $updated_at Updated time
  */
-class Article extends ActiveRecord
+class Articles extends ActiveRecord
 {
     /**
      * Unpublished status
@@ -103,7 +103,7 @@ class Article extends ActiveRecord
      */
     public static function find()
     {
-        return new ArticleQuery(get_called_class());
+        return new ArticlesQuery(get_called_class());
     }
 
     /**
