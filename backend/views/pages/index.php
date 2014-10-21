@@ -5,10 +5,6 @@ use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
 use yii\grid\CheckboxColumn;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\PagesSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = Yii::t('backend', 'Страницы');
 $this->params['subtitle'] = Yii::t('backend', 'Список страниц');
 $this->params['breadcrumbs'][] = $this->title;

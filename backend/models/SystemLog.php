@@ -45,12 +45,11 @@ class SystemLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('backend', 'ID'),
-            'level' => Yii::t('backend', 'Level'),
-            'category' => Yii::t('backend', 'Category'),
-            'log_time' => Yii::t('backend', 'Log Time'),
-            'prefix' => Yii::t('backend', 'Prefix'),
-            'message' => Yii::t('backend', 'Message'),
+            'level' => Yii::t('backend', 'Уровень'),
+            'category' => Yii::t('backend', 'Категория'),
+            'log_time' => Yii::t('backend', 'Время'),
+            'prefix' => Yii::t('backend', 'Префикс'),
+            'message' => Yii::t('backend', 'Сообщение'),
         ];
     }
 }

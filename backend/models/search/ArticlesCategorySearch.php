@@ -8,7 +8,8 @@ use yii\data\ActiveDataProvider;
 use backend\models\ArticlesCategory;
 
 /**
- * ArticlesCategorySearch represents the model behind the search form about `backend\models\ArticlesCategory`.
+ * Поиск для модели ArticlesCategory
+ * @package backend\models\search
  */
 class ArticlesCategorySearch extends ArticlesCategory
 {
@@ -33,10 +34,8 @@ class ArticlesCategorySearch extends ArticlesCategory
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
+     * Для поиска
+     * @param $params
      * @return ActiveDataProvider
      */
     public function search($params)

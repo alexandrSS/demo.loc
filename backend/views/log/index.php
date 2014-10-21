@@ -3,21 +3,14 @@
 use yii\helpers\Html;
 use backend\themes\admin\widgets\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\SystemLogSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = Yii::t('backend', 'System Logs');
+$this->title = Yii::t('backend', 'Системный журнал');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="system-log-index">
 
     <p>
-        <?= Html::a(Yii::t('backend', 'Clear'), false, ['class' => 'btn btn-danger', 'data-method' => 'delete', 'data-pjax' => '1']) ?>
+        <?= Html::a(Yii::t('backend', 'Очистить'), false, ['class' => 'btn btn-danger', 'data-method' => 'delete', 'data-pjax' => '1']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

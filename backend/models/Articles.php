@@ -107,17 +107,16 @@ class Articles extends \common\models\Articles
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('backend', 'ATTR_ID'),
-            'title' => Yii::t('backend', 'ATTR_TITLE'),
-            'alias' => Yii::t('backend', 'ATTR_ALIAS'),
-            'snippet' => Yii::t('backend', 'ATTR_SNIPPET'),
-            'content' => Yii::t('backend', 'ATTR_CONTENT'),
-            'views' => Yii::t('backend', 'ATTR_VIEWS'),
-            'status_id' => Yii::t('backend', 'ATTR_STATUS'),
-            'created_at' => Yii::t('backend', 'ATTR_CREATED'),
-            'updated_at' => Yii::t('backend', 'ATTR_UPDATED'),
-            'preview_url' => Yii::t('backend', 'ATTR_PREVIEW_URL'),
-            'image_url' => Yii::t('backend', 'ATTR_IMAGE_URL'),
+            'title' => Yii::t('backend', 'Название'),
+            'alias' => Yii::t('backend', 'Псевдоним'),
+            'snippet' => Yii::t('backend', 'Фрагмент'),
+            'content' => Yii::t('backend', 'Содержание'),
+            'views' => Yii::t('backend', 'Вид'),
+            'status_id' => Yii::t('backend', 'Статус'),
+            'created_at' => Yii::t('backend', 'Создана'),
+            'updated_at' => Yii::t('backend', 'Обнавлена'),
+            'preview_url' => Yii::t('backend', 'Предваретельное изображение'),
+            'image_url' => Yii::t('backend', 'Основное изображение'),
         ];
     }
 

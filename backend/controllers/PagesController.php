@@ -2,17 +2,19 @@
 
 namespace backend\controllers;
 
-use Yii;
+use backend\components\Controller;
 use backend\models\Pages;
 use backend\models\search\PagesSearch;
-use backend\components\Controller;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * PagesController implements the CRUD actions for Pages model.
+ * Контроллер управления статическими страницами
+ * Class PagesController
+ * @package backend\controllers
  */
 class PagesController extends Controller
 {
@@ -34,8 +36,8 @@ class PagesController extends Controller
     }
 
     /**
-     * Lists all Pages models.
-     * @return mixed
+     * Вывод всех страниц
+     * @return string
      */
     public function actionIndex()
     {
@@ -51,9 +53,8 @@ class PagesController extends Controller
     }
 
     /**
-     * Creates a new Pages model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Создание страницы
+     * @return array|string|Response
      */
     public function actionCreate()
     {
@@ -66,7 +67,7 @@ class PagesController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['update', 'id' => $model->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить страницу. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -85,10 +86,10 @@ class PagesController extends Controller
     }
 
     /**
-     * Updates an existing Pages model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * Обновление страницы
+     * @param $id
+     * @return array|string|Response
+     * @throws HttpException
      */
     public function actionUpdate($id)
     {
@@ -101,7 +102,7 @@ class PagesController extends Controller
                 if ($model->save(false)) {
                     return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_UPDATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить страницу. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -120,21 +121,15 @@ class PagesController extends Controller
     }
 
     /**
-     * Find model by ID.
      *
-     * @param integer|array $id Post ID
-     *
-     * @return \vova07\articles\models\backend\Pages Model
-     *
-     * @throws HttpException 404 error if post not found
+     * @param $id
+     * @throws HttpException
      */
     protected function findModel($id)
     {
         if (is_array($id)) {
-            /** @var \vova07\articles\models\backend\Pages $model */
             $model = Pages::findAll($id);
         } else {
-            /** @var \vova07\articles\models\backend\Pages $model */
             $model = Pages::findOne($id);
         }
         if ($model !== null) {

@@ -247,21 +247,6 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
-        return [
-            'username' => Yii::t('users', 'ATTR_USERNAME'),
-            'email' => Yii::t('users', 'ATTR_EMAIL'),
-            'role' => Yii::t('users', 'ATTR_ROLE'),
-            'status_id' => Yii::t('users', 'ATTR_STATUS'),
-            'created_at' => Yii::t('users', 'ATTR_CREATED'),
-            'updated_at' => Yii::t('users', 'ATTR_UPDATED'),
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {

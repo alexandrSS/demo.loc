@@ -3,14 +3,16 @@
 namespace backend\controllers;
 
 use common\modules\users\models\LoginForm;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-use Yii;
 
 /**
- * Backend controller for guest users.
+ * Контроллер авторизации и деавторизации
+ * Class LoginController
+ * @package backend\controllers
  */
 class LoginController extends Controller
 {
@@ -38,7 +40,8 @@ class LoginController extends Controller
     }
 
     /**
-     * Login user.
+     * Авторизация пользователя
+     * @return array|string|Response
      */
     public function actionLogin()
     {
@@ -68,7 +71,8 @@ class LoginController extends Controller
     }
 
     /**
-     * Logout user.
+     * Деавторизация пользователя
+     * @return Response
      */
     public function actionLogout()
     {

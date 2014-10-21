@@ -8,7 +8,9 @@ use yii\data\ActiveDataProvider;
 use backend\models\SystemLog;
 
 /**
- * SystemLogSearch represents the model behind the search form about `backend\models\SystemLog`.
+ * Поиск для модели SystemLog
+ * Class SystemLogSearch
+ * @package backend\models\search
  */
 class SystemLogSearch extends SystemLog
 {

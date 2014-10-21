@@ -5,7 +5,9 @@ namespace backend\controllers;
 use backend\components\Controller;
 
 /**
- * Backend default controller.
+ * Контроллер по умолчанию
+ * Class DefaultController
+ * @package backend\controllers
  */
 class DefaultController extends Controller
 {
@@ -38,7 +40,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * Backend main page.
+     * Основная страница
+     * @return string
      */
     public function actionIndex()
     {

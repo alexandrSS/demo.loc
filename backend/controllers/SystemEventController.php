@@ -2,18 +2,23 @@
 
 namespace backend\controllers;
 
-use Yii;
-use backend\models\SystemEvent;
-use backend\models\search\SystemEventSearch;
 use backend\components\Controller;
-use yii\web\NotFoundHttpException;
+use backend\models\search\SystemEventSearch;
+use backend\models\SystemEvent;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
- * SystemEventController реализует CRUD действия для модел SystemEvent.
+ * Контроллер управления событиями
+ * Class SystemEventController
+ * @package backend\controllers
  */
 class SystemEventController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -54,6 +59,22 @@ class SystemEventController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Finds the SystemEvent model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return SystemEvent the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = SystemEvent::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     /**
@@ -104,21 +125,5 @@ class SystemEventController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the SystemEvent model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return SystemEvent the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = SystemEvent::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @var yii\base\View $this View
- * @var yii\data\ActiveDataProvider $dataProvider DataProvider
- */
-
 use yii\widgets\ListView;
 
 echo ListView::widget([

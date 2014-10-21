@@ -2,7 +2,5 @@
 
 return [
     'adminEmail' => 'admin@email.loc',
-    'articles' => [
-
-    ]
+    'allowHtmlTags' => 'p,span,strong,ul,ol,li,em,u,strike,br,hr,img,a',
 ];

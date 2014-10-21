@@ -3,8 +3,9 @@
 namespace backend\controllers;
 
 /**
+ *
  * Class SystemInfo
- * @package trntv\systeminfo
+ * @package backend\controllers
  */
 class SystemInfo
 {
@@ -35,6 +36,14 @@ class SystemInfo
     }
 
     /**
+     * @return bool
+     */
+    public static function getIsWindows()
+    {
+        return strpos(strtolower(PHP_OS), 'win') === 0;
+    }
+
+    /**
      * @return string
      */
     public static function getLinuxKernelVersion()
@@ -61,14 +70,6 @@ class SystemInfo
     }
 
     /**
-     * @return bool
-     */
-    public static function getIsWindows()
-    {
-        return strpos(strtolower(PHP_OS), 'win') === 0;
-    }
-
-    /**
      * @return null
      */
     public static function getUptime()
@@ -85,61 +86,11 @@ class SystemInfo
     }
 
     /**
-     * @param bool $key
-     * @return array|null
-     */
-    public static function getCpuinfo($key = false)
-    {
-        if (self::getIsWindows()) {
-            return null; // todo: Windows
-        } else {
-            $cpuinfo = @file_get_contents('/proc/cpuinfo');
-            if ($cpuinfo) {
-                $cpuinfo = explode("\n", $cpuinfo);
-                $values = [];
-                foreach ($cpuinfo as $v) {
-                    $v = array_map("trim", explode(':', $v));
-                    if (isset($v[0]) && isset($v[1])) {
-                        $values[$v[0]] = $v[1];
-                    }
-                }
-                return $key ?
-                    (isset($values[$key]) ? $values[$key] : null)
-                    : $values;
-            }
-        }
-    }
-
-    /**
-     * @return array|null
-     */
-    public static function getCpuCores()
-    {
-        return self::getCpuinfo('cpu cores');
-    }
-
-    /**
      * @return mixed
      */
     public static function getServerIP()
     {
         return self::getIsISS() ? $_SERVER['LOCAL_ADDR'] : $_SERVER['SERVER_ADDR'];
-    }
-
-    /**
-     * @return string
-     */
-    public static function getExternalIP()
-    {
-        return gethostbyname($_SERVER['SERVER_NAME']);
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function getServerSoftware()
-    {
-        return $_SERVER['SERVER_SOFTWARE'];
     }
 
     /**
@@ -151,11 +102,27 @@ class SystemInfo
     }
 
     /**
+     * @return string
+     */
+    public static function getExternalIP()
+    {
+        return gethostbyname($_SERVER['SERVER_NAME']);
+    }
+
+    /**
      * @return bool
      */
     public static function getIsNginx()
     {
         return strpos(strtolower(self::getServerSoftware()), 'nginx') !== false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getServerSoftware()
+    {
+        return $_SERVER['SERVER_SOFTWARE'];
     }
 
     /**
@@ -259,6 +226,53 @@ class SystemInfo
     }
 
     /**
+     * @return array|null
+     */
+    public static function getCpuCores()
+    {
+        return self::getCpuinfo('cpu cores');
+    }
+
+    /**
+     * @param bool $key
+     * @return array|null
+     */
+    public static function getCpuinfo($key = false)
+    {
+        if (self::getIsWindows()) {
+            return null; // todo: Windows
+        } else {
+            $cpuinfo = @file_get_contents('/proc/cpuinfo');
+            if ($cpuinfo) {
+                $cpuinfo = explode("\n", $cpuinfo);
+                $values = [];
+                foreach ($cpuinfo as $v) {
+                    $v = array_map("trim", explode(':', $v));
+                    if (isset($v[0]) && isset($v[1])) {
+                        $values[$v[0]] = $v[1];
+                    }
+                }
+                return $key ?
+                    (isset($values[$key]) ? $values[$key] : null)
+                    : $values;
+            }
+        }
+    }
+
+    /**
+     * @return bool|int
+     */
+    public static function getTotalMem()
+    {
+        if (self::getIsWindows()) {
+            //todo
+        } else {
+            $meminfo = self::getMemoryInfo();
+            return isset($meminfo['MemTotal']) ? intval($meminfo['MemTotal']) * 1024 : false;
+        }
+    }
+
+    /**
      * @return array
      */
     public static function getMemoryInfo()
@@ -275,19 +289,6 @@ class SystemInfo
                 }
             }
             return $meminfo;
-        }
-    }
-
-    /**
-     * @return bool|int
-     */
-    public static function getTotalMem()
-    {
-        if (self::getIsWindows()) {
-            //todo
-        } else {
-            $meminfo = self::getMemoryInfo();
-            return isset($meminfo['MemTotal']) ? intval($meminfo['MemTotal']) * 1024 : false;
         }
     }
 

@@ -1,133 +1,112 @@
 <?php
-
 namespace common\behaviors;
 
-use yii\base\Module;
+use Yii;
 use yii\base\Behavior;
 use yii\helpers\HtmlPurifier;
 
 /**
  * Class PurifierBehavior
- * HTMLPurifier behavior.
+ * Данное поведение очищает от небезопастного кода указаные в настройках атрибуты.
  *
- * Usage:
+ * Пример использования:
  * ```
  * ...
- * 'purifierBehavior' => [
- *     'class' => PurifierBehavior::className(),
+ * 'purifier' => [
+ *     'class' => 'common\behaviors\PurifierBehavior',
  *     'attributes' => [
- *         self::EVENT_BEFORE_VALIDATE => [
- *             'snippet',
- *             'content' => [
- *                 'HTML.AllowedElements' => '',
- *                 'AutoFormat.RemoveEmpty' => true
- *             ]
- *         ]
+ *         ActiveRecord::EVENT_BEFORE_UPDATE => ['content'],
+ *         ActiveRecord::EVENT_BEFORE_INSERT => ['content'],
  *     ],
  *     'textAttributes' => [
- *         self::EVENT_BEFORE_VALIDATE => ['title', 'alias']
+ *         ActiveRecord::EVENT_BEFORE_UPDATE => ['title'],
+ *         ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
  *     ]
  * ]
  * ...
  * ```
  *
- * @property array $attributes Attributes array with settings
- * @property array $textAttributes Text attributes array with settings
- * @property array $purifierOptions Purifier settings
+ * @property array $attributes массив атрибутов которые доступны в поведении.
+ * @property array $purifierOptions массив с настройками HtmlPurifier.
  */
 class PurifierBehavior extends Behavior
 {
     /**
-     * @var array Attributes array
+     * @var array Массив аттрибутов которые должны быть обработаны с HtmlPurifier
      */
     public $attributes = [];
 
     /**
-     * @var array Text attributes array
+     * @var array Массив аттрибутов которые должны быть полностью очищены с HtmlPurifier от HTML тэгов и небезопастного кода
      */
     public $textAttributes = [];
 
     /**
-     * @var array Purifier settings
+     * @var array Массив с конфигами для каждого аттрибута
      */
-    public $purifierSettings = [
-        'AutoFormat.RemoveEmpty' => true,
-        'AutoFormat.RemoveEmpty.RemoveNbsp' => true,
-        'AutoFormat.Linkify' => true,
-        'HTML.Nofollow' => true
-    ];
+    public $purifierOptions = [];
 
     /**
-     * @inheritdoc
+     * @return array Массив с дефолтной конфигурацией
      */
-    public function attach($owner)
+    public static function defaultPurifierOptions()
     {
-        parent::attach($owner);
-
-        if (!is_array($this->attributes) || empty($this->attributes)) {
-            throw new InvalidParamException('Invalid or empty attributes array.');
-        }
-        if (!empty($this->attributes) && !is_array($this->attributes)) {
-            throw new InvalidParamException('Invalid or text attributes array.');
-        }
+        return [
+            'AutoFormat.RemoveEmpty' => true,
+            'AutoFormat.RemoveEmpty.RemoveNbsp' => true,
+            'AutoFormat.Linkify' => true,
+            'HTML.Nofollow' => true
+        ];
     }
 
+
     /**
-     * @inheritdoc
+     * Назначаем обработчик для [[owner]] событий.
+     * @return array События (array keys) с назначеными им обработчиками (array values).
      */
     public function events()
     {
-        $events = [];
-
-        foreach ($this->attributes as $event => $attributes) {
-            $events[$event] = 'purify';
+        foreach ($this->attributes as $i => $event) {
+            $events[$i] = 'purify';
         }
-        foreach ($this->textAttributes as $event => $attributes) {
-            $events[$event] = 'textPurify';
+        foreach ($this->textAttributes as $i => $event) {
+            $events[$i] = 'textPurify';
         }
-
         return $events;
     }
 
     /**
-     * Purify attributes
-     *
-     * @param Event $event Current event
+     * Очищаем атрибуты с указаными настройками.
+     * @param Event $event Текущее событие.
      */
     public function purify($event)
     {
         $attributes = isset($this->attributes[$event->name]) ? (array)$this->attributes[$event->name] : [];
         if (!empty($attributes)) {
             $purifier = new HtmlPurifier;
-            foreach ($attributes as $attribute => $config) {
-                if (is_array($config)) {
-                    $settings = $config;
-                } else {
-                    $attribute = $config;
-                    $settings = $this->purifierSettings;
-                }
-                $this->owner->$attribute = $purifier->process($this->owner->$attribute, $settings);
+            foreach ($attributes as $attribute) {
+                $options = isset($this->purifierOptions[$attribute]) ? $this->purifierOptions[$attribute] : $this->defaultPurifierOptions();
+                $this->owner->$attribute = $purifier->process($this->owner->$attribute, $options);
             }
         }
     }
 
     /**
-     * Purify text attributes
-     *
-     * @param Event $event Current event
+     * Очищаем атрибуты от всего HTML кода.
+     * @param Event $event Текущее событие.
      */
     public function textPurify($event)
     {
         $attributes = isset($this->textAttributes[$event->name]) ? (array)$this->textAttributes[$event->name] : [];
         if (!empty($attributes)) {
             $purifier = new HtmlPurifier;
-            $settings = [
-                'HTML.AllowedElements' => '',
-                'AutoFormat.RemoveEmpty' => true,
-                'AutoFormat.RemoveEmpty.RemoveNbsp' => true,
-            ];
             foreach ($attributes as $attribute) {
-                $this->owner->$attribute = $purifier->process($this->owner->$attribute, $settings);
+                $options = [
+                    'HTML.AllowedElements' => '',
+                    'AutoFormat.RemoveEmpty' => true,
+                    'AutoFormat.RemoveEmpty.RemoveNbsp' => true,
+                ];
+                $this->owner->$attribute = $purifier->process($this->owner->$attribute, $options);
             }
         }
     }

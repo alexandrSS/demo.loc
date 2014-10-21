@@ -6,7 +6,9 @@ use yii\data\ActiveDataProvider;
 use backend\models\Articles;
 
 /**
- * Article search model.
+ * Поиск для модели Articles
+ * Class ArticlesSearch
+ * @package backend\models\search
  */
 class ArticlesSearch extends Articles
 {

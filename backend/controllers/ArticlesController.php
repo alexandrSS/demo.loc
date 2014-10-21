@@ -5,22 +5,24 @@ namespace backend\controllers;
 use backend\components\Controller;
 use backend\models\Articles;
 use backend\models\search\ArticlesSearch;
-use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
 use backend\widget\imperavi\actions\GetAction as ImperaviGet;
 use backend\widget\imperavi\actions\UploadAction as ImperaviUpload;
+use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\HttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-use Yii;
 
 /**
- * Контроллер
+ * Контроллер управления статьями
+ * Class ArticlesController
+ * @package backend\controllers
  */
 class ArticlesController extends Controller
 {
     /**
-     * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -71,7 +73,8 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Posts list page.
+     * Список статей
+     * @return string
      */
     public function actionIndex()
     {
@@ -90,7 +93,8 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Create post page.
+     * Создание статьи
+     * @return array|string|Response
      */
     public function actionCreate()
     {
@@ -102,7 +106,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['update', 'id' => $model->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить статью. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -121,11 +125,10 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Update post page.
-     *
-     * @param integer $id Post ID
-     *
-     * @return mixed
+     * Обновление статьи
+     * @param $id
+     * @return array|string|Response
+     * @throws HttpException
      */
     public function actionUpdate($id)
     {
@@ -138,7 +141,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_UPDATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить статью. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -157,21 +160,15 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Find model by ID.
-     *
-     * @param integer|array $id Post ID
-     *
-     * @return \vova07\Articless\models\backend\Articles Model
-     *
-     * @throws HttpException 404 error if post not found
+     * Поиск статьи по id
+     * @param $id
+     * @throws HttpException
      */
     protected function findModel($id)
     {
         if (is_array($id)) {
-            /** @var \vova07\Articless\models\backend\Articles $model */
             $model = Articles::findAll($id);
         } else {
-            /** @var \vova07\Articless\models\backend\Articles $model */
             $model = Articles::findOne($id);
         }
         if ($model !== null) {
@@ -182,11 +179,10 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Delete post page.
-     *
-     * @param integer $id Post ID
-     *
-     * @return mixed
+     * Удаление статьи
+     * @param $id
+     * @return Response
+     * @throws HttpException
      */
     public function actionDelete($id)
     {
@@ -195,10 +191,8 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Delete multiple posts page.
-     *
-     * @return mixed
-     * @throws \yii\web\HttpException
+     * Удаление статей
+     * @throws HttpException
      */
     public function actionBatchDelete()
     {

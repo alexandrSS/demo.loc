@@ -4,7 +4,10 @@ namespace backend\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use backend\models\query\ArticlesCategoryQuery;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use common\behaviors\TransliterateBehavior;
+use common\behaviors\PurifierBehavior;
 
 /**
  * This is the model class for table "articles_category".
@@ -27,53 +30,17 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      * Ключи кэша которые использует модель.
      */
     const CACHE_ARTICLE_CATEGORY_LIST_DATA = 'articleCategoriesListData';
-    /**
-     * @var string Jui created date
-     */
-    private $_createdAtJui;
 
     /**
-     * @var string Jui updated date
+     * @var Читабельный статус категории
      */
-    private $_updatedAtJui;
+    protected $_parentList;
 
     /**
-     * @return string Jui created date
+     * @var Читабельный статус категории
      */
-    public function getCreatedAtJui()
-    {
-        if (!$this->isNewRecord && $this->_createdAtJui === null) {
-            $this->_createdAtJui = Yii::$app->formatter->asDate($this->created_at, 'Y-m-d');
-        }
-        return $this->_createdAtJui;
-    }
+    protected $_categoryStatus;
 
-    /**
-     * Set jui created date
-     */
-    public function setCreatedAtJui($value)
-    {
-        $this->_createdAtJui = $value;
-    }
-
-    /**
-     * @return string Jui updated date
-     */
-    public function getUpdatedAtJui()
-    {
-        if (!$this->isNewRecord && $this->_updatedAtJui === null) {
-            $this->_updatedAtJui = Yii::$app->formatter->asDate($this->updated_at, 'Y-m-d');
-        }
-        return $this->_updatedAtJui;
-    }
-
-    /**
-     * Set jui created date
-     */
-    public function setUpdatedAtJui($value)
-    {
-        $this->_updatedAtJui = $value;
-    }
     /**
      * @return string Readable blog status
      */
@@ -90,16 +57,17 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     public static function getStatusArray()
     {
         return [
-            self::STATUS_UNPUBLISHED => Yii::t('backend', 'STATUS_UNPUBLISHED'),
-            self::STATUS_PUBLISHED => Yii::t('backend', 'STATUS_PUBLISHED')
+            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Не активная'),
+            self::STATUS_PUBLISHED => Yii::t('backend', 'Активная')
         ];
     }
+
     /**
      * @return array [[DropDownList]] массив категорий.
      */
     public static function getCategoryArray()
     {
-        $key = self::CACHE_CATEGORIES_LIST_DATA;
+        $key = self::CACHE_ARTICLE_CATEGORY_LIST_DATA;
         $value = Yii::$app->getCache()->get($key);
         if ($value === false || empty($value)) {
             $value = self::find()->select(['id', 'title'])->published()->asArray()->all();
@@ -107,6 +75,22 @@ class ArticlesCategory extends \common\models\ArticlesCategory
             Yii::$app->cache->set($key, $value);
         }
         return $value;
+    }
+
+    /**
+     * Читабельный статус котегории
+     * @return mixed
+     */
+    public function getParentList()
+    {
+        if(!empty($this->parent_id)){
+            if($this->_parentList === NULL){
+                $parentList = self::getParentListArray();
+                $this->_parentList = $parentList[$this->parent_id];
+            }
+            return $this->_parentList;
+        }
+        return $this->_parentList = NULL;
     }
 
     public static function getParentListArray($parent_id = null, $level = 0)
@@ -132,6 +116,39 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     }
 
     /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+            'transliterateBehavior' => [
+                'class' => TransliterateBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
+                ]
+            ],
+            'purifierBehavior' => [
+                'class' => PurifierBehavior::className(),
+                'textAttributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
+                ],
+                'purifierOptions' => [
+                    'HTML.AllowedElements' => Yii::$app->params['allowHtmlTags']
+                ]
+            ]
+        ];
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -141,19 +158,19 @@ class ArticlesCategory extends \common\models\ArticlesCategory
 
         return $rules;
     }
+
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('backend', 'ID'),
-            'title' => Yii::t('backend', 'Title'),
-            'alias' => Yii::t('backend', 'Alias'),
-            'parent_id' => Yii::t('backend', 'Parent ID'),
-            'status_id' => Yii::t('backend', 'Status ID'),
-            'created_at' => Yii::t('backend', 'Created At'),
-            'updated_at' => Yii::t('backend', 'Updated At'),
+            'title' => Yii::t('backend', 'Название'),
+            'alias' => Yii::t('backend', 'Псевдоним'),
+            'parent_id' => Yii::t('backend', 'Родитель'),
+            'status_id' => Yii::t('backend', 'Статус'),
+            'created_at' => Yii::t('backend', 'Создана'),
+            'updated_at' => Yii::t('backend', 'Обнавлена'),
         ];
     }
 
@@ -165,19 +182,13 @@ class ArticlesCategory extends \common\models\ArticlesCategory
         $scenarios = parent::scenarios();
         $scenarios['admin-create'] = [
             'title',
-            'alias',
             'parent_id',
-            'status_id',
-            'createdAtJui',
-            'updatedAtJui'
+            'status_id'
         ];
         $scenarios['admin-update'] = [
             'title',
-            'alias',
             'parent_id',
-            'status_id',
-            'createdAtJui',
-            'updatedAtJui'
+            'status_id'
         ];
 
         return $scenarios;
@@ -188,7 +199,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      */
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert)) {
+        if (parent::beforeSave($insert)) {
             Yii::$app->getCache()->delete(self::CACHE_ARTICLE_CATEGORY_LIST_DATA);
             return true;
         }
@@ -200,7 +211,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      */
     public function beforeDelete($insert)
     {
-        if(parent::beforeDelete($insert)) {
+        if (parent::beforeDelete($insert)) {
             Yii::$app->getCache()->delete(self::CACHE_ARTICLE_CATEGORY_LIST_DATA);
             return true;
         }

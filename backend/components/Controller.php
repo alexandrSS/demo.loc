@@ -2,8 +2,8 @@
 
 namespace backend\components;
 
-use yii\filters\AccessControl;
 use Yii;
+use yii\filters\AccessControl;
 
 /**
  * Основной контроллер backend приложеннием

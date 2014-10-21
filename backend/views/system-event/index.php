@@ -1,13 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use backend\themes\admin\widgets\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\modules\system\models\search\SystemEventSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = Yii::t('backend', 'System Events');
+$this->title = Yii::t('backend', 'Системные события');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="system-event-index">

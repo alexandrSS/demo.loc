@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @var \yii\base\View $this View
- * @var \yii\data\ActiveDataProvider $dataProvider Data provider
- * @var \vova07\articles\models\backend\ArticleSearch $searchModel Search model
- * @var array $statusArray Statuses array
- */
-
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;

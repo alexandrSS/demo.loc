@@ -2,20 +2,24 @@
 
 namespace backend\controllers;
 
-use Yii;
+use backend\components\Controller;
 use backend\models\ArticlesCategory;
 use backend\models\search\ArticlesCategorySearch;
-use backend\components\Controller;
-use yii\web\HttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * ArticlesCategoryController implements the CRUD actions for ArticlesCategory model.
+ * Контроллер управления категорий статей
+ * @package backend\controllers
  */
 class ArticlesCategoryController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -34,8 +38,8 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Lists all ArticlesCategory models.
-     * @return mixed
+     * Список категорий
+     * @return string
      */
     public function actionIndex()
     {
@@ -53,8 +57,7 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Creates a new ArticlesCategory model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Создание категории
      * @return mixed
      */
     public function actionCreate()
@@ -68,7 +71,7 @@ class ArticlesCategoryController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['update', 'id' => $model->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -88,10 +91,10 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Updates an existing ArticlesCategory model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * Обновление категории
+     * @param $id
+     * @return array|string|Response
+     * @throws HttpException
      */
     public function actionUpdate($id)
     {
@@ -105,7 +108,7 @@ class ArticlesCategoryController extends Controller
                 if ($model->save(false)) {
                     return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'BACKEND_FLASH_FAIL_ADMIN_UPDATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -125,21 +128,15 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Find model by ID.
-     *
-     * @param integer|array $id Post ID
-     *
-     * @return \vova07\Articless\models\backend\Articles Model
-     *
-     * @throws HttpException 404 error if post not found
+     * Поиск категории по ID
+     * @param $id
+     * @throws HttpException
      */
     protected function findModel($id)
     {
         if (is_array($id)) {
-            /** @var \vova07\Articless\models\backend\Articles $model */
             $model = ArticlesCategory::findAll($id);
         } else {
-            /** @var \vova07\Articless\models\backend\Articles $model */
             $model = ArticlesCategory::findOne($id);
         }
         if ($model !== null) {
@@ -150,11 +147,10 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Delete post page.
-     *
-     * @param integer $id Post ID
-     *
-     * @return mixed
+     * Удаление категории
+     * @param $id
+     * @return Response
+     * @throws HttpException
      */
     public function actionDelete($id)
     {
@@ -163,10 +159,8 @@ class ArticlesCategoryController extends Controller
     }
 
     /**
-     * Delete multiple posts page.
-     *
-     * @return mixed
-     * @throws \yii\web\HttpException
+     * Удаление нескольких категорий
+     * @throws HttpException
      */
     public function actionBatchDelete()
     {

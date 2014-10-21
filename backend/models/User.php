@@ -3,8 +3,8 @@
 namespace backend\models;
 
 use backend\modules\system\models\SystemEvent;
-use yii\helpers\ArrayHelper;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class User
@@ -18,22 +18,19 @@ use Yii;
  */
 class User extends \common\modules\users\models\User
 {
+    const EVENT_AFTER_SIGNUP = 'afterSignup';
     /**
      * @var string|null Password
      */
     public $password;
-
     /**
      * @var string|null Repeat password
      */
     public $repassword;
-
     /**
      * @var string Model status.
      */
     private $_status;
-
-    const EVENT_AFTER_SIGNUP = 'afterSignup';
 
     /**
      * @return string Model status.
@@ -53,18 +50,10 @@ class User extends \common\modules\users\models\User
     public static function getStatusArray()
     {
         return [
-            self::STATUS_ACTIVE => Yii::t('backend', 'STATUS_ACTIVE'),
-            self::STATUS_INACTIVE => Yii::t('backend', 'STATUS_INACTIVE'),
-            self::STATUS_BANNED => Yii::t('backend', 'STATUS_BANNED')
+            self::STATUS_ACTIVE => Yii::t('backend', 'Активный'),
+            self::STATUS_INACTIVE => Yii::t('backend', 'Не активный'),
+            self::STATUS_BANNED => Yii::t('backend', 'Забаненый')
         ];
-    }
-
-    /**
-     * @return array Role array.
-     */
-    public static function getRoleArray()
-    {
-        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 
     /**
@@ -98,6 +87,14 @@ class User extends \common\modules\users\models\User
     }
 
     /**
+     * @return array Role array.
+     */
+    public static function getRoleArray()
+    {
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
+    }
+
+    /**
      * @inheritdoc
      */
     public function scenarios()
@@ -115,14 +112,14 @@ class User extends \common\modules\users\models\User
     {
         return
             [
-                'username' => Yii::t('backend', 'ATTR_USERNAME'),
-                'email' => Yii::t('backend', 'ATTR_EMAIL'),
-                'role' => Yii::t('backend', 'ATTR_ROLE'),
-                'status_id' => Yii::t('backend', 'ATTR_STATUS'),
-                'created_at' => Yii::t('backend', 'ATTR_CREATED'),
-                'updated_at' => Yii::t('backend', 'ATTR_UPDATED'),
-                'password' => Yii::t('backend', 'ATTR_PASSWORD'),
-                'repassword' => Yii::t('backend', 'ATTR_REPASSWORD')
+                'username' => Yii::t('backend', 'Логин'),
+                'email' => Yii::t('backend', 'Почта'),
+                'role' => Yii::t('backend', 'Роль'),
+                'status_id' => Yii::t('backend', 'Статус'),
+                'created_at' => Yii::t('backend', 'Создан'),
+                'updated_at' => Yii::t('backend', 'Обновлен'),
+                'password' => Yii::t('backend', 'Пароль'),
+                'repassword' => Yii::t('backend', 'Повторите пароль'),
             ];
     }
 

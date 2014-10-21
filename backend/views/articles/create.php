@@ -1,17 +1,9 @@
 <?php
 
-/**
- * Article create view.
- *
- * @var \yii\base\View $this View
- * @var \vova07\articles\models\backend\Article $model Model
- * @var array $statusArray Statuses array
- */
-
 use backend\themes\admin\widgets\Box;
 
-$this->title = Yii::t('backend', 'BACKEND_CREATE_TITLE');
-$this->params['subtitle'] = Yii::t('backend', 'BACKEND_CREATE_SUBTITLE');
+$this->title = Yii::t('backend', 'Статьи');
+$this->params['subtitle'] = Yii::t('backend', 'Создание статьи');
 $this->params['breadcrumbs'] = [
     [
         'label' => $this->title,
@@ -37,7 +29,7 @@ $this->params['breadcrumbs'] = [
                         'icon' => 'fa-reply',
                         'options' => [
                             'class' => 'btn-default',
-                            'title' => Yii::t('backend', 'BACKEND_CANCEL_BTN_TITLE')
+                            'title' => Yii::t('backend', 'Отмена')
                         ]
                     ]
                 ]

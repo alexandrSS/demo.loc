@@ -8,7 +8,9 @@ use yii\data\ActiveDataProvider;
 use backend\models\Pages;
 
 /**
- * PagesSearch represents the model behind the search form about `backend\models\Pages`.
+ * Поиск Pages
+ * Class PagesSearch
+ * @package backend\models\search
  */
 class PagesSearch extends Pages
 {

@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Users list view.
- *
- * @var \yii\base\View $this View
- * @var \yii\data\ActiveDataProvider $dataProvider Data provider
- * @var \vova07\users\models\backend\UserSearch $searchModel Search model
- * @var array $roleArray Roles array
- * @var array $statusArray Statuses array
- */
-
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
@@ -17,8 +7,8 @@ use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
-$this->title = Yii::t('backend', 'BACKEND_INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('backend', 'BACKEND_INDEX_SUBTITLE');
+$this->title = Yii::t('backend', 'Пользователи');
+$this->params['subtitle'] = Yii::t('backend', 'Список пользователей');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
@@ -78,7 +68,7 @@ $this->params['breadcrumbs'] = [
                             $searchModel,
                             'status_id',
                             $statusArray,
-                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')]
+                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'Выберите статус')]
                         )
                     ],
                     [
@@ -87,7 +77,7 @@ $this->params['breadcrumbs'] = [
                             $searchModel,
                             'role',
                             $roleArray,
-                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'BACKEND_PROMPT_ROLE')]
+                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'Выберите роль')]
                         )
                     ],
                     [

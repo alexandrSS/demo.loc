@@ -1,14 +1,10 @@
 <?php
 
-use yii\helpers\Html;
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
 use yii\grid\CheckboxColumn;
-
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\ArticlesCategorySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use yii\helpers\Html;
 
 $this->title = Yii::t('backend', 'Категории статей');
 $this->params['subtitle'] = Yii::t('backend', 'Список котегорий');
@@ -28,27 +24,41 @@ $this->params['breadcrumbs'] = [
                 'grid' => 'articles-grid'
             ]
         ); ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => CheckboxColumn::classname()
-            ],
-            'title',
-            'alias',
-            'parent_id',
-            'status_id',
-            // 'created_at',
-            // 'updated_at',
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'class' => CheckboxColumn::classname()
+                ],
+                'title',
+                'alias',
+                [
+                    'attribute' => 'parent_id',
+                    'value' => function ($model) {
+                        return $model->ParentList;
+                    },
+                    'filter' => Html::activeDropDownList(
+                        $searchModel,
+                        'parent_id',
+                        $parentList,
+                        [
+                            'class' => 'form-control',
+                            'prompt' => Yii::t('backend', 'Родитель')
+                        ]
+                    )
+                ],
+                'status_id',
+                // 'created_at',
+                // 'updated_at',
 
-            [
-                'class' => ActionColumn::className(),
-                'template' => '{update} {delete}'
-            ]
-        ],
-    ]); ?>
+                [
+                    'class' => ActionColumn::className(),
+                    'template' => '{update} {delete}'
+                ]
+            ],
+        ]); ?>
 
         <?php Box::end(); ?>
     </div>

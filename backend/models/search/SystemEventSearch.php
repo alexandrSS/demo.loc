@@ -8,7 +8,9 @@ use yii\data\ActiveDataProvider;
 use backend\models\SystemEvent;
 
 /**
- * SystemEventSearch represents the model behind the search form about `common\models\SystemEvent`.
+ * Поиск для модели SystemEvent
+ * Class SystemEventSearch
+ * @package backend\models\search
  */
 class SystemEventSearch extends SystemEvent
 {

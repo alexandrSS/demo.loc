@@ -3,17 +3,17 @@
         <div id="memory-usage" class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">
-                    <?= Yii::t('backend', 'Memory Usage') ?>
+                    <?= Yii::t('backend', 'Использование памяти') ?>
                 </h3>
 
                 <div class="box-tools pull-right">
-                    <?= Yii::t('backend', 'Real time') ?>
+                    <?= Yii::t('backend', 'В режиме реального времени') ?>
                     <div class="btn-group realtime" data-toggle="btn-toggle">
                         <button type="button" class="btn btn-default btn-xs active" data-toggle="on">
-                            <?= Yii::t('backend', 'On') ?>
+                            <?= Yii::t('backend', 'Вкл') ?>
                         </button>
                         <button type="button" class="btn btn-default btn-xs" data-toggle="off">
-                            <?= Yii::t('backend', 'Off') ?>
+                            <?= Yii::t('backend', 'Выкл') ?>
                         </button>
                     </div>
                 </div>

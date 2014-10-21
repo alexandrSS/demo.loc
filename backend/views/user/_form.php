@@ -1,17 +1,5 @@
 <?php
 
-/**
- * User form view.
- *
- * @var \yii\web\View $this View
- * @var \yii\widgets\ActiveForm $form Form
- * @var \vova07\users\models\backend\User $model Model
- * @var \vova07\users\models\Profile $profile Profile
- * @var array $roleArray Roles array
- * @var array $statusArray Statuses array
- * @var \backend\themes\admin\widgets\Box $box Box widget instance
- */
-
 use common\widget\fileapi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -46,10 +34,9 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-sm-6">
             <?=
-            $form->field($user, 'status_id')->dropDownList(
-                $statusArray,
+            $form->field($user, 'status_id')->dropDownList($statusArray,
                 [
-                    'prompt' => Yii::t('backend', 'BACKEND_PROMPT_STATUS')
+                    'prompt' => Yii::t('backend', 'Выберите статус')
                 ]
             ) ?>
         </div>
@@ -58,7 +45,7 @@ use yii\widgets\ActiveForm;
             $form->field($user, 'role')->dropDownList(
                 $roleArray,
                 [
-                    'prompt' => Yii::t('backend', 'BACKEND_PROMPT_ROLE')
+                    'prompt' => Yii::t('backend', 'Выберите роль')
                 ]
             ) ?>
         </div>
@@ -80,7 +67,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $user->isNewRecord ? Yii::t('backend', 'BACKEND_CREATE_SUBMIT') : Yii::t('backend', 'BACKEND_UPDATE_SUBMIT'),
+    $user->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('backend', 'Обновить'),
     [
         'class' => $user->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

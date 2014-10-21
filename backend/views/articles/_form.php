@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Article form view.
- *
- * @var \yii\base\View $this View
- * @var \yii\widgets\ActiveForm $form Form
- * @var \vova07\articles\models\backend\Article $model Model
- * @var array $statusArray Statuses array
- * @var \backend\themes\admin\widgets\Box $box Box widget instance
- */
-
 use common\widget\fileapi\Widget as FileAPI;
 use backend\widget\imperavi\Widget as Imperavi;
 use yii\helpers\Html;
@@ -123,10 +113,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'BACKEND_CREATE_SUBMIT') : Yii::t(
-        'articles',
-        'BACKEND_UPDATE_SUBMIT'
-    ),
+    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('articles','Обнавить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

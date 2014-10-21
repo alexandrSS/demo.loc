@@ -2,19 +2,23 @@
 
 namespace backend\controllers;
 
-use Yii;
-use backend\models\SystemLog;
-use backend\models\search\SystemLogSearch;
 use backend\components\Controller;
-use yii\helpers\VarDumper;
-use yii\web\NotFoundHttpException;
+use backend\models\search\SystemLogSearch;
+use backend\models\SystemLog;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
- * LogController реализует CRUD действия для модел SystemLog.
+ * Контроллер управленя ошибками и предупреждениями
+ * Class LogController
+ * @package backend\controllers
  */
 class LogController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -29,7 +33,7 @@ class LogController extends Controller
     }
 
     /**
-     * Список всех моделеи SystemLog.
+     * Список всех ошибок и предупреждений
      * @return mixed
      */
     public function actionIndex()
@@ -51,9 +55,10 @@ class LogController extends Controller
     }
 
     /**
-     * Отображает одну модель SystemLog.
-     * @param integer $id
-     * @return mixed
+     * Вывод ошибки или предупреждения
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -63,24 +68,9 @@ class LogController extends Controller
     }
 
     /**
-     * Удаляет существующию модель SystemLog.
-     * Если удаление прошло успешно, перенаправляется на действие 'index'.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the SystemLog model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return SystemLog the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * Поиск модели
+     * @param $id
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
@@ -89,5 +79,19 @@ class LogController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Удаление всех ошибок и предупреждений
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 }

@@ -1,18 +1,9 @@
 <?php
 
-/**
- * Article update view.
- *
- * @var yii\base\View $this View
- * @var vova07\articles\models\backend\Article $model Model
- * @var array $statusArray Statuses array
- * @var \backend\themes\admin\widgets\Box $box Box widget instance
- */
-
 use backend\themes\admin\widgets\Box;
 
-$this->title = Yii::t('backend', 'BACKEND_UPDATE_TITLE');
-$this->params['subtitle'] = Yii::t('backend', 'BACKEND_UPDATE_SUBTITLE');
+$this->title = Yii::t('backend', 'Статьи');
+$this->params['subtitle'] = Yii::t('backend', 'Обновление статьи');
 $this->params['breadcrumbs'] = [
     [
         'label' => $this->title,

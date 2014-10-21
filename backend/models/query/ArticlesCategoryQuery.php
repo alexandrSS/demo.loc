@@ -11,23 +11,23 @@ use backend\models\ArticlesCategory;
  */
 class ArticlesCategoryQuery extends ActiveQuery
 {
-	/**
-	 * Выбираем только опубликованные записи.
-	 * @param ActiveQuery $query
-	 */
-	public function published()
-	{
-		$this->andWhere('status_id = :status_id', [':status_id' => ArticlesCategory::STATUS_PUBLISHED]);
-		return $this;
-	}
+    /**
+     * Выбираем только опубликованные записи.
+     * @return $this
+     */
+    public function published()
+    {
+        $this->andWhere('status_id = :status_id', [':status_id' => ArticlesCategory::STATUS_PUBLISHED]);
+        return $this;
+    }
 
-	/**
-	 * Выбираем только неопубликованные записи.
-	 * @param ActiveQuery $query
-	 */
-	public function unpublished()
-	{
-		$this->andWhere('status_id = :status_id', [':status_id' => ArticlesCategory::STATUS_UNPUBLISHED]);
-		return $this;
-	}
+    /**
+     * Выбираем только неопубликованные записи.
+     * @return $this
+     */
+    public function unpublished()
+    {
+        $this->andWhere('status_id = :status_id', [':status_id' => ArticlesCategory::STATUS_UNPUBLISHED]);
+        return $this;
+    }
 }

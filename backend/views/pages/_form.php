@@ -6,9 +6,6 @@ use backend\widget\imperavi\Widget as Imperavi;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Pages */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -80,10 +77,7 @@ use yii\jui\DatePicker;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'BACKEND_CREATE_SUBMIT') : Yii::t(
-        'articles',
-        'BACKEND_UPDATE_SUBMIT'
-    ),
+    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('articles','Обновить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

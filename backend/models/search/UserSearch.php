@@ -9,7 +9,9 @@ use yii\data\ActiveDataProvider;
 use Yii;
 
 /**
- * User search model.
+ * Поиск для модели User
+ * Class UserSearch
+ * @package backend\models\search
  */
 class UserSearch extends User
 {

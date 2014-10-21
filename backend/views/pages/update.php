@@ -2,9 +2,6 @@
 
 use backend\themes\admin\widgets\Box;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Pages */
-
 $this->title = Yii::t('backend', 'Страницы');
 $this->params['subtitle'] = Yii::t('backend', 'Обновление страницы');
 $this->params['breadcrumbs'] = [

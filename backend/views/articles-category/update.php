@@ -1,10 +1,6 @@
 <?php
 
-use yii\helpers\Html;
 use backend\themes\admin\widgets\Box;
-
-/* @var $this yii\web\View */
-/* @var $model backend\models\ArticlesCategory */
 
 $this->title = Yii::t('backend', 'Категории статей');
 $this->params['subtitle'] = Yii::t('backend', 'Обновление категории');

@@ -5,6 +5,11 @@ namespace backend\controllers;
 use backend\components\Controller;
 use yii\web\Response;
 
+/**
+ * Системная информация
+ * Class SystemInformationController
+ * @package backend\controllers
+ */
 class SystemInformationController extends Controller
 {
     public function actionIndex()

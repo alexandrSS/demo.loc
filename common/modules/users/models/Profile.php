@@ -85,8 +85,8 @@ class Profile extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('users', 'ATTR_NAME'),
-            'surname' => Yii::t('users', 'ATTR_SURNAME')
+            'name' => Yii::t('users', 'Имя'),
+            'surname' => Yii::t('users', 'Фамилия')
         ];
     }
 
