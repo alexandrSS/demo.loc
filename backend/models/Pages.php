@@ -3,6 +3,10 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use common\behaviors\TransliterateBehavior;
+use common\behaviors\PurifierBehavior;
 
 /**
  * This is the model class for table "pages".
@@ -18,51 +22,36 @@ use Yii;
 class Pages extends \common\models\Pages
 {
     /**
-     * @var string Jui created date
+     * @return array
      */
-    private $_createdAtJui;
-
-    /**
-     * @var string Jui updated date
-     */
-    private $_updatedAtJui;
-
-    /**
-     * @return string Jui created date
-     */
-    public function getCreatedAtJui()
+    public function behaviors()
     {
-        if (!$this->isNewRecord && $this->_createdAtJui === null) {
-            $this->_createdAtJui = Yii::$app->formatter->asDate($this->created_at, 'Y-m-d');
-        }
-        return $this->_createdAtJui;
-    }
-
-    /**
-     * Set jui created date
-     */
-    public function setCreatedAtJui($value)
-    {
-        $this->_createdAtJui = $value;
-    }
-
-    /**
-     * @return string Jui updated date
-     */
-    public function getUpdatedAtJui()
-    {
-        if (!$this->isNewRecord && $this->_updatedAtJui === null) {
-            $this->_updatedAtJui = Yii::$app->formatter->asDate($this->updated_at, 'Y-m-d');
-        }
-        return $this->_updatedAtJui;
-    }
-
-    /**
-     * Set jui created date
-     */
-    public function setUpdatedAtJui($value)
-    {
-        $this->_updatedAtJui = $value;
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+            'transliterateBehavior' => [
+                'class' => TransliterateBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
+                ]
+            ],
+            'purifierBehavior' => [
+                'class' => PurifierBehavior::className(),
+                'textAttributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
+                ],
+                'purifierOptions' => [
+                    'HTML.AllowedElements' => Yii::$app->params['allowHtmlTags']
+                ]
+            ]
+        ];
     }
 
     /**
@@ -81,8 +70,8 @@ class Pages extends \common\models\Pages
     public static function getStatusArray()
     {
         return [
-            self::STATUS_UNPUBLISHED => Yii::t('backend', 'STATUS_UNPUBLISHED'),
-            self::STATUS_PUBLISHED => Yii::t('backend', 'STATUS_PUBLISHED')
+            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Скрыта'),
+            self::STATUS_PUBLISHED => Yii::t('backend', 'Опубликована')
         ];
     }
 

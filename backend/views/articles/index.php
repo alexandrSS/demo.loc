@@ -31,10 +31,10 @@ $this->params['breadcrumbs'] = [
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
                     [
                         'class' => CheckboxColumn::classname()
                     ],
-                    'id',
                     [
                         'attribute' => 'title',
                         'format' => 'html',
@@ -45,7 +45,6 @@ $this->params['breadcrumbs'] = [
                             );
                         }
                     ],
-                    'views',
                     [
                         'attribute' => 'status_id',
                         'format' => 'html',

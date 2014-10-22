@@ -21,10 +21,11 @@ $this->params['breadcrumbs'] = [
                     'class' => 'table-responsive'
                 ],
                 'buttonsTemplate' => '{create} {batch-delete}',
-                'grid' => 'articles-grid'
+                'grid' => 'articlesCategory-grid'
             ]
         ); ?>
         <?= GridView::widget([
+            'id' => 'articlesCategory-grid',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
@@ -45,11 +46,31 @@ $this->params['breadcrumbs'] = [
                         $parentList,
                         [
                             'class' => 'form-control',
-                            'prompt' => Yii::t('backend', 'Родитель')
+                            'prompt' => Yii::t('backend', 'Выберите родителя')
                         ]
                     )
                 ],
-                'status_id',
+                [
+                    'attribute' => 'status_id',
+                    'format' => 'html',
+                    'value' => function ($model) {
+                            if ($model->status_id === $model::STATUS_PUBLISHED) {
+                                $class = 'label-success';
+                            } elseif ($model->status_id === $model::STATUS_UNPUBLISHED) {
+                                $class = 'label-warning';
+                            } else {
+                                $class = 'label-danger';
+                            }
+
+                            return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                        },
+                    'filter' => Html::activeDropDownList(
+                            $searchModel,
+                            'status_id',
+                            $statusArray,
+                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'Выберите статус')]
+                        )
+                ],
                 // 'created_at',
                 // 'updated_at',
 

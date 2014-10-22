@@ -28,38 +28,6 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <?= $form->field($model, 'createdAtJui')->widget(
-                DatePicker::className(),
-                [
-                    'options' => [
-                        'class' => 'form-control'
-                    ],
-                    'clientOptions' => [
-                        'dateFormat' => 'dd.mm.yy',
-                        'changeMonth' => true,
-                        'changeYear' => true
-                    ]
-                ]
-            ); ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'updatedAtJui')->widget(
-                DatePicker::className(),
-                [
-                    'options' => [
-                        'class' => 'form-control'
-                    ],
-                    'clientOptions' => [
-                        'dateFormat' => 'dd.mm.yy',
-                        'changeMonth' => true,
-                        'changeYear' => true
-                    ]
-                ]
-            ); ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
             <?= $form->field($model, 'preview_url')->widget(
                 FileAPI::className(),
                 [
@@ -113,7 +81,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('articles','Обнавить'),
+    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('backend','Обнавить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

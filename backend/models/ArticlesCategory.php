@@ -37,18 +37,20 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     protected $_parentList;
 
     /**
-     * @var Читабельный статус категории
+     * @var string Model status.
      */
-    protected $_categoryStatus;
+    private $_status;
 
     /**
-     * @return string Readable blog status
+     * @return string Model status.
      */
     public function getStatus()
     {
-        $statuses = self::getStatusArray();
-
-        return $statuses[$this->status_id];
+        if ($this->_status === null) {
+            $statuses = self::getStatusArray();
+            $this->_status = $statuses[$this->status_id];
+        }
+        return $this->_status;
     }
 
     /**
@@ -57,8 +59,8 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     public static function getStatusArray()
     {
         return [
-            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Не активная'),
-            self::STATUS_PUBLISHED => Yii::t('backend', 'Активная')
+            self::STATUS_PUBLISHED => Yii::t('backend', 'Активный'),
+            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Не активный'),
         ];
     }
 
@@ -209,9 +211,9 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     /**
      * @inheritdoc
      */
-    public function beforeDelete($insert)
+    public function beforeDelete()
     {
-        if (parent::beforeDelete($insert)) {
+        if (parent::beforeDelete()) {
             Yii::$app->getCache()->delete(self::CACHE_ARTICLE_CATEGORY_LIST_DATA);
             return true;
         }

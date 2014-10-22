@@ -69,7 +69,7 @@ class ArticlesCategoryController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    return $this->redirect(['update', 'id' => $model->id]);
+                    return $this->redirect(['index']);
                 } else {
                     Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
@@ -106,7 +106,7 @@ class ArticlesCategoryController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    return $this->refresh();
+                    return $this->redirect(['index']);
                 } else {
                     Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();

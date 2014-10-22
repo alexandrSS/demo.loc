@@ -18,21 +18,26 @@ use yii\widgets\ActiveForm;
  */
 class PagesController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'index' => ['get'],
-                    'view' => ['get'],
-                    'create' => ['get', 'post'],
-                    'update' => ['get', 'put', 'post'],
-                    'delete' => ['post', 'delete'],
-                    'batch-delete' => ['post', 'delete']
-                ],
-            ],
+        $behaviors = parent::behaviors();
+
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'view' => ['get'],
+                'create' => ['get', 'post'],
+                'update' => ['get', 'put', 'post'],
+                'delete' => ['post', 'delete'],
+                'batch-delete' => ['post', 'delete']
+            ]
         ];
+
+        return $behaviors;
     }
 
     /**
@@ -121,9 +126,9 @@ class PagesController extends Controller
     }
 
     /**
-     *
      * @param $id
-     * @throws HttpException
+     * @return static|static[]
+     * @throws \yii\web\HttpException
      */
     protected function findModel($id)
     {
