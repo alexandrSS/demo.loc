@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Menu;
 use backend\models\Pages;
 
 $this->title = Yii::t('backend', 'Панель управления');
@@ -11,5 +12,8 @@ $this->params['subtitle'] = Yii::t('backend', 'Центральная стран
     <p><?= Yii::t('backend', 'Yii2-Demo панель управления.') ?></p>
 </div>
 <?php
-print_r(Pages::getMenuPage())
+//print_r(Pages::getMenuPage());
+//echo Menu::widget([
+//    'items' => Pages::getMenuPage(),
+//    ])
 ?>

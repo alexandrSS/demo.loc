@@ -97,14 +97,14 @@ class Pages extends \yii\db\ActiveRecord
     {
         $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
 
-        $array = array();
+        $array = [];
 
         foreach($models as $model)
         {
-            $array[] = array(
+            $array[] = [
                 'label' => $model->title,
-                'url' => array($model->alias)
-            );
+                'url' => ['/' . $model->alias]
+            ];
         }
         return $array;
     }

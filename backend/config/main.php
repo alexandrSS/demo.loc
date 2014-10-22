@@ -54,11 +54,13 @@ return [
             'translations' => [
                 'backend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'ru-RU',
                     'basePath' => '@backend/messages',
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@backend/themes/admin/messages',
+                    'sourceLanguage' => 'ru-RU',
                 ],
             ]
         ]
