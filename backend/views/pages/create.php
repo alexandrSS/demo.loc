@@ -24,16 +24,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttons' => [
-                    [
-                        'url' => ['index'],
-                        'icon' => 'fa-reply',
-                        'options' => [
-                            'class' => 'btn-default',
-                            'title' => Yii::t('backend', 'Отмена')
-                        ]
-                    ]
-                ]
+                'buttonsTemplate' => '{cancel}'
             ]
         );
         echo $this->render(

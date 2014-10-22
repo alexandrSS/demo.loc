@@ -27,38 +27,6 @@ use yii\jui\DatePicker;
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6">
-        <?= $form->field($model, 'createdAtJui')->widget(
-            DatePicker::className(),
-            [
-                'options' => [
-                    'class' => 'form-control'
-                ],
-                'clientOptions' => [
-                    'dateFormat' => 'dd.mm.yy',
-                    'changeMonth' => true,
-                    'changeYear' => true
-                ]
-            ]
-        ); ?>
-    </div>
-    <div class="col-sm-6">
-        <?= $form->field($model, 'updatedAtJui')->widget(
-            DatePicker::className(),
-            [
-                'options' => [
-                    'class' => 'form-control'
-                ],
-                'clientOptions' => [
-                    'dateFormat' => 'dd.mm.yy',
-                    'changeMonth' => true,
-                    'changeYear' => true
-                ]
-            ]
-        ); ?>
-    </div>
-</div>
-<div class="row">
     <div class="col-sm-12">
         <?= $form->field($model, 'content')->widget(
             Imperavi::className(),
@@ -77,7 +45,7 @@ use yii\jui\DatePicker;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('articles','Обновить'),
+    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('backend','Обновить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

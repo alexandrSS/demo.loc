@@ -5,6 +5,7 @@ use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
+use yii\jui\DatePicker;
 
 $this->title = Yii::t('backend', 'Страницы');
 $this->params['subtitle'] = Yii::t('backend', 'Список страниц');
@@ -53,8 +54,38 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         )
                 ],
-                'created_at',
-                'updated_at',
+                [
+                    'attribute' => 'created_at',
+                    'format' => 'date',
+                    'filter' => DatePicker::widget(
+                        [
+                            'model' => $searchModel,
+                            'attribute' => 'created_at',
+                            'options' => [
+                                'class' => 'form-control'
+                            ],
+                            'clientOptions' => [
+                                'dateFormat' => 'dd.mm.yy',
+                            ]
+                        ]
+                    )
+                ],
+                [
+                    'attribute' => 'updated_at',
+                    'format' => 'date',
+                    'filter' => DatePicker::widget(
+                        [
+                            'model' => $searchModel,
+                            'attribute' => 'updated_at',
+                            'options' => [
+                                'class' => 'form-control'
+                            ],
+                            'clientOptions' => [
+                                'dateFormat' => 'dd.mm.yy',
+                            ]
+                        ]
+                    )
+                ],
 
                 [
                     'class' => ActionColumn::className(),

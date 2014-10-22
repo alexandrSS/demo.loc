@@ -49,7 +49,12 @@ echo Menu::widget(
                     [
                         'label' => Yii::t('themes', 'Change password'),
                         'url' => ['/users/user/password']
-                    ]
+                    ],
+                    [
+                        'label' => \Yii::t('themes', 'Backend'),
+                        'url' => ['/backend'],
+                        'visible' => Yii::$app->user->can('admin')
+                    ],
                 ]
             ],
             [

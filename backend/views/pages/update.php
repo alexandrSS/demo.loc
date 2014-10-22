@@ -24,7 +24,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{cancel} {delete}'
+                'buttonsTemplate' => '{cancel} {create} {delete}'
             ]
         );
         echo $this->render(

@@ -95,6 +95,11 @@ class ArticlesCategory extends \common\models\ArticlesCategory
         return $this->_parentList = NULL;
     }
 
+    /**
+     * @param null $parent_id
+     * @param int $level
+     * @return array
+     */
     public static function getParentListArray($parent_id = null, $level = 0)
     {
         if (empty($parent_id)) {
@@ -157,6 +162,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     {
         $rules = parent::rules();
         $rules[] = ['status_id', 'in', 'range' => array_keys(self::getStatusArray())];
+        $rules[] = [['title', 'alias'], 'unique'];
 
         return $rules;
     }
@@ -168,7 +174,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     {
         return [
             'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Псевдоним'),
+            'alias' => Yii::t('backend', 'Адрес (URL)'),
             'parent_id' => Yii::t('backend', 'Родитель'),
             'status_id' => Yii::t('backend', 'Статус'),
             'created_at' => Yii::t('backend', 'Создана'),

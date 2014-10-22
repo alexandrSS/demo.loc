@@ -94,7 +94,7 @@ class Pages extends \common\models\Pages
         return [
             'id' => Yii::t('backend', 'Идентификатор'),
             'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Псевдоним'),
+            'alias' => Yii::t('backend', 'Адрес (URL)'),
             'content' => Yii::t('backend', 'Текст'),
             'status_id' => Yii::t('backend', 'Статус'),
             'created_at' => Yii::t('backend', 'Создана'),
@@ -110,18 +110,13 @@ class Pages extends \common\models\Pages
         $scenarios = parent::scenarios();
         $scenarios['admin-create'] = [
             'title',
-            'alias',
             'content',
             'status_id',
-            'createdAtJui',
-            'updatedAtJui'
         ];
         $scenarios['admin-update'] = [
             'title',
-            'alias',
             'content',
             'status_id',
-            'updatedAtJui'
         ];
 
         return $scenarios;

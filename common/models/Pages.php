@@ -92,4 +92,20 @@ class Pages extends \yii\db\ActiveRecord
             ]
         ];
     }
+
+    public static function getMenuPage()
+    {
+        $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
+
+        $array = array();
+
+        foreach($models as $model)
+        {
+            $array[] = array(
+                'label' => $model->title,
+                'url' => array($model->alias)
+            );
+        }
+        return $array;
+    }
 }

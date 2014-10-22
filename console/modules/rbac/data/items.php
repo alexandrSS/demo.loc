@@ -2,12 +2,12 @@
 return [
     'user' => [
         'type' => 1,
-        'description' => 'User',
+        'description' => 'Пользователь',
         'ruleName' => 'group',
     ],
     'admin' => [
         'type' => 1,
-        'description' => 'Admin',
+        'description' => 'Админ',
         'ruleName' => 'group',
         'children' => [
             'user',
@@ -15,7 +15,7 @@ return [
     ],
     'superadmin' => [
         'type' => 1,
-        'description' => 'Superadmin',
+        'description' => 'Супер-Админ',
         'ruleName' => 'group',
         'children' => [
             'admin',

@@ -97,7 +97,7 @@ class Articles extends \common\models\Articles
     {
         return [
             'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Псевдоним'),
+            'alias' => Yii::t('backend', 'Адрес (URL)'),
             'snippet' => Yii::t('backend', 'Фрагмент'),
             'content' => Yii::t('backend', 'Содержание'),
             'views' => Yii::t('backend', 'Вид'),
