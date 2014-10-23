@@ -8,37 +8,32 @@ echo \common\components\widgets\menu\MenuWidget::widget([
     'activateParents' => true,
     'items' => [
         [
-            'label' => Yii::t('themes', 'Dashboard'),
+            'label' => Yii::t('themes', 'Панель управления'),
             'icon' => '<i class="fa fa-bar-chart-o"></i>',
             'url' => Yii::$app->homeUrl
         ],
         [
-            'label' => Yii::t('themes', 'Content'),
+            'label' => Yii::t('themes', 'Контент'),
             'icon' => '<i class="fa fa-edit"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
-                ['label' => Yii::t('themes', 'Articles category'), 'url' => ['/articles-category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Articles'), 'url' => ['/articles'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Static pages'), 'url' => ['/pages'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Articles'), 'url'=>['/article/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Article Categories'), 'url'=>['/article-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Text Widgets'), 'url'=>['/widget-text/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Menu Widgets'), 'url'=>['/widget-menu/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'Carousel Widgets'), 'url'=>['/widget-carousel/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Категории статей'), 'url' => ['/articles-category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Статьи'), 'url' => ['/articles'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Страницы'), 'url' => ['/pages'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
             ]
         ],
         [
-            'label' => Yii::t('themes', 'Users'),
+            'label' => Yii::t('themes', 'Пользователи'),
             'icon' => '<i class="fa fa-users"></i>',
             'url' => ['/user']
         ],
         [
-            'label' => Yii::t('themes', 'System'),
+            'label' => Yii::t('themes', 'Система'),
             'icon' => '<i class="fa fa-cogs"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
                 [
-                    'label' => Yii::t('themes', 'System Information'),
+                    'label' => Yii::t('themes', 'Системная информация'),
                     'url' => ['/system-information/index'],
                     'icon' => '<i class="fa fa-angle-double-right"></i>'
                 ],
@@ -46,14 +41,14 @@ echo \common\components\widgets\menu\MenuWidget::widget([
                 //['label'=>Yii::t('themes', 'File Storage Items'), 'url'=>['/file-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 //['label'=>Yii::t('themes', 'File Manager'), 'url'=>['/file-manager/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 [
-                    'label' => Yii::t('themes', 'System Events'),
+                    'label' => Yii::t('themes', 'Системные события'),
                     'url' => ['/system-event/index'],
                     'icon' => '<i class="fa fa-angle-double-right"></i>',
                     'badge' => \backend\models\SystemEvent::find()->today()->count(),
                     'badgeBgClass' => 'bg-green',
                 ],
                 [
-                    'label' => Yii::t('themes', 'Logs'),
+                    'label' => Yii::t('themes', 'Журнал'),
                     'url' => ['/log/index'],
                     'icon' => '<i class="fa fa-angle-double-right"></i>',
                     'badge' => \backend\models\SystemLog::find()->count(),

@@ -4,7 +4,7 @@ Yii::setAlias('backend', dirname(__DIR__));
 
 return [
     'id' => 'app-backend',
-    'name' => 'Yii2-Start',
+    'name' => 'Yii2-Demo',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'defaultRoute' => 'default/index',
@@ -59,8 +59,8 @@ return [
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    //'sourceLanguage' => 'ru-RU',
                     'basePath' => '@backend/themes/admin/messages',
-                    'sourceLanguage' => 'ru-RU',
                 ],
             ]
         ]

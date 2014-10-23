@@ -49,7 +49,7 @@ use backend\models\SystemEvent;
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">
-                                <?= Yii::t('themes', 'You have {num} events', ['num' => SystemEvent::find()->today()->count()]) ?>
+                                <?= Yii::t('themes', 'У вас {num} событий', ['num' => SystemEvent::find()->today()->count()]) ?>
                             </li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
@@ -65,7 +65,7 @@ use backend\models\SystemEvent;
                                 </ul>
                             </li>
                             <li class="footer">
-                                <?= Html::a(Yii::t('themes', 'View all'), ['/system-event/index']) ?>
+                                <?= Html::a(Yii::t('themes', 'Посмотреть все'), ['/system-event/index']) ?>
                             </li>
                         </ul>
                     </li>
@@ -78,7 +78,7 @@ use backend\models\SystemEvent;
                         </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header"><?= Yii::t('themes', 'You have {num} log items', ['num' => SystemLog::find()->count()]) ?></li>
+                            <li class="header"><?= Yii::t('themes', 'У вас {num} системных событий', ['num' => SystemLog::find()->count()]) ?></li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -93,7 +93,7 @@ use backend\models\SystemEvent;
                                 </ul>
                             </li>
                             <li class="footer">
-                                <?= Html::a(Yii::t('themes', 'View all'), ['/log/index']) ?>
+                                <?= Html::a(Yii::t('themes', 'Посмотреть все'), ['/log/index']) ?>
                             </li>
                         </ul>
                     </li>
@@ -119,14 +119,14 @@ use backend\models\SystemEvent;
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <?= Html::a(
-                                        Yii::t('themes', 'Profile'),
+                                        Yii::t('themes', 'Профиль'),
                                         ['/user/update', 'id' => Yii::$app->user->id],
                                         ['class' => 'btn btn-default btn-flat']
                                     ) ?>
                                 </div>
                                 <div class="pull-right">
                                     <?= Html::a(
-                                        Yii::t('themes', 'Sign out'),
+                                        Yii::t('themes', 'Выйти'),
                                         ['/login/logout'],
                                         ['class' => 'btn btn-default btn-flat']
                                     ) ?>
@@ -152,7 +152,7 @@ use backend\models\SystemEvent;
                     <?php endif; ?>
                     <div class="pull-left info">
                         <p>
-                            <?= Yii::t('themes', 'Hello, {name}', ['name' => Yii::$app->user->identity->profile->name]) ?>
+                            <?= Yii::t('themes', 'Привет, {name}', ['name' => Yii::$app->user->identity->profile->name]) ?>
                         </p>
                         <a>
                             <i class="fa fa-circle text-success"></i>
@@ -179,7 +179,7 @@ use backend\models\SystemEvent;
                 <?= Breadcrumbs::widget(
                     [
                         'homeLink' => [
-                            'label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('themes', 'Home'),
+                            'label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('themes', 'К сайту'),
                             'url' => '/'
                         ],
                         'encodeLabels' => false,
