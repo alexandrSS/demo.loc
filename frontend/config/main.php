@@ -2,23 +2,10 @@
 
 return [
     'id' => 'app-frontend',
-    'name' => 'Yii2-Start',
+    'name' => 'Yii2-Demo',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'site/default/index',
-    'modules' => [
-        'articles' => [
-            'class' => 'frontend\modules\articles\Module',
-        ],
-        'category' => [
-            'class' => 'frontend\modules\category\Module',
-        ],
-        'site' => [
-            'class' => 'frontend\modules\site\Module'
-        ],
-        'users' => [
-            'class' => 'frontend\modules\users\Module',
-        ],
-    ],
+    'defaultRoute' => 'site/index',
+    'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'cookieValidationKey' => '7MGUCaKyJbDJJuY1fxiUnJMmmUUzyA',
@@ -26,15 +13,15 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '' => 'site/default/index',
+                '' => 'site/index',
                 'POST <_m:articles>' => '<_m>/user/create',
                 '<_m:articles>' => '<_m>/default/index',
                 '<_m:articles>/<id:\d+>-<alias:[a-zA-Z0-9_-]{1,100}+>' => '<_m>/default/view',
-                '<_a:(about|contacts|captcha)>' => 'site/default/<_a>',
-                '<_a:(login|signup|activation|recovery|recovery-confirmation|resend|fileapi-upload)>' => 'users/guest/<_a>',
-                '<_a:logout>' => 'users/user/<_a>',
-                '<_a:email>' => 'users/default/<_a>',
-                'my/settings/<_a:[\w\-]+>' => 'users/user/<_a>',
+                '<_a:(about|contacts|captcha)>' => 'site/<_a>',
+                '<_a:(login|signup|activation|recovery|recovery-confirmation|resend|fileapi-upload)>' => 'guest/<_a>',
+                '<_a:logout>' => 'user/<_a>',
+                '<_a:email>' => 'default/<_a>',
+                'my/settings/<_a:[\w\-]+>' => 'user/<_a>',
             ]
         ],
         'view' => [
@@ -46,7 +33,7 @@ return [
             ]
         ],
         'user' => [
-            'loginUrl' => ['users/guest/login']
+            'loginUrl' => ['guest/login']
         ],
         'assetManager' => [
             'bundles' => [
@@ -65,21 +52,13 @@ return [
             ]
         ],
         'errorHandler' => [
-            'errorAction' => 'site/default/error'
+            'errorAction' => 'site/error'
         ],
         'i18n' => [
             'translations' => [
-                'articles' => [
+                'frontend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/modules/articles/messages',
-                ],
-                'site' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/modules/site/messages',
-                ],
-                'users' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/modules/users/messages',
+                    'basePath' => '@common/messages',
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',

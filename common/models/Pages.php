@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+
 use common\behaviors\PurifierBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -109,43 +110,43 @@ class Pages extends \yii\db\ActiveRecord
 
         $array = [
             [
-                'label' => Yii::t('themes', 'Sign In'),
-                'url' => ['/users/guest/login'],
+                'label' => Yii::t('themes', 'Войти'),
+                'url' => ['/guest/login'],
                 'visible' => Yii::$app->user->isGuest
             ],
             [
-                'label' => Yii::t('themes', 'Sign Up'),
-                'url' => ['/users/guest/signup'],
+                'label' => Yii::t('themes', 'Регистрация'),
+                'url' => ['/guest/signup'],
                 'visible' => Yii::$app->user->isGuest
             ],
             [
-                'label' => Yii::t('themes', 'Settings'),
+                'label' => Yii::t('themes', 'Настройки'),
                 'url' => '#',
                 'template' => '<a href="{url}" class="dropdown-toggle" data-toggle="dropdown">{label} <i class="icon-angle-down"></i></a>',
                 'visible' => !Yii::$app->user->isGuest,
                 'items' => [
                     [
-                        'label' => Yii::t('themes', 'Edit profile'),
-                        'url' => ['/users/user/update']
+                        'label' => Yii::t('themes', 'Профиль'),
+                        'url' => ['/user/update']
                     ],
                     [
-                        'label' => Yii::t('themes', 'Change email'),
-                        'url' => ['/users/user/email']
+                        'label' => Yii::t('themes', 'Смена почты'),
+                        'url' => ['/user/email']
                     ],
                     [
-                        'label' => Yii::t('themes', 'Change password'),
-                        'url' => ['/users/user/password']
+                        'label' => Yii::t('themes', 'Сменить пароль'),
+                        'url' => ['/user/password']
                     ],
                     [
-                        'label' => \Yii::t('themes', 'Backend'),
+                        'label' => \Yii::t('themes', 'Управление сайтом'),
                         'url' => ['/backend'],
                         'visible' => Yii::$app->user->can('admin')
                     ],
                 ]
             ],
             [
-                'label' => Yii::t('themes', 'Sign Out'),
-                'url' => ['/users/user/logout'],
+                'label' => Yii::t('themes', 'Выйти'),
+                'url' => ['/user/logout'],
                 'visible' => !Yii::$app->user->isGuest
             ]
         ];

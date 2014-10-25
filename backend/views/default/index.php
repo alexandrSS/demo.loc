@@ -12,7 +12,7 @@ $this->params['subtitle'] = Yii::t('backend', 'Центральная стран
     <p><?= Yii::t('backend', 'Yii2-Demo панель управления.') ?></p>
 </div>
 <?php
-echo '<pre>';
+/*echo '<pre>';
 print_r(Pages::getMenuPage());
 echo '</pre>';
-?>
+*/?>

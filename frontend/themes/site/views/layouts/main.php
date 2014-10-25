@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Theme main layout.
- *
- * @var \yii\web\View $this View
- * @var string $content Content
- */
-
 use frontend\themes\site\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 

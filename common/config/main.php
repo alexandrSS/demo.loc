@@ -8,14 +8,11 @@ return [
         'category' => [
             'class' => 'common\modules\category\Module',
         ],
-        'users' => [
-            'class' => 'common\modules\users\Module',
-        ],
     ],
     'components' => [
         'user' => [
             'class' => 'yii\web\User',
-            'identityClass' => 'common\modules\users\models\User',
+            'identityClass' => 'common\models\User',
             'loginUrl' => ['login']
         ],
         'cache' => [
@@ -29,7 +26,7 @@ return [
             'suffix' => '/'
         ],
         'assetManager' => [
-            'linkAssets' => false   // TODO: Windows XP
+            'linkAssets' => true   // TODO: Windows XP
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
@@ -76,13 +73,6 @@ return [
                     'basePath' => '@common/widget/fileapi/messages',
                     'fileMap' => [
                         'fileapi' => 'fileapi.php',
-                    ],
-                ],
-                'users' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/modules/users/messages',
-                    'fileMap' => [
-                        'users' => 'users.php',
                     ],
                 ],
             ]
