@@ -2,7 +2,7 @@
 
 use yii\widgets\ListView;
 
-$this->title = Yii::t('backend', 'FRONTEND_INDEX_TITLE');
+$this->title = Yii::t('frontend', 'Статьи');
 $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="row">
 

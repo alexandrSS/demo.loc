@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Yii::t('frontend', 'FRONTEND_PASSWORD_CHANGE_TITLE');
+$this->title = Yii::t('frontend', 'Смена пароля');
 $this->params['breadcrumbs'] = [
-    Yii::t('frontend', 'FRONTEND_SETTINGS_LABEL'),
+    Yii::t('frontend', 'Настройки'),
     $this->title
 ];
 $this->params['contentId'] = 'error'; ?>
@@ -21,7 +21,7 @@ $this->params['contentId'] = 'error'; ?>
         <?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')])->label(false) ?>
         <?= $form->field($model, 'repassword')->passwordInput(['placeholder' => $model->getAttributeLabel('repassword')])->label(false) ?>
         <?= Html::submitButton(
-            Yii::t('frontend', 'FRONTEND_PASSWORD_CHANGE_SUBMIT'),
+            Yii::t('frontend', 'Изменить'),
             [
                 'class' => 'btn btn-primary pull-right'
             ]

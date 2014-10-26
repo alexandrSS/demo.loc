@@ -10,7 +10,9 @@ use yii\web\ViewAction;
 use Yii;
 
 /**
- * Frontend main controller.
+ * Основной контроллер frontend приложенния
+ * Class SiteController
+ * @package frontend\controllers
  */
 class SiteController extends Controller
 {
@@ -37,7 +39,8 @@ class SiteController extends Controller
     }
 
     /**
-     * Site "Home" page.
+     * Главная страница
+     * @return string
      */
     public function actionIndex()
     {
@@ -47,7 +50,8 @@ class SiteController extends Controller
     }
 
     /**
-     * Site "Contact" page.
+     * Страница "Контакты"
+     * @return string|\yii\web\Response
      */
     public function actionContacts()
     {
@@ -55,7 +59,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash(
                 'success',
-                Yii::t('frontend', 'CONTACTS_FLASH_SUCCESS_MSG')
+                Yii::t('frontend', 'Сообщение было успешно отправлено. Спасибо!')
             );
             return $this->refresh();
         } else {

@@ -25,18 +25,18 @@ class UserEmailController extends Controller
         if ($model->isValidToken() === false) {
             Yii::$app->session->setFlash(
                 'danger',
-                Yii::t('users', 'FRONTEND_FLASH_FAIL_NEW_EMAIL_CONFIRMATION_WITH_INVALID_KEY')
+                Yii::t('frontend', 'Неверный код подтверждения.')
             );
         } else {
             if ($model->confirm()) {
                 Yii::$app->session->setFlash(
                     'success',
-                    Yii::t('users', 'FRONTEND_FLASH_SUCCESS_NEW_EMAIL_CONFIRMATION')
+                    Yii::t('frontend', 'E-mail адрес был успешно обновлён!')
                 );
             } else {
                 Yii::$app->session->setFlash(
                     'danger',
-                    Yii::t('users', 'FRONTEND_FLASH_FAIL_NEW_EMAIL_CONFIRMATION')
+                    Yii::t('frontend', 'В момент подтверждения нового электронного адреса возникла ошибка. Попробуйте ещё раз пожалуйста!')
                 );
             }
         }

@@ -71,11 +71,11 @@ class UserController extends Controller
                 if ($model->password()) {
                     Yii::$app->session->setFlash(
                         'success',
-                        Yii::t('users', 'FRONTEND_FLASH_SUCCESS_PASSWORD_CHANGE')
+                        Yii::t('frontend', 'Пароль был успешно обновлён!')
                     );
                     return $this->goHome();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_PASSWORD_CHANGE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент изменения пароля возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -102,10 +102,10 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    Yii::$app->session->setFlash('success', Yii::t('users', 'FRONTEND_FLASH_SUCCES_EMAIL_CHANGE'));
+                    Yii::$app->session->setFlash('success', Yii::t('frontend', 'На указанный новый электронный адрес было отправлено письмо с кодом подтверждения.'));
                     return $this->goHome();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_EMAIL_CHANGE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент изменения электронного адреса возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -132,9 +132,9 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    Yii::$app->session->setFlash('success', Yii::t('users', 'FRONTEND_FLASH_SUCCES_UPDATE'));
+                    Yii::$app->session->setFlash('success', Yii::t('frontend', 'Профиль был успешно обновлён.'));
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_UPDATE'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент обноеления профиля возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                 }
                 return $this->refresh();
             } elseif (Yii::$app->request->isAjax) {

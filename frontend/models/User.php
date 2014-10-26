@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * Class User
- * @package frontend\modules\users\models
+ * @package frontend\models
  * User is the model behind the signup form.
  *
  * @property string $username Username
@@ -77,8 +77,8 @@ class User extends \common\models\User
         $labels = parent::attributeLabels();
 
         return array_merge($labels, [
-            'password' => Yii::t('frontend', 'ATTR_PASSWORD'),
-            'repassword' => Yii::t('frontend', 'ATTR_REPASSWORD')
+            'password' => Yii::t('frontend', 'Пароль'),
+            'repassword' => Yii::t('frontend', 'Повторите пароль')
         ]);
     }
 
@@ -107,7 +107,7 @@ class User extends \common\models\User
             if ($this->profile !== null) {
                 $this->profile->save(false);
             }
-            if ($this->module->requireEmailConfirmation === true) {
+            if (self::REQUIRE_EMAIL_CONFIGURATION === true) {
                 $this->send();
             }
         }
@@ -120,10 +120,10 @@ class User extends \common\models\User
      */
     public function send()
     {
-        return $this->module->mail
+        return self::getMail()
                     ->compose('signup', ['model' => $this])
                     ->setTo($this->email)
-                    ->setSubject(Yii::t('frontend', 'EMAIL_SUBJECT_SIGNUP') . ' ' . Yii::$app->name)
+                    ->setSubject(Yii::t('frontend', 'Код подтверждения новой учётной записи.') . ' ' . Yii::$app->name)
                     ->send();
     }
 }

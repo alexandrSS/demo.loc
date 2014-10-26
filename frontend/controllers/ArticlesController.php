@@ -7,8 +7,16 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
 
+/**
+ * Контроллер для вывода статей
+ * Class ArticlesController
+ * @package frontend\controllers
+ */
 class ArticlesController extends Controller
 {
+    /**
+     * @return string
+     */
     function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -26,6 +34,12 @@ class ArticlesController extends Controller
         );
     }
 
+    /**
+     * @param $id
+     * @param $alias
+     * @return string
+     * @throws \yii\web\HttpException
+     */
     public function actionView($id, $alias)
     {
         if (($model = Articles::findOne(['id' => $id, 'alias' => $alias])) !== null) {

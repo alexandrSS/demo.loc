@@ -4,9 +4,9 @@ use common\widget\fileapi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Yii::t('frontend', 'FRONTEND_UPDATE_TITLE');
+$this->title = Yii::t('frontend', 'Редактирование профиля');
 $this->params['breadcrumbs'] = [
-    Yii::t('frontend', 'FRONTEND_SETTINGS_LABEL'),
+    Yii::t('frontend', 'Настройки'),
     $this->title
 ];
 $this->params['contentId'] = 'error'; ?>
@@ -37,7 +37,7 @@ $this->params['contentId'] = 'error'; ?>
             ]
         )->label(false) ?>
         <?= Html::submitButton(
-            Yii::t('frontend', 'FRONTEND_UPDATE_SUBMIT'),
+            Yii::t('frontend', 'Обновить'),
             [
                 'class' => 'btn btn-primary pull-right'
             ]

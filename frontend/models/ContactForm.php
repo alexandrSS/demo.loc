@@ -7,7 +7,7 @@ use Yii;
 
 /**
  * Class ContactForm.
- * @package frontend\modules\site\models
+ * @package frontend\models
  * Contact form model.
  *
  * @property string $name Name
@@ -35,7 +35,7 @@ class ContactForm extends Model
             // [[email]] must be an valid e-mail.
             ['email', 'email'],
             // [[verifyCode]] must be a right captcha code.
-            ['verifyCode', 'captcha', 'captchaAction' => 'site/default/captcha']
+            ['verifyCode', 'captcha', 'captchaAction' => 'site/captcha']
         ];
     }
 
@@ -45,11 +45,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('frontend', 'CONTACT_FORM_ATTR_NAME'),
-            'email' => Yii::t('frontend', 'CONTACT_FORM_ATTR_EMAIL'),
-            'subject' => Yii::t('frontend', 'CONTACT_FORM_ATTR_SUBJECT'),
-            'body' => Yii::t('frontend', 'CONTACT_FORM_ATTR_BODY'),
-            'verifyCode' => Yii::t('frontend', 'CONTACT_FORM_ATTR_VERIFY_CODE'),
+            'name' => Yii::t('frontend', 'ФИО'),
+            'email' => Yii::t('frontend', 'E-mail'),
+            'subject' => Yii::t('frontend', 'Тема'),
+            'body' => Yii::t('frontend', 'Сообщение'),
+            'verifyCode' => Yii::t('frontend', 'Код верификации'),
         ];
     }
 

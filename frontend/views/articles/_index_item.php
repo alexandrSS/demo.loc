@@ -25,7 +25,7 @@ use yii\helpers\Html;
 
     <?= $model->snippet ?>
     <?= Html::a(
-        Yii::t('backend', 'FRONTEND_INDEX_READ_MORE_BTN') . ' <i class="icon-angle-right"></i>',
+        Yii::t('frontend', 'Читать далее') . ' <i class="icon-angle-right"></i>',
         ['view', 'id' => $model->id, 'alias' => $model->alias],
         ['class' => 'btn btn-default']
     ) ?>

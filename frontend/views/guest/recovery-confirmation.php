@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Yii::t('frontend', 'FRONTEND_RECOVERY_CONFIRMATION_TITLE');
+$this->title = Yii::t('frontend', 'Восстановление пароля');
 $this->params['breadcrumbs'] = [
     $this->title
 ];
@@ -20,7 +20,7 @@ $this->params['contentId'] = 'error'; ?>
         <?= $form->field($model, 'repassword')->passwordInput(['placeholder' => $model->getAttributeLabel('repassword')])->label(false) ?>
         <?= $form->field($model, 'token', ['template' => "{input}\n{error}"])->hiddenInput() ?>
         <?= Html::submitButton(
-            Yii::t('frontend', 'FRONTEND_RECOVERY_CONFIRMATION_SUBMIT'),
+            Yii::t('frontend', 'Сохранить'),
             [
                 'class' => 'btn btn-success pull-right'
             ]

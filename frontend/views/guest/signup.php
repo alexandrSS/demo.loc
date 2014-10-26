@@ -4,7 +4,7 @@ use common\widget\fileapi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Yii::t('frontend', 'FRONTEND_SIGNUP_TITLE');
+$this->title = Yii::t('frontend', 'Регистрация');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
@@ -46,11 +46,11 @@ $this->params['breadcrumbs'] = [
             ]
         )->label(false) ?>
         <?= Html::submitButton(
-            Yii::t('frontend', 'FRONTEND_SIGNUP_SUBMIT'),
+            Yii::t('frontend', 'Зарегистрироватся'),
             [
                 'class' => 'btn btn-success btn-large pull-right'
             ]
         ) ?>
-        <?= Html::a(Yii::t('frontend', 'FRONTEND_SIGNUP_RESEND'), ['resend']); ?>
+        <?= Html::a(Yii::t('frontend', 'Повторная отправка e-mail подтверждения'), ['resend']); ?>
     </fieldset>
 <?php ActiveForm::end(); ?>

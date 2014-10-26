@@ -110,6 +110,14 @@ class Pages extends \yii\db\ActiveRecord
 
         $array = [
             [
+                'label' => Yii::t('themes', 'Статьи'),
+                'url' => ['/articles'],
+            ],
+            [
+                'label' => Yii::t('themes', 'Контакты'),
+                'url' => ['/contacts'],
+            ],
+            [
                 'label' => Yii::t('themes', 'Войти'),
                 'url' => ['/guest/login'],
                 'visible' => Yii::$app->user->isGuest

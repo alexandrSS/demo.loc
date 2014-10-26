@@ -15,13 +15,14 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'POST <_m:articles>' => '<_m>/user/create',
-                '<_m:articles>' => '<_m>/default/index',
+                '<_m:articles>' => '<_m>/index',
                 '<_m:articles>/<id:\d+>-<alias:[a-zA-Z0-9_-]{1,100}+>' => '<_m>/default/view',
                 '<_a:(about|contacts|captcha)>' => 'site/<_a>',
                 '<_a:(login|signup|activation|recovery|recovery-confirmation|resend|fileapi-upload)>' => 'guest/<_a>',
                 '<_a:logout>' => 'user/<_a>',
                 '<_a:email>' => 'default/<_a>',
                 'my/settings/<_a:[\w\-]+>' => 'user/<_a>',
+                '<alias:[a-zA-Z0-9_-]{1,100}+>' => 'pages/view'
             ]
         ],
         'view' => [
@@ -59,6 +60,7 @@ return [
                 'frontend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
+                    'sourceLanguage' => 'ru-RU',
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',

@@ -7,7 +7,7 @@ use Yii;
 
 /**
  * Class PasswordForm
- * @package frontend\modules\users\models
+ * @package frontend\models
  * PasswordForm is the model behind the change password form.
  *
  * @property string $password Password
@@ -32,7 +32,7 @@ class PasswordForm extends Model
     public $oldpassword;
 
     /**
-     * @var \common\modules\users\models\User User instance
+     * @var \common\models\User User instance
      */
     private $_user;
 
@@ -63,9 +63,9 @@ class PasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => Yii::t('frontend', 'ATTR_NEW_PASSWORD'),
-            'repassword' => Yii::t('frontend', 'ATTR_NEW_REPASSWORD'),
-            'oldpassword' => Yii::t('frontend', 'ATTR_OLDPASSWORD')
+            'password' => Yii::t('frontend', 'Новый пароль'),
+            'repassword' => Yii::t('frontend', 'Повторите новый пароль'),
+            'oldpassword' => Yii::t('frontend', 'Текущий пароль')
         ];
     }
 
@@ -77,7 +77,7 @@ class PasswordForm extends Model
     {
         $user = $this->user;
         if (!$user || !$user->validatePassword($this->$attribute)) {
-            $this->addError($attribute, Yii::t('frontend', 'ERROR_MSG_INVALID_OLD_PASSWORD'));
+            $this->addError($attribute, Yii::t('frontend', 'Неправильный текущий пароль'));
         }
     }
 

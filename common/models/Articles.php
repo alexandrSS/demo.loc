@@ -180,17 +180,17 @@ class Articles extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('articles', 'ATTR_ID'),
-            'title' => Yii::t('articles', 'ATTR_TITLE'),
-            'alias' => Yii::t('articles', 'ATTR_ALIAS'),
-            'snippet' => Yii::t('articles', 'ATTR_SNIPPET'),
-            'content' => Yii::t('articles', 'ATTR_CONTENT'),
-            'views' => Yii::t('articles', 'ATTR_VIEWS'),
-            'status_id' => Yii::t('articles', 'ATTR_STATUS'),
-            'created_at' => Yii::t('articles', 'ATTR_CREATED'),
-            'updated_at' => Yii::t('articles', 'ATTR_UPDATED'),
-            'preview_url' => Yii::t('articles', 'ATTR_PREVIEW_URL'),
-            'image_url' => Yii::t('articles', 'ATTR_IMAGE_URL'),
+            'id' => Yii::t('common', 'ID'),
+            'title' => Yii::t('common', 'Заголовок'),
+            'alias' => Yii::t('common', 'Алиас'),
+            'snippet' => Yii::t('common', 'Введение'),
+            'content' => Yii::t('common', 'Контент'),
+            'views' => Yii::t('common', 'Просмотры'),
+            'status_id' => Yii::t('common', 'Статус'),
+            'created_at' => Yii::t('common', 'Создана'),
+            'updated_at' => Yii::t('common', 'Обновлёна'),
+            'preview_url' => Yii::t('common', 'Мини-изображение'),
+            'image_url' => Yii::t('common', 'Изображение'),
         ];
     }
 }

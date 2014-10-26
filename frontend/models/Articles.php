@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * Class Articless
- * @package vova07\articless\models\frontend
  * Articles model.
  *
  * @property integer $id ID

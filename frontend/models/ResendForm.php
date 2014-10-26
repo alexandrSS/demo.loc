@@ -2,29 +2,25 @@
 
 namespace frontend\models;
 
-use common\modules\users\models\User;
-use common\modules\users\traits\ModuleTrait;
 use yii\base\Model;
 use Yii;
 
 /**
  * Class ResendForm
- * @package vova07\users\models
+ * @package frontend\models
  * ResendForm is the model behind the resend form.
  *
  * @property string $email E-mail
  */
 class ResendForm extends Model
 {
-    use ModuleTrait;
-
     /**
      * @var string $email E-mail
      */
     public $email;
 
     /**
-     * @var \vova07\users\models\frontend\User User instance
+     * @var User instance
      */
     private $_model;
 
@@ -56,7 +52,7 @@ class ResendForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('frontend', 'ATTR_EMAIL')
+            'email' => Yii::t('frontend', 'E-mail')
         ];
     }
 
@@ -84,7 +80,7 @@ class ResendForm extends Model
         return $this->module->mail
             ->compose('signup', ['model' => $this->_model])
             ->setTo($this->email)
-            ->setSubject(Yii::t('frontend', 'EMAIL_SUBJECT_SIGNUP') . ' ' . Yii::$app->name)
+            ->setSubject(Yii::t('frontend', 'Код подтверждения новой учётной записи.') . ' ' . Yii::$app->name)
             ->send();
     }
 }

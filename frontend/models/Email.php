@@ -8,7 +8,7 @@ use Yii;
 
 /**
  * Class Email
- * @package frontend\modules\users\models
+ * @package frontend\models
  * Email is the model that is used to change user email address.
  *
  * @property integer $user_id User ID
@@ -89,15 +89,15 @@ class Email extends ActiveRecord
 	public function attributeLabels()
 	{
 		return [
-			'email' => Yii::t('frontend', 'ATTR_NEW_EMAIL'),
-			'oldemail' => Yii::t('frontend', 'ATTR_OLDEMAIL'),
+			'email' => Yii::t('frontend', 'Новый e-mail'),
+			'oldemail' => Yii::t('frontend', 'Текущий e-mail'),
 		];
 	}
 
-	/**
-	 * @return common\modules\users\models\User|null Related user
-	 */
-	public function getUser()
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser()
 	{
 		return $this->hasOne(User::className(), ['id' => 'user_id']);
 	}
@@ -141,7 +141,7 @@ class Email extends ActiveRecord
     	return $this->module->mail
     	            ->compose('email', ['model' => $this])
     	            ->setTo($this->email)
-    	            ->setSubject(Yii::t('frontend', 'EMAIL_SUBJECT_CHANGE') . ' ' . Yii::$app->name)
+    	            ->setSubject(Yii::t('frontend', 'Код подтверждения новой электронной почты.') . ' ' . Yii::$app->name)
     	            ->send();
     }
 }

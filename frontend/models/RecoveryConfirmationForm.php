@@ -2,15 +2,13 @@
 
 namespace frontend\models;
 
-use common\modules\users\helpers\Security;
-use common\modules\users\models\User;
-use common\modules\users\traits\ModuleTrait;
+use common\helpers\Security;
 use yii\base\Model;
 use Yii;
 
 /**
  * Class RecoveryConfirmationForm
- * @package vova07\users\models
+ * @package frontend\models
  * RecoveryConfirmationForm is the model behind the recovery confirmation form.
  *
  * @property string $password Password
@@ -19,8 +17,6 @@ use Yii;
  */
 class RecoveryConfirmationForm extends Model
 {
-    use ModuleTrait;
-
     /**
      * @var string Password
      */
@@ -37,7 +33,7 @@ class RecoveryConfirmationForm extends Model
     public $token;
 
     /**
-     * @var \vova07\users\models\frontend\User User instance
+     * @var User instance
      */
     private $_user;
 
@@ -74,8 +70,8 @@ class RecoveryConfirmationForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => Yii::t('frontend', 'ATTR_PASSWORD'),
-            'repassword' => Yii::t('frontend', 'ATTR_REPASSWORD')
+            'password' => Yii::t('frontend', 'Пароль'),
+            'repassword' => Yii::t('frontend', 'Повторите пароль')
         ];
     }
 

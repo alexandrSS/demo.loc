@@ -5,7 +5,7 @@ use yii\helpers\Html;
 $this->title = $model['title'];
 $this->params['breadcrumbs'] = [
     [
-        'label' => Yii::t('backend', 'BACKEND_INDEX_TITLE'),
+        'label' => Yii::t('frontend', 'Статьи'),
         'url' => ['index']
     ],
     $this->title

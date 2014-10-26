@@ -2,8 +2,8 @@
 
 use yii\widgets\ListView;
 
-$this->title = Yii::t('frontend', 'FRONTEND_INDEX_TITLE');
-$this->params['subtitle'] = Yii::t('frontend', 'FRONTEND_INDEX_SUBTITLE');
+$this->title = Yii::t('frontend', 'Пользователи');
+$this->params['subtitle'] = Yii::t('frontend', 'Список пользователей');
 $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>

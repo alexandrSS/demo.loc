@@ -18,7 +18,8 @@ use yii\widgets\ActiveForm;
 use Yii;
 
 /**
- * Frontend controller for guest users.
+ * Class GuestController
+ * @package frontend\controllers
  */
 class GuestController extends Controller
 {
@@ -41,21 +42,21 @@ class GuestController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function actions()
     {
         return [
             'fileapi-upload' => [
                 'class' => FileAPIUpload::className(),
-                'path' => $this->module->avatarsTempPath
+                'path' => User::AVATARS_TEMP_PATH
             ]
         ];
     }
 
     /**
-     * Sign Up page.
-     * If record will be successful created, user will be redirected to home page.
+     * Регистрация
+     * @return array|string|Response
      */
     public function actionSignup()
     {
@@ -66,12 +67,14 @@ class GuestController extends Controller
             if ($user->validate() && $profile->validate()) {
                 $user->populateRelation('profile', $profile);
                 if ($user->save(false)) {
-                    if ($this->module->requireEmailConfirmation === true) {
+                    if (User::REQUIRE_EMAIL_CONFIGURATION === true) {
                         Yii::$app->session->setFlash(
                             'success',
                             Yii::t(
-                                'users',
-                                'FRONTEND_FLASH_SUCCESS_SIGNUP_WITHOUT_LOGIN',
+                                'frontend',
+                                'Учётная запись была успешно создана. Через несколько секунд вам на почту будет отправлен код для активации аккаунта.
+                                В случае если письмо не пришло в течении 15 минут,
+                                вы можете заново запросить отправку ключа по данной <a href="{url}">ссылке</a>.',
                                 [
                                     'url' => Url::toRoute('resend')
                                 ]
@@ -81,12 +84,12 @@ class GuestController extends Controller
                         Yii::$app->user->login($user);
                         Yii::$app->session->setFlash(
                             'success',
-                            Yii::t('users', 'FRONTEND_FLASH_SUCCESS_SIGNUP_WITH_LOGIN')
+                            Yii::t('frontend', 'Учётная запись была успешно создана.')
                         );
                     }
                     return $this->goHome();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_SIGNUP'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент регистрации возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -105,7 +108,8 @@ class GuestController extends Controller
     }
 
     /**
-     * Resend email confirmation token page.
+     * Повторное подтверждение почты
+     * @return array|string|Response
      */
     public function actionResend()
     {
@@ -114,10 +118,10 @@ class GuestController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->resend()) {
-                    Yii::$app->session->setFlash('success', Yii::t('users', 'FRONTEND_FLASH_SUCCESS_RESEND'));
+                    Yii::$app->session->setFlash('success', Yii::t('frontend', 'На указанный электронный адрес было отправлено письмо с кодом активации новой учётной записи.'));
                     return $this->goHome();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_RESEND'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент отправки письма возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -135,7 +139,8 @@ class GuestController extends Controller
     }
 
     /**
-     * Sign In page.
+     * Страница входа
+     * @return array|string|Response
      */
     public function actionLogin()
     {
@@ -165,27 +170,26 @@ class GuestController extends Controller
     }
 
     /**
-     * Activate a new user page.
-     *
-     * @param string $token Activation token.
-     *
-     * @return mixed View
+     * Активация нового пользователя
+     * @param $token
+     * @return Response
      */
     public function actionActivation($token)
     {
         $model = new ActivationForm(['token' => $token]);
 
         if ($model->validate() && $model->activation()) {
-            Yii::$app->session->setFlash('success', Yii::t('users', 'FRONTEND_FLASH_SUCCESS_ACTIVATION'));
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'Ваша учётная запись была успешно активирована.'));
         } else {
-            Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_ACTIVATION'));
+            Yii::$app->session->setFlash('danger', Yii::t('frontend', 'Неверный код активации или возмоможно аккаунт был уже ранее активирован.'));
         }
 
         return $this->goHome();
     }
 
     /**
-     * Request password recovery page.
+     * Восстановление пароля
+     * @return array|string|Response
      */
     public function actionRecovery()
     {
@@ -194,10 +198,10 @@ class GuestController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->recovery()) {
-                    Yii::$app->session->setFlash('success', Yii::t('users', 'FRONTEND_FLASH_SUCCESS_RECOVERY'));
+                    Yii::$app->session->setFlash('success', Yii::t('frontend', 'На указанный вами электронный адрес было отправлено письмо с кодом восстановления пароля.'));
                     return $this->goHome();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('users', 'FRONTEND_FLASH_FAIL_RECOVERY'));
+                    Yii::$app->session->setFlash('danger', Yii::t('frontend', 'В момент отправки письма возникла ошибка. Попробуйте ещё раз пожалуйста!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -215,11 +219,9 @@ class GuestController extends Controller
     }
 
     /**
-     * Confirm password recovery request page.
-     *
-     * @param string $token Confirmation token
-     *
-     * @return mixed View
+     * Подтверждение пароля после восстановления
+     * @param $token
+     * @return array|string|Response
      */
     public function actionRecoveryConfirmation($token)
     {
@@ -228,7 +230,7 @@ class GuestController extends Controller
         if (!$model->isValidToken()) {
             Yii::$app->session->setFlash(
                 'danger',
-                Yii::t('users', 'FRONTEND_FLASH_FAIL_RECOVERY_CONFIRMATION_WITH_INVALID_KEY')
+                Yii::t('frontend', 'Неверный код подтверждения.')
             );
             return $this->goHome();
         }
@@ -238,13 +240,13 @@ class GuestController extends Controller
                 if ($model->recovery()) {
                     Yii::$app->session->setFlash(
                         'success',
-                        Yii::t('users', 'FRONTEND_FLASH_SUCCESS_RECOVERY_CONFIRMATION')
+                        Yii::t('frontend', 'Пароль был успешно восстановлен.')
                     );
                     return $this->goHome();
                 } else {
                     Yii::$app->session->setFlash(
                         'danger',
-                        Yii::t('users', 'FRONTEND_FLASH_FAIL_RECOVERY_CONFIRMATION')
+                        Yii::t('frontend', 'В момент подтверждения нового пароля возникла ошибка. Попробуйте ещё раз пожалуйста!')
                     );
                     return $this->refresh();
                 }

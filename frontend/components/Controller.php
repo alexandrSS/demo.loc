@@ -3,7 +3,9 @@
 namespace frontend\components;
 
 /**
- * Main frontend controller.
+ * Основной контроллер frontend приложенния
+ * Class Controller
+ * @package frontend\components
  */
 class Controller extends \yii\web\Controller
 {

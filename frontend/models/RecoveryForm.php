@@ -2,29 +2,25 @@
 
 namespace frontend\models;
 
-use common\modules\users\models\User;
-use common\modules\users\traits\ModuleTrait;
 use yii\base\Model;
 use Yii;
 
 /**
  * Class RecoveryForm
- * @package vova07\users\models
+ * @package frontend\models
  * RecoveryForm is the model behind the recovery form.
  *
  * @property string $email E-mail
  */
 class RecoveryForm extends Model
 {
-    use ModuleTrait;
-
     /**
      * @var string $email E-mail
      */
     public $email;
 
     /**
-     * @var \vova07\users\models\frontend\User User instance
+     * @var User instance
      */
     private $_model;
 
@@ -55,7 +51,7 @@ class RecoveryForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('frontend', 'ATTR_EMAIL')
+            'email' => Yii::t('frontend', 'E-mail')
         ];
     }
 
@@ -83,7 +79,7 @@ class RecoveryForm extends Model
         return $this->module->mail
             ->compose('recovery', ['model' => $this->_model])
             ->setTo($this->email)
-            ->setSubject(Yii::t('frontend', 'EMAIL_SUBJECT_RECOVERY') . ' ' . Yii::$app->name)
+            ->setSubject(Yii::t('frontend', 'Код восстановления пароля.') . ' ' . Yii::$app->name)
             ->send();
     }
 }

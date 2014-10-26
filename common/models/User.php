@@ -38,6 +38,11 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 3;
 
     /**
+     * @var boolean If true after registration user will be required to confirm his e-mail address.
+     */
+    const REQUIRE_EMAIL_CONFIGURATION = false;
+
+    /**
      * Default role
      */
     const ROLE_DEFAULT = 'user';
@@ -309,7 +314,7 @@ class User extends ActiveRecord implements IdentityInterface
             if ($this->isNewRecord) {
                 // Set default status
                 if (!$this->status_id) {
-                    $this->status_id = $this->module->requireEmailConfirmation ? self::STATUS_INACTIVE : self::STATUS_ACTIVE;
+                    $this->status_id = self::REQUIRE_EMAIL_CONFIGURATION ? self::STATUS_INACTIVE : self::STATUS_ACTIVE;
                 }
                 // Set default role
                 if (!$this->role) {
@@ -403,9 +408,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if ($this->_mail === null) {
             $this->_mail = Yii::$app->getMailer();
-            $this->_mail->htmlLayout = '@common/modules/users/mails/layouts/html';
-            $this->_mail->textLayout = '@common/modules/users/mails/layouts/text';
-            $this->_mail->viewPath = '@common/modules/users/mails/views';
+            $this->_mail->htmlLayout = '@common/mails/layouts/html';
+            $this->_mail->textLayout = '@common/mails/layouts/text';
+            $this->_mail->viewPath = '@common/mails/views';
             if ($this->robotEmail !== null) {
                 $this->_mail->messageConfig['from'] = $this->robotName === null ? $this->robotEmail : [$this->robotEmail => $this->robotName];
             }
