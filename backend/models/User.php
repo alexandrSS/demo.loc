@@ -2,7 +2,6 @@
 
 namespace backend\models;
 
-use backend\modules\system\models\SystemEvent;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -16,7 +15,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property Profile $profile Profile
  */
-class User extends \common\modules\users\models\User
+class User extends \common\models\User
 {
     const EVENT_AFTER_SIGNUP = 'afterSignup';
     /**

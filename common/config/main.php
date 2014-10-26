@@ -64,9 +64,9 @@ return [
 
         'i18n' => [
             'translations' => [
-                'backend' => [
+                'common' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/messages',
+                    'basePath' => '@common/messages',
                 ],
                 'fileapi' => [
                     'class' => 'yii\i18n\PhpMessageSource',

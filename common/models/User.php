@@ -250,6 +250,14 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->auth_key;
     }
 
+    public static function getAdminRoles()
+    {
+        return[
+            'admin',
+            'superAdmin'
+        ];
+    }
+
     /**
      * Auth Key validation.
      *

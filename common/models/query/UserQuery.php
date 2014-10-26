@@ -2,8 +2,8 @@
 
 namespace common\models\query;
 
-use yii\db\ActiveQuery;
 use common\models\User;
+use yii\db\ActiveQuery;
 
 /**
  * Class UserQuery
@@ -73,7 +73,7 @@ class UserQuery extends ActiveQuery
 	 */
 	public function admin()
 	{
-		$this->andWhere(['role' => $this->module->adminRoles]);
+		$this->andWhere(['role' => User::getAdminRoles()]);
 		return $this;
 	}
 }

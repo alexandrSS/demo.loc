@@ -5,7 +5,7 @@ namespace backend\controllers;
 use backend\components\Controller;
 use backend\models\search\UserSearch;
 use backend\models\User;
-use common\modules\users\models\Profile;
+use common\models\Profile;
 use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
 use Yii;
 use yii\filters\VerbFilter;
