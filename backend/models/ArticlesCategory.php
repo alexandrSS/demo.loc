@@ -34,7 +34,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     /**
      * @var Читабельный статус категории
      */
-    protected $_parentList;
+    protected $_categoryList;
 
     /**
      * @var string Model status.
@@ -65,34 +65,19 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     }
 
     /**
-     * @return array [[DropDownList]] массив категорий.
-     */
-    public static function getCategoryArray()
-    {
-        $key = self::CACHE_ARTICLE_CATEGORY_LIST_DATA;
-        $value = Yii::$app->getCache()->get($key);
-        if ($value === false || empty($value)) {
-            $value = self::find()->select(['id', 'title'])->published()->asArray()->all();
-            $value = ArrayHelper::map($value, 'id', 'title');
-            Yii::$app->cache->set($key, $value);
-        }
-        return $value;
-    }
-
-    /**
      * Читабельный статус котегории
      * @return mixed
      */
-    public function getParentList()
+    public function getCategoryList()
     {
         if(!empty($this->parent_id)){
-            if($this->_parentList === NULL){
-                $parentList = self::getParentListArray();
-                $this->_parentList = $parentList[$this->parent_id];
+            if($this->_categoryList === NULL){
+                $categoryList = self::getCategoryListArray();
+                $this->_categoryList = $categoryList[$this->parent_id];
             }
-            return $this->_parentList;
+            return $this->_categoryList;
         }
-        return $this->_parentList = NULL;
+        return $this->_categoryList = NULL;
     }
 
     /**
@@ -100,7 +85,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      * @param int $level
      * @return array
      */
-    public static function getParentListArray($parent_id = null, $level = 0)
+    public static function getCategoryListArray($parent_id = null, $level = 0)
     {
         if (empty($parent_id)) {
             $parent_id = null;
@@ -116,7 +101,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
 
             $list[$category->id] = $category->title;
 
-            $list = ArrayHelper::merge($list, self::getParentListArray($category->id, $level + 1));
+            $list = ArrayHelper::merge($list, self::getCategoryListArray($category->id, $level + 1));
         }
 
         return $list;

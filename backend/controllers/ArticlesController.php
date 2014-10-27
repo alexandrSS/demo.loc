@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\components\Controller;
 use backend\models\Articles;
+use backend\models\ArticlesCategory;
 use backend\models\search\ArticlesSearch;
 use backend\widget\imperavi\actions\GetAction as ImperaviGet;
 use backend\widget\imperavi\actions\UploadAction as ImperaviUpload;
@@ -81,13 +82,15 @@ class ArticlesController extends Controller
         $searchModel = new ArticlesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $statusArray = Articles::getStatusArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
 
         return $this->render(
             'index',
             [
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
-                'statusArray' => $statusArray
+                'statusArray' => $statusArray,
+                'categoryList' => $categoryList
             ]
         );
     }
@@ -100,6 +103,7 @@ class ArticlesController extends Controller
     {
         $model = new Articles(['scenario' => 'admin-create']);
         $statusArray = Articles::getStatusArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -119,7 +123,8 @@ class ArticlesController extends Controller
             'create',
             [
                 'model' => $model,
-                'statusArray' => $statusArray
+                'statusArray' => $statusArray,
+                'categoryList' => $categoryList
             ]
         );
     }
@@ -135,6 +140,7 @@ class ArticlesController extends Controller
         $model = $this->findModel($id);
         $model->setScenario('admin-update');
         $statusArray = Articles::getStatusArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -154,7 +160,8 @@ class ArticlesController extends Controller
             'update',
             [
                 'model' => $model,
-                'statusArray' => $statusArray
+                'statusArray' => $statusArray,
+                'categoryList' => $categoryList
             ]
         );
     }

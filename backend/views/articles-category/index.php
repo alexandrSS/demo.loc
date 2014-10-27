@@ -20,7 +20,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{create} {batch-delete}',
+                'buttonsTemplate' => '{create}',
                 'grid' => 'articlesCategory-grid'
             ]
         ); ?>
@@ -30,20 +30,18 @@ $this->params['breadcrumbs'] = [
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                [
-                    'class' => CheckboxColumn::classname()
-                ],
+                //['class' => CheckboxColumn::classname()],
                 'title',
                 'alias',
                 [
                     'attribute' => 'parent_id',
                     'value' => function ($model) {
-                        return $model->ParentList;
+                        return $model->categoryList;
                     },
                     'filter' => Html::activeDropDownList(
                         $searchModel,
                         'parent_id',
-                        $parentList,
+                        $categoryList,
                         [
                             'class' => 'form-control',
                             'prompt' => Yii::t('backend', 'Выберите родителя')

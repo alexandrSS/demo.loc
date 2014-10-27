@@ -1,7 +1,7 @@
 <?php
 
 use frontend\themes\site\widgets\Menu;
-use common\models\Pages;
+use frontend\models\Pages;
 
 echo Menu::widget(
     [

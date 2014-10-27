@@ -52,6 +52,7 @@ class ArticlesSearch extends Articles
         $query->andFilterWhere(
             [
                 'id' => $this->id,
+                'category_id' => $this->status_id,
                 'status_id' => $this->status_id,
                 'FROM_UNIXTIME(created_at, "%d.%m.%Y")' => $this->created_at,
                 'FROM_UNIXTIME(updated_at, "%d.%m.%Y")' => $this->updated_at

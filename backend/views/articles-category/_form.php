@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
     <div class="col-sm-12">
-        <?= $form->field($model, 'parent_id')->dropDownList($parentList, [
+        <?= $form->field($model, 'parent_id')->dropDownList($categoryList, [
             'prompt' => Yii::t('backend', 'Выберите категорию')
         ]) ?>
     </div>

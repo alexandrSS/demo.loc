@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{create} {batch-delete}',
+                'buttonsTemplate' => '{create}',
                 'grid' => 'pages-grid'
             ]
         ); ?>
@@ -31,9 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                [
-                    'class' => CheckboxColumn::classname()
-                ],
+                //['class' => CheckboxColumn::classname()],
                 'title',
                 'alias',
                 [

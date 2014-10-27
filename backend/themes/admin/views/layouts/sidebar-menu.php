@@ -8,6 +8,11 @@ echo \common\components\widgets\menu\MenuWidget::widget([
     'activateParents' => true,
     'items' => [
         [
+            'label' => Yii::t('themes', 'К сайту'),
+            'icon' => '<i class="fa fa-home"></i>',
+            'url' => '/'
+        ],
+        [
             'label' => Yii::t('themes', 'Панель управления'),
             'icon' => '<i class="fa fa-bar-chart-o"></i>',
             'url' => Yii::$app->homeUrl

@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use common\behaviors\TransliterateBehavior;
@@ -25,6 +26,11 @@ use common\behaviors\PurifierBehavior;
  */
 class Articles extends \common\models\Articles
 {
+    /**
+     * @var Читабельный статус категории
+     */
+    protected $_categoryList;
+
     /**
      * @return array
      */
@@ -80,6 +86,14 @@ class Articles extends \common\models\Articles
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(ArticlesCategory::className(), ['id' => 'category_id']);
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -96,6 +110,7 @@ class Articles extends \common\models\Articles
     public function attributeLabels()
     {
         return [
+            'category_id' => Yii::t('backend', 'Категория'),
             'title' => Yii::t('backend', 'Название'),
             'alias' => Yii::t('backend', 'Адрес (URL)'),
             'snippet' => Yii::t('backend', 'Фрагмент'),
@@ -118,6 +133,7 @@ class Articles extends \common\models\Articles
         $scenarios['admin-create'] = [
             'title',
             'alias',
+            'category_id',
             'snippet',
             'content',
             'status_id',
@@ -127,6 +143,7 @@ class Articles extends \common\models\Articles
         $scenarios['admin-update'] = [
             'title',
             'alias',
+            'category_id',
             'snippet',
             'content',
             'status_id',

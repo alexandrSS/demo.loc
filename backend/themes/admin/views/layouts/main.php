@@ -179,8 +179,8 @@ use backend\models\SystemEvent;
                 <?= Breadcrumbs::widget(
                     [
                         'homeLink' => [
-                            'label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('themes', 'К сайту'),
-                            'url' => '/'
+                            'label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('themes', 'Панель управления'),
+                            'url' => Yii::$app->homeUrl
                         ],
                         'encodeLabels' => false,
                         'tag' => 'ol',

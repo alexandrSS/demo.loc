@@ -45,13 +45,13 @@ class ArticlesCategoryController extends Controller
     {
         $searchModel = new ArticlesCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $parentList = ArticlesCategory::getParentListArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
         $statusArray = ArticlesCategory::getStatusArray();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'parentList' => $parentList,
+            'categoryList' => $categoryList,
             'statusArray' => $statusArray
         ]);
     }
@@ -64,7 +64,7 @@ class ArticlesCategoryController extends Controller
     {
         $model = new ArticlesCategory(['scenario' => 'admin-create']);
         $statusArray = ArticlesCategory::getStatusArray();
-        $parentList = ArticlesCategory::getParentListArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -85,7 +85,7 @@ class ArticlesCategoryController extends Controller
             [
                 'model' => $model,
                 'statusArray' => $statusArray,
-                'parentList' => $parentList,
+                'categoryList' => $categoryList,
             ]
         );
     }
@@ -101,7 +101,7 @@ class ArticlesCategoryController extends Controller
         $model = $this->findModel($id);
         $model->setScenario('admin-update');
         $statusArray = ArticlesCategory::getStatusArray();
-        $parentList = ArticlesCategory::getParentListArray();
+        $categoryList = ArticlesCategory::getCategoryListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -122,7 +122,7 @@ class ArticlesCategoryController extends Controller
             [
                 'model' => $model,
                 'statusArray' => $statusArray,
-                'parentList' => $parentList,
+                'categoryList' => $categoryList,
             ]
         );
     }

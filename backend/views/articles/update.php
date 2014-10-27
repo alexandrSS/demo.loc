@@ -31,6 +31,7 @@ $this->params['breadcrumbs'] = [
             [
                 'model' => $model,
                 'statusArray' => $statusArray,
+                'categoryList' => $categoryList,
                 'box' => $box
             ]
         );

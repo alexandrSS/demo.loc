@@ -160,7 +160,7 @@ class Articles extends ActiveRecord
     {
         return [
             // Required
-            [['title', 'content'], 'required'],
+            [['title', 'category_id', 'content'], 'required'],
             // Trim
             [['title', 'snippet', 'content'], 'trim'],
             // CreatedAtJui and UpdatedAtJui

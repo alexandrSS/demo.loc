@@ -1,5 +1,7 @@
 <?php
 
+use frontend\themes\site\widgets\Menu;
+use frontend\models\ArticlesCategory;
 use yii\widgets\ListView;
 
 $this->title = Yii::t('frontend', 'Статьи');
@@ -7,6 +9,16 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="row">
 
     <aside class="col-sm-4 col-sm-push-8">
+        <?=
+        Menu::widget(
+            [
+                'options' => [
+                    'class' => isset($footer) ? 'pull-right' : 'nav navbar-nav navbar-right'
+                ],
+                'items' => ArticlesCategory::getMenuPage()
+            ]
+        );
+        ?>
         <div class="widget ads">
             <div class="row">
                 <div class="col-xs-6">

@@ -10,6 +10,14 @@ use yii\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?php $box->beginBody(); ?>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <?= $form->field($model, 'category_id')->dropDownList($categoryList, [
+                'prompt' => Yii::t('backend', 'Выберите категорию')
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <?= $form->field($model, 'title') ?>

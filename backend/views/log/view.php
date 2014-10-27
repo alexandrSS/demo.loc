@@ -3,9 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-$this->title = $model->id;
+$this->title = Yii::t('backend', 'Системный журнал');
+$this->params['subtitle'] = Yii::t('backend', 'Просмотр события');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Системный журнал'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->id;
 ?>
 <div class="system-log-view">
 

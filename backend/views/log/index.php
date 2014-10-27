@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use backend\themes\admin\widgets\GridView;
 
 $this->title = Yii::t('backend', 'Системный журнал');
+$this->params['subtitle'] = Yii::t('backend', 'Все события');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="system-log-index">

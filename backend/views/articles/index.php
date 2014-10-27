@@ -21,7 +21,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{create} {batch-delete}',
+                'buttonsTemplate' => '{create}',
                 'grid' => 'articles-grid'
             ]
         ); ?>
@@ -32,9 +32,7 @@ $this->params['breadcrumbs'] = [
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-                    [
-                        'class' => CheckboxColumn::classname()
-                    ],
+                    //['class' => CheckboxColumn::classname()],
                     [
                         'attribute' => 'title',
                         'format' => 'html',
@@ -44,6 +42,27 @@ $this->params['breadcrumbs'] = [
                                 ['update', 'id' => $model['id']]
                             );
                         }
+                    ],
+                    [
+                        'attribute' => 'category_id',
+                        'format' => 'html',
+                        'value' => function ($model) {
+                                if($model->category_id !== NULL)
+                                {
+                                    return Html::a($model->category['title'], ['/article-category/view', 'id' => $model->category['id']]);
+                                }else{
+                                    return NULL;
+                                }
+                            },
+                        'filter' => Html::activeDropDownList(
+                                $searchModel,
+                                'category_id',
+                                $categoryList,
+                                [
+                                    'class' => 'form-control',
+                                    'prompt' => Yii::t('backend', 'Выберите категорию')
+                                ]
+                            )
                     ],
                     [
                         'attribute' => 'status_id',
