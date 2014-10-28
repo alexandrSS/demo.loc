@@ -1,21 +1,11 @@
 <?php
 
-use common\modules\users\helpers\Security;
+use common\helpers\Security;
 use yii\db\Migration;
 use yii\db\Schema;
 
 /**
- * CLass m140418_204054_create_module_tbl
- * @package vova07\users\migrations
- *
- * Create module tables.
- *
- * Will be created 3 tables:
- * - `{{%users}}` - Users table.
- * - `{{%profiles}}` - User profiles table.
- * - `{{%user_email}}` - Users email table. This table is used to store temporary new user email address.
- *
- * By default will be added one superadministrator with login: `admin` and password: `admin12345`.
+ * Class m140418_204054_users
  */
 class m140418_204054_users extends Migration
 {
