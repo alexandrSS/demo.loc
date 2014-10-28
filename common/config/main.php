@@ -23,7 +23,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName'=>false,
-            'suffix' => '/'
+            //'suffix' => '/'
         ],
         'assetManager' => [
             'linkAssets' => true   // TODO: Windows XP

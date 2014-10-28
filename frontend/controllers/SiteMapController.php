@@ -18,26 +18,50 @@ class SiteMapController extends Controller
 
     public function actionIndex()
     {
-        $items = [];
 
-        //Страницы
-        $items = array_merge(
-            $items,
+
+        $items = array();
+
+        //Category
+//        $items = array_merge($items, array(array(
+//            'models' => Category::model()->published()->findAll(),
+//            'changefreq' => self::DAILY,
+//            'priority' => 0.5,
+//        )));
+        //Page
+//        $items = array_merge($items, array(array(
+//            'models' => Page::model()->published()->findAll(),
+//            'changefreq' => self::DAILY,
+//            'priority' => 0.8,
+//        )));
+
+        $tests = [
             [
-                [
-                    'models' => Pages::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all(),
-                    'changefreq' => self::DAILY,
-                    'priority' => 0.8
-                ]
-            ]
-        );
+                'url' => '/',
+                'date' => '2014-03-03',
+                'changefreq' => self::HOURLY,
+                'priority' => 1,
+            ],
+            [
+                'url' => '/map',
+                'date' => '2014-01-20',
+                'changefreq' => self::WEEKLY,
+                'priority' => 0.5,
+            ],
+            [
+                'url' => '/letter',
+                'date' => '2014-01-20',
+                'changefreq' => self::DAILY,
+                'priority' => 0.5,
+            ],
+        ];
 
-        header("Content-type: text/xml");
+        header('Content-type: text/xml');
 
         $this->renderPartial('index', array(
-            'items'=>$items,
-            'host'=>Yii::$app->request->hostInfo,
-            //'tests'=>$tests,
+            //'items'=>$items,
+            //'host'=>Yii::$app->request->hostInfo,
+            'tests' => $tests,
         ));
     }
 }

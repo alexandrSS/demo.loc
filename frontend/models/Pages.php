@@ -17,6 +17,8 @@ use Yii;
  */
 class Pages extends \common\models\Pages
 {
+    private $_url;
+
     /**
      * Меню страниц
      * @return array
@@ -87,5 +89,13 @@ class Pages extends \common\models\Pages
         ];
 
         return $arrayReturn = array_merge($arrayPage,$array);
+    }
+
+
+    public function getUrl()
+    {
+        if ($this->_url === null)
+            $this->_url = Yii::$app->urlManager->createUrl($this->alias);
+        return $this->_url;
     }
 }

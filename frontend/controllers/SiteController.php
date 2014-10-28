@@ -17,39 +17,6 @@ use Yii;
  */
 class SiteController extends Controller
 {
-    const ALWAYS = 'always';
-    const HOURLY = 'hourly';
-    const DAILY = 'daily';
-    const WEEKLY = 'weekly';
-    const MONTHLY = 'monthly';
-    const YEARLY = 'yearly';
-    const NEVER = 'never';
-
-    public function actionMap()
-    {
-        $this->layout = '//siteMap';
-        $items = [];
-
-        //Страницы
-        $items = array_merge(
-            $items,
-            [
-                [
-                    'models' => Pages::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all(),
-                    'changefreq' => self::DAILY,
-                    'priority' => 0.8
-                ]
-            ]
-        );
-
-        //header("Content-type: text/xml");
-
-        $this->render('index', array(
-            'items'=>$items,
-            'host'=>Yii::$app->request->hostInfo,
-            //'tests'=>$tests,
-        ));
-    }
     /**
      * @inheritdoc
      */

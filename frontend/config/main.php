@@ -14,7 +14,7 @@ return [
         'urlManager' => [
             'rules' => [
                 '' => 'site/index',
-                'sitemap.xml' => 'site/map',
+                'sitemap.xml' => 'site-map/index',
                 'POST <_m:articles>' => '<_m>/user/create',
                 '<_m:articles>' => '<_m>/index',
                 '<_m:articles>/<id:\d+>-<alias:[a-zA-Z0-9_-]{1,100}+>' => '<_m>/default/view',
@@ -23,7 +23,7 @@ return [
                 '<_a:logout>' => 'user/<_a>',
                 '<_a:email>' => 'default/<_a>',
                 'my/settings/<_a:[\w\-]+>' => 'user/<_a>',
-                //'<alias:[a-zA-Z0-9_-]{1,100}+>' => 'pages/view'
+                '<alias:[a-zA-Z0-9_-]{1,100}+>' => 'pages/view'
             ]
         ],
         'view' => [
