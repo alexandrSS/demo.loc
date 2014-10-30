@@ -40,9 +40,9 @@ class ArticlesController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionView($id, $alias)
+    public function actionView($alias)
     {
-        if (($model = Articles::findOne(['id' => $id, 'alias' => $alias])) !== null) {
+        if (($model = Articles::findOne(['alias' => $alias])) !== null) {
             return $this->render(
                 'view',
                 [

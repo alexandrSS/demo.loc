@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\behaviors\PurifierBehavior;
+use common\helpers\Sitemap;
 use common\widget\fileapi\behaviors\UploadBehavior;
 use common\models\query\ArticlesQuery;
 use yii\behaviors\SluggableBehavior;
@@ -192,5 +193,11 @@ class Articles extends ActiveRecord
             'preview_url' => Yii::t('common', 'Мини-изображение'),
             'image_url' => Yii::t('common', 'Изображение'),
         ];
+    }
+
+
+    public function afterSave()
+    {
+        Sitemap::init();
     }
 }

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\behaviors\PurifierBehavior;
+use common\helpers\Sitemap;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
@@ -92,5 +93,11 @@ class Pages extends \yii\db\ActiveRecord
                 'value' => self::MODERATION ? self::STATUS_PUBLISHED : self::STATUS_UNPUBLISHED
             ]
         ];
+    }
+
+
+    public function afterSave()
+    {
+        Sitemap::init();
     }
 }
