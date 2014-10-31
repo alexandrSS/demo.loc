@@ -35,6 +35,26 @@ class ArticlesController extends Controller
     }
 
     /**
+     * @return string
+     */
+    function actionCategory()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Articles::find()->published(),
+            'pagination' => [
+                'pageSize' => Articles::RECORDS_PER_PAGE
+            ]
+        ]);
+
+        return $this->render(
+            'index',
+            [
+                'dataProvider' => $dataProvider
+            ]
+        );
+    }
+
+    /**
      * @param $id
      * @param $alias
      * @return string

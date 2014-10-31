@@ -23,6 +23,7 @@ return [
                 'my/settings/<_a:[\w\-]+>' => 'user/<_a>',
                 '<_m:articles>' => '<_m>/index',
                 '<_m:articles>/<alias:[a-zA-Z0-9_-]{1,100}+>' => '<_m>/view',
+                'category/<category:[a-zA-Z0-9_-]{1,100}+>' => 'articles/category',
                 '<alias:[a-zA-Z0-9_-]{1,100}+>' => 'pages/view'
             ]
         ],

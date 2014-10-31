@@ -39,7 +39,7 @@ class Articles extends ActiveRecord
     /**
      * Posts per page
      */
-    const RECORDS_PER_PAGE = 20;
+    const RECORDS_PER_PAGE = 10;
 
     /**
      * Whether posts need to be moderated before publishing

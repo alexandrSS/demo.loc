@@ -5,9 +5,6 @@ return [
     'timeZone' => 'Europe/Moscow',
     'language'=>'ru-RU',
     'modules' => [
-        'category' => [
-            'class' => 'common\modules\category\Module',
-        ],
     ],
     'components' => [
         'user' => [
@@ -26,7 +23,7 @@ return [
             //'suffix' => '/'
         ],
         'assetManager' => [
-            'linkAssets' => false   // TODO: Windows XP
+            'linkAssets' => true   // TODO: Windows XP
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
