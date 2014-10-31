@@ -8,41 +8,20 @@ $this->title = Yii::t('frontend', 'Статьи');
 $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="row">
 
-    <aside class="col-sm-4 col-sm-push-8">
+    <aside class="col-sm-3 col-sm-push-9">
         <?=
         Menu::widget(
             [
                 'options' => [
-                    'class' => isset($footer) ? 'pull-right' : 'nav navbar-nav navbar-right'
+                    'class' => 'nav nav-pills nav-stacked'
                 ],
-                'items' => ArticlesCategory::getMenuPage()
+                'items' => ArticlesCategory::getMenuArticleCategory()
             ]
         );
         ?>
-        <div class="widget ads">
-            <div class="row">
-                <div class="col-xs-6">
-                    <img class="img-responsive img-rounded" src="<?= $this->assetManager->publish('@frontend/themes/site/images/ads/ad1.png')[1] ?>" alt="Ads" />
-                </div>
-
-                <div class="col-xs-6">
-                    <img class="img-responsive img-rounded" src="<?= $this->assetManager->publish('@frontend/themes/site/images/ads/ad2.png')[1] ?>" alt="Ads" />
-                </div>
-            </div>
-            <p> </p>
-            <div class="row">
-                <div class="col-xs-6">
-                    <img class="img-responsive img-rounded" src="<?= $this->assetManager->publish('@frontend/themes/site/images/ads/ad3.png')[1] ?>" alt="Ads" />
-                </div>
-
-                <div class="col-xs-6">
-                    <img class="img-responsive img-rounded" src="<?= $this->assetManager->publish('@frontend/themes/site/images/ads/ad4.png')[1] ?>" alt="Ads" />
-                </div>
-            </div>
-        </div><!--/.ads-->
     </aside>
 
-    <div class="col-sm-8 col-sm-pull-4">
+    <div class="col-sm-9 col-sm-pull-3">
         <?= ListView::widget(
             [
                 'dataProvider' => $dataProvider,

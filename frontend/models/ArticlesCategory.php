@@ -26,7 +26,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      * Меню страниц
      * @return array
      */
-    public static function getMenuPage()
+    public static function getMenuArticleCategory()
     {
         $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
         $array[]=[];
@@ -35,7 +35,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
         {
             $array[] = [
                 'label' => $model->title,
-                'url' => ['/' . $model->alias]
+                'url' => ['/category/' . $model->alias]
             ];
         }
 
