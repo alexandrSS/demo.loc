@@ -18,7 +18,7 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'url' => Yii::$app->homeUrl
         ],
         [
-            'label' => Yii::t('themes', 'Контент'),
+            'label' => Yii::t('themes', 'Содержимое'),
             'icon' => '<i class="fa fa-edit"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
@@ -38,13 +38,10 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'options' => ['class' => 'treeview'],
             'items' => [
                 [
-                    'label' => Yii::t('themes', 'Системная информация'),
+                    'label' => Yii::t('themes', 'Информация о системе'),
                     'url' => ['/system-information/index'],
                     'icon' => '<i class="fa fa-angle-double-right"></i>'
                 ],
-                //['label'=>Yii::t('themes', 'Key-Value Storage'), 'url'=>['/key-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'File Storage Items'), 'url'=>['/file-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                //['label'=>Yii::t('themes', 'File Manager'), 'url'=>['/file-manager/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 [
                     'label' => Yii::t('themes', 'Системные события'),
                     'url' => ['/system-event/index'],

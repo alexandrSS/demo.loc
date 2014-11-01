@@ -200,4 +200,9 @@ class Articles extends ActiveRecord
     {
         Sitemap::init();
     }
+
+    public function afterDelete()
+    {
+        Sitemap::init();
+    }
 }

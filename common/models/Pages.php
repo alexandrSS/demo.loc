@@ -100,4 +100,9 @@ class Pages extends \yii\db\ActiveRecord
     {
         Sitemap::init();
     }
+
+    public function afterDelete()
+    {
+        Sitemap::init();
+    }
 }

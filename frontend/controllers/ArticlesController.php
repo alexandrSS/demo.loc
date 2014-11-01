@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\models\Articles;
+use frontend\models\ArticlesCategory;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -37,19 +38,20 @@ class ArticlesController extends Controller
     /**
      * @return string
      */
-    function actionCategory()
+    function actionCategory($category)
     {
+        $articleCategory = ArticlesCategory::find()->where(['alias' => $category])->one();
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->published(),
+            'query' => Articles::find()->category($articleCategory['id']),
             'pagination' => [
                 'pageSize' => Articles::RECORDS_PER_PAGE
             ]
         ]);
 
         return $this->render(
-            'index',
+            'category',
             [
-                'dataProvider' => $dataProvider
+                'dataProvider' => $dataProvider,
             ]
         );
     }

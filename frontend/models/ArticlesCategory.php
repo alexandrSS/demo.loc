@@ -29,7 +29,6 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     public static function getMenuArticleCategory()
     {
         $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
-        $array[]=[];
 
         foreach($models as $model)
         {

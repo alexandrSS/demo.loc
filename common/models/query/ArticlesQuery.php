@@ -35,4 +35,10 @@ class ArticlesQuery extends ActiveQuery
     }
 
 
+    public function category($category)
+    {
+        $this->andWhere(['category_id' => $category]);
+
+        return $this;
+    }
 }

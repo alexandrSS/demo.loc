@@ -23,7 +23,7 @@ return [
             //'suffix' => '/'
         ],
         'assetManager' => [
-            'linkAssets' => true   // TODO: Windows XP
+            'linkAssets' => false   // TODO: Windows XP
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
