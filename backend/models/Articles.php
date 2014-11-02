@@ -3,11 +3,12 @@
 namespace backend\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
+use common\behaviors\PurifierBehavior;
+use yii\behaviors\SluggableBehavior;
+use common\widget\fileapi\behaviors\UploadBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use common\behaviors\TransliterateBehavior;
-use common\behaviors\PurifierBehavior;
 
 /**
  * Class Article
@@ -27,41 +28,62 @@ use common\behaviors\PurifierBehavior;
 class Articles extends \common\models\Articles
 {
     /**
-     * @var Читабельный статус категории
-     */
-    protected $_categoryList;
-
-    /**
      * @return array
      */
     public function behaviors()
     {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+        $behaviors = parent::behaviors();
+
+        return array_merge(
+            $behaviors,
+            [
+                'timestamp' => [
+                    'class' => TimestampBehavior::className(),
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                    ],
                 ],
-            ],
-            'transliterateBehavior' => [
-                'class' => TransliterateBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
-                ]
-            ],
-            'purifierBehavior' => [
-                'class' => PurifierBehavior::className(),
-                'textAttributes' => [
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title'],
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
+                'transliterateBehavior' => [
+                    'class' => TransliterateBehavior::className(),
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
+                    ]
                 ],
-                'purifierOptions' => [
-                    'HTML.AllowedElements' => Yii::$app->params['allowHtmlTags']
-                ]
+                'purifierBehavior' => [
+                    'class' => PurifierBehavior::className(),
+                    'textAttributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
+                    ],
+                    'purifierOptions' => [
+                        'HTML.AllowedElements' => Yii::$app->params['allowHtmlTags'],
+                        'AutoFormat.RemoveEmpty' => true
+                    ]
+                ],
+                'sluggableBehavior' => [
+                    'class' => SluggableBehavior::className(),
+                    'attribute' => 'title',
+                    'slugAttribute' => 'alias'
+                ],
+                'uploadBehavior' => [
+                    'class' => UploadBehavior::className(),
+                    'attributes' => [
+                        'preview_url' => [
+                            'path' => self::PREVIEW_PATH,
+                            'tempPath' => self::IMAGES_TEMP_PATH,
+                            'url' => self::PREVIEW_URL
+                        ],
+                        'image_url' => [
+                            'path' => self::IMAGE_PATH,
+                            'tempPath' => self::IMAGES_TEMP_PATH,
+                            'url' => self::IMAGE_URL
+                        ]
+                    ]
+                ],
             ]
-        ];
+        );
     }
 
     /**
@@ -99,9 +121,13 @@ class Articles extends \common\models\Articles
     public function rules()
     {
         $rules = parent::rules();
-        $rules[] = ['status_id', 'in', 'range' => array_keys(self::getStatusArray())];
 
-        return $rules;
+        return array_merge(
+            $rules,
+            [
+                ['status_id', 'in', 'range' => array_keys(self::getStatusArray())],
+            ]
+        );
     }
 
     /**
@@ -109,19 +135,14 @@ class Articles extends \common\models\Articles
      */
     public function attributeLabels()
     {
-        return [
-            'category_id' => Yii::t('backend', 'Категория'),
-            'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Адрес (URL)'),
-            'snippet' => Yii::t('backend', 'Фрагмент'),
-            'content' => Yii::t('backend', 'Содержание'),
-            'views' => Yii::t('backend', 'Вид'),
-            'status_id' => Yii::t('backend', 'Статус'),
-            'created_at' => Yii::t('backend', 'Создана'),
-            'updated_at' => Yii::t('backend', 'Обнавлена'),
-            'preview_url' => Yii::t('backend', 'Предваретельное изображение'),
-            'image_url' => Yii::t('backend', 'Основное изображение'),
-        ];
+        $labels = parent::attributeLabels();
+
+        return array_merge(
+            $labels,
+            [
+                'category_id' => Yii::t('backend', 'Категория'),
+            ]
+        );
     }
 
     /**
@@ -129,28 +150,27 @@ class Articles extends \common\models\Articles
      */
     public function scenarios()
     {
-        $scenarios = parent::scenarios();
-        $scenarios['admin-create'] = [
-            'title',
-            'alias',
-            'category_id',
-            'snippet',
-            'content',
-            'status_id',
-            'preview_url',
-            'image_url',
+        return[
+            'admin-create' => [
+                'title',
+                'alias',
+                'category_id',
+                'snippet',
+                'content',
+                'status_id',
+                'preview_url',
+                'image_url',
+            ],
+            'admin-update' => [
+                'title',
+                'alias',
+                'category_id',
+                'snippet',
+                'content',
+                'status_id',
+                'preview_url',
+                'image_url',
+            ]
         ];
-        $scenarios['admin-update'] = [
-            'title',
-            'alias',
-            'category_id',
-            'snippet',
-            'content',
-            'status_id',
-            'preview_url',
-            'image_url',
-        ];
-
-        return $scenarios;
     }
 }

@@ -33,9 +33,9 @@ use yii\jui\DatePicker;
             [
                 'settings' => [
                     'minHeight' => 300,
-                    'imageGetJson' => Url::to(['/articles/default/imperavi-get']),
-                    'imageUpload' => Url::to(['/articles/default/imperavi-image-upload']),
-                    'fileUpload' => Url::to(['/articles/default/imperavi-file-upload'])
+                    'imageGetJson' => Url::to(['/articles/imperavi-get']),
+                    'imageUpload' => Url::to(['/articles/imperavi-image-upload']),
+                    'fileUpload' => Url::to(['/articles/imperavi-file-upload'])
                 ]
             ]
         ) ?>

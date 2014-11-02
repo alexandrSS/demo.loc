@@ -26,21 +26,21 @@ SET time_zone = "+00:00";
 -- Структура таблицы `articles_category`
 --
 
-CREATE TABLE IF NOT EXISTS `articles_category` (
+CREATE TABLE IF NOT EXISTS 'articles_category' (
   `id` int(11) NOT NULL,
-  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `alias` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `alias` varchar(100) NOT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `status_id` smallint(6) NOT NULL DEFAULT '0',
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `articles_category`
 --
 
-INSERT INTO `articles_category` (`id`, `title`, `alias`, `parent_id`, `status_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO 'articles_category' (`id`, `title`, `alias`, `parent_id`, `status_id`, `created_at`, `updated_at`) VALUES
   (1, 'Yii', 'yii', NULL, 1, 1414529027, 1414529027),
   (2, 'PHP', 'php', NULL, 1, 1414734771, 1414734771),
   (3, 'Информационная безопасность', 'informatsionnaya-bezopasnostj', NULL, 1, 1414735169, 1414735169),
@@ -52,20 +52,20 @@ INSERT INTO `articles_category` (`id`, `title`, `alias`, `parent_id`, `status_id
 -- Структура таблицы `articles`
 --
 
-CREATE TABLE IF NOT EXISTS `articles` (
+CREATE TABLE IF NOT EXISTS 'articles' (
 `id` int(11) NOT NULL,
-  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `alias` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `alias` varchar(100) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
-  `snippet` text COLLATE utf8_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `image_url` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `preview_url` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `snippet` text NOT NULL,
+  `content` longtext NOT NULL,
+  `image_url` varchar(64) NOT NULL,
+  `preview_url` varchar(64) NOT NULL,
   `status_id` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Дамп данных таблицы `articles`
@@ -95,7 +95,7 @@ INSERT INTO `articles` (`id`, `title`, `alias`, `category_id`, `author_id`, `sni
 -- Структура таблицы `pages`
 --
 
-CREATE TABLE IF NOT EXISTS `pages` (
+CREATE TABLE IF NOT EXISTS 'pages' (
 `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `alias` varchar(100) NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
 -- Дамп данных таблицы `pages`
 --
 
-INSERT INTO `pages` (`id`, `title`, `alias`, `content`, `status_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO 'pages' (`id`, `title`, `alias`, `content`, `status_id`, `created_at`, `updated_at`) VALUES
 (1, 'Sitemap. Класс для PHP5', 'sitemap-klass-dlya-php5', '<p><strong>sitemaps.org:</strong></p><blockquote>С помощью файла Sitemap веб-мастеры могут сообщать поисковым системам о веб-страницах, которые доступны для сканирования. Файл Sitemap представляет собой XML-файл, в котором перечислены URL-адреса веб-сайта в сочетании с метаданными, связанными с каждым URL-адресом (дата его последнего изменения; частота изменений; его приоритетность на уровне сайта), чтобы поисковые системы могли более грамотно сканировать этот сайт.</blockquote><p><a href="http://www.sitemaps.org/ru/">Официальный сайт</a></p><p>В начале этой недели я решил, что пора сделать себе генерируемый sitemap. Хотелось как можно более универсального решения, что в общем-то удалось.</p><h3>Что может класс</h3><ul><li>Генерить Sitemap :)</li><li>Писать сгенерённое в файл.</li><li>Расставлять tab-ы.</li><li>Экранировать URL в соответствии со спецификацией.</li><li>Приводить время в формате timestamp к нужному формату.</li><li>Работать как <a href="http://code-igniter.ru/user_guide/general/libraries.html">библиотека CodeIgniter</a>.</li></ul><h3>Пример</h3><pre>&lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Создаём класс. &lt;span class="php-hl-var"&gt;$sitemap&lt;/span&gt; = &lt;strong&gt;new&lt;/strong&gt; &lt;span class="php-hl-identifier"&gt;Sitemap&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-code"&gt;; &lt;/span&gt;&lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Добавим страничку &lt;span class="php-hl-var"&gt;$sitemap&lt;/span&gt;&lt;span class="php-hl-code"&gt;-&gt;&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;addItem&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;strong&gt;new&lt;/strong&gt; &lt;span class="php-hl-identifier"&gt;SitemapItem&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt; &lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-string"&gt;http://rmcreative.ru/&lt;/span&gt;&lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-code"&gt;, &lt;/span&gt;&lt;span class="php-hl-comment"&gt;//&lt;/span&gt; URL. &lt;span class="php-hl-identifier"&gt;time&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-code"&gt;, &lt;/span&gt;&lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Время в формате timestamp. &lt;span class="php-hl-identifier"&gt;SitemapItem&lt;/span&gt;&lt;span class="php-hl-code"&gt;::&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;daily&lt;/span&gt;&lt;span class="php-hl-code"&gt;, &lt;/span&gt;&lt;span class="php-hl-comment"&gt;//&lt;/span&gt;&lt;span class="php-hl-comment"&gt;Частота обновления (константы класса SitemapItem).&lt;/span&gt; &lt;span class="php-hl-number"&gt;0&lt;/span&gt;&lt;span class="php-hl-number"&gt;.7&lt;/span&gt; &lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Приоритет страницы. &lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-code"&gt;; &lt;/span&gt;&lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Добавим все остальные страницы сайта. &lt;strong&gt;foreach&lt;/strong&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;span class="php-hl-var"&gt;$pages&lt;/span&gt; &lt;strong&gt;as&lt;/strong&gt; &lt;span class="php-hl-var"&gt;$page&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;{&lt;/span&gt; &lt;span class="php-hl-var"&gt;$sitemap&lt;/span&gt;&lt;span class="php-hl-code"&gt;-&gt;&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;addItem&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;strong&gt;new&lt;/strong&gt; &lt;span class="php-hl-identifier"&gt;SitemapItem&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt; &lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-string"&gt;http://rmcreative.ru/&lt;/span&gt;&lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-code"&gt;.&lt;/span&gt;&lt;span class="php-hl-var"&gt;$page&lt;/span&gt;&lt;span class="php-hl-code"&gt;-&gt;&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;url&lt;/span&gt;&lt;span class="php-hl-code"&gt;, &lt;/span&gt;&lt;span class="php-hl-var"&gt;$page&lt;/span&gt;&lt;span class="php-hl-code"&gt;-&gt;&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;updated_on&lt;/span&gt;&lt;span class="php-hl-code"&gt;, &lt;/span&gt;&lt;span class="php-hl-identifier"&gt;SitemapItem&lt;/span&gt;&lt;span class="php-hl-code"&gt;::&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;monthly&lt;/span&gt; &lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-code"&gt;; &lt;/span&gt;&lt;span class="php-hl-brackets"&gt;}&lt;/span&gt; &lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Сгенерим sitemap в файл sitemap.xml. &lt;span class="php-hl-comment"&gt;//&lt;/span&gt; Если файл не указать - generate вернёт строку. &lt;span class="php-hl-var"&gt;$sitemap&lt;/span&gt;&lt;span class="php-hl-code"&gt;-&gt;&lt;/span&gt;&lt;span class="php-hl-identifier"&gt;generate&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;(&lt;/span&gt;&lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-string"&gt;sitemap.xml&lt;/span&gt;&lt;span class="php-hl-quotes"&gt;''&lt;/span&gt;&lt;span class="php-hl-brackets"&gt;)&lt;/span&gt;&lt;span class="php-hl-code"&gt;;&lt;/span&gt;</pre><h3>Сам класс</h3><p><a href="http://rmcreative.ru/files/src/sitemap.rar">Забираем</a></p>', 1, 1414465564, 1414729933);
 
 

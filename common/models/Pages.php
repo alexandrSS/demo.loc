@@ -2,10 +2,7 @@
 
 namespace common\models;
 
-use common\behaviors\PurifierBehavior;
 use common\helpers\Sitemap;
-use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -41,28 +38,6 @@ class Pages extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestampBehavior' => [
-                'class' => TimestampBehavior::className(),
-            ],
-            'sluggableBehavior' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'slugAttribute' => 'alias'
-            ],
-            'purifierBehavior' => [
-                'class' => PurifierBehavior::className(),
-                'attributes' => [
-                    self::EVENT_BEFORE_VALIDATE => [
-                        'content' => [
-                            'HTML.AllowedElements' => '',
-                            'AutoFormat.RemoveEmpty' => true
-                        ]
-                    ]
-                ],
-                'textAttributes' => [
-                    self::EVENT_BEFORE_VALIDATE => ['title', 'alias']
-                ]
-            ]
         ];
     }
     /**
@@ -93,6 +68,22 @@ class Pages extends \yii\db\ActiveRecord
                 'default',
                 'value' => self::MODERATION ? self::STATUS_PUBLISHED : self::STATUS_UNPUBLISHED
             ]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('backend', 'Идентификатор'),
+            'title' => Yii::t('backend', 'Название'),
+            'alias' => Yii::t('backend', 'Адрес (URL)'),
+            'content' => Yii::t('backend', 'Текст'),
+            'status_id' => Yii::t('backend', 'Статус'),
+            'created_at' => Yii::t('backend', 'Создана'),
+            'updated_at' => Yii::t('backend', 'Обнавлена'),
         ];
     }
 

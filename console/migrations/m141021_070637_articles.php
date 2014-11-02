@@ -12,7 +12,7 @@ class m141021_070637_articles extends Migration
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+            $tableOptions = 'CHARACTER SET utf8 ENGINE=InnoDB';
         }
 
         $this->createTable('{{%articles_category}}', [

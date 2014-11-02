@@ -2,14 +2,14 @@
 
 namespace common\models;
 
-use common\behaviors\PurifierBehavior;
 use common\helpers\Sitemap;
-use common\widget\fileapi\behaviors\UploadBehavior;
 use common\models\query\ArticlesQuery;
-use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use Yii;
+use common\behaviors\PurifierBehavior;
+use common\widget\fileapi\behaviors\UploadBehavior;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * Class Articles
@@ -49,12 +49,12 @@ class Articles extends ActiveRecord
     /**
      * Preview path
      */
-    const PREVIEW_PATH = '@statics/web/articles/previews/';
+    const PREVIEW_PATH = '@statics/web/articles/previews';
 
     /**
      * Image path
      */
-    const IMAGE_PATH = '@statics/web/articles/images/';
+    const IMAGE_PATH = '@statics/web/articles/images';
 
     /**
      * @var string Files path
@@ -69,7 +69,7 @@ class Articles extends ActiveRecord
     /**
      * @var string Images temporary path
      */
-    const IMAGES_TEMP_PATH = '@statics/temp/articles/images/';
+    const IMAGES_TEMP_PATH = '@statics/temp/articles/images';
 
     /**
      * @var string Preview URL

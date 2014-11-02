@@ -17,7 +17,6 @@ use yii\helpers\ArrayHelper;
  */
 class User extends \common\models\User
 {
-    const EVENT_AFTER_SIGNUP = 'afterSignup';
     /**
      * @var string|null Password
      */
@@ -30,30 +29,6 @@ class User extends \common\models\User
      * @var string Model status.
      */
     private $_status;
-
-    /**
-     * @return string Model status.
-     */
-    public function getStatus()
-    {
-        if ($this->_status === null) {
-            $statuses = self::getStatusArray();
-            $this->_status = $statuses[$this->status_id];
-        }
-        return $this->_status;
-    }
-
-    /**
-     * @return array Status array.
-     */
-    public static function getStatusArray()
-    {
-        return [
-            self::STATUS_ACTIVE => Yii::t('backend', 'Активный'),
-            self::STATUS_INACTIVE => Yii::t('backend', 'Не активный'),
-            self::STATUS_BANNED => Yii::t('backend', 'Забаненый')
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -86,14 +61,6 @@ class User extends \common\models\User
     }
 
     /**
-     * @return array Role array.
-     */
-    public static function getRoleArray()
-    {
-        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
-    }
-
-    /**
      * @inheritdoc
      */
     public function scenarios()
@@ -123,7 +90,42 @@ class User extends \common\models\User
     }
 
     /**
-     * @inheritdoc
+     * @return string Model status.
+     */
+    public function getStatus()
+    {
+        if ($this->_status === null) {
+            $statuses = self::getStatusArray();
+            $this->_status = $statuses[$this->status_id];
+        }
+        return $this->_status;
+    }
+
+    /**
+     * @return array Status array.
+     */
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_ACTIVE => Yii::t('backend', 'Активный'),
+            self::STATUS_INACTIVE => Yii::t('backend', 'Не активный'),
+            self::STATUS_BANNED => Yii::t('backend', 'Забаненый')
+        ];
+    }
+
+
+    /**
+     * @return array Role array.
+     */
+    public static function getRoleArray()
+    {
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
+    }
+
+
+    /**
+     * @param bool $insert
+     * @return bool
      */
     public function beforeSave($insert)
     {
@@ -132,11 +134,11 @@ class User extends \common\models\User
                 $this->setPassword($this->password);
                 $this->generateAuthKey();
                 $this->generateToken();
-                SystemEvent::log('users', self::EVENT_AFTER_SIGNUP, [
-                    'username' => $this->username,
-                    'email' => $this->email,
-                    'created_at' => $this->created_at
-                ]);
+                SystemEvent::log(
+                    'users',
+                    self::EVENT_AFTER_SIGNUP,
+                    ['username' => $this->username, 'email' => $this->email, 'created_at' => $this->created_at]
+                );
             }
             return true;
         }

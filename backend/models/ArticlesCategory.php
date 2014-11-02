@@ -142,25 +142,14 @@ class ArticlesCategory extends \common\models\ArticlesCategory
     public function rules()
     {
         $rules = parent::rules();
-        $rules[] = ['status_id', 'in', 'range' => array_keys(self::getStatusArray())];
-        $rules[] = [['title', 'alias'], 'unique'];
 
-        return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Адрес (URL)'),
-            'parent_id' => Yii::t('backend', 'Родитель'),
-            'status_id' => Yii::t('backend', 'Статус'),
-            'created_at' => Yii::t('backend', 'Создана'),
-            'updated_at' => Yii::t('backend', 'Обнавлена'),
-        ];
+        return array_merge(
+            $rules,
+            [
+                ['status_id', 'in', 'range' => array_keys(self::getStatusArray())],
+                [['title', 'alias'], 'unique']
+            ]
+        );
     }
 
     /**
@@ -168,18 +157,9 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      */
     public function scenarios()
     {
-        $scenarios = parent::scenarios();
-        $scenarios['admin-create'] = [
-            'title',
-            'parent_id',
-            'status_id'
+        return [
+            'admin-create' => ['title', 'parent_id', 'status_id'],
+            'admin-update' => ['title', 'parent_id', 'status_id'],
         ];
-        $scenarios['admin-update'] = [
-            'title',
-            'parent_id',
-            'status_id'
-        ];
-
-        return $scenarios;
     }
 }

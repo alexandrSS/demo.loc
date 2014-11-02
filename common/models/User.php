@@ -37,6 +37,7 @@ class User extends ActiveRecord implements IdentityInterface
     /** Deleted status */
     const STATUS_DELETED = 3;
 
+    const EVENT_AFTER_SIGNUP = 'afterSignup';
     /**
      * @var boolean If true after registration user will be required to confirm his e-mail address.
      */

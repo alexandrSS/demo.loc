@@ -57,6 +57,21 @@ class ArticlesCategory extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'title' => Yii::t('common', 'Название'),
+            'alias' => Yii::t('common', 'Адрес (URL)'),
+            'parent_id' => Yii::t('common', 'Родитель'),
+            'status_id' => Yii::t('common', 'Статус'),
+            'created_at' => Yii::t('common', 'Создана'),
+            'updated_at' => Yii::t('common', 'Обнавлена'),
+        ];
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getArticles()

@@ -55,6 +55,32 @@ class Pages extends \common\models\Pages
     }
 
     /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+
+        return array_merge(
+            $rules,
+            [
+                ['status_id', 'in', 'range' => array_keys(self::getStatusArray())]
+            ]
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        return [
+            'admin-create' => ['title', 'content', 'status_id'],
+            'admin-update' => ['title', 'content', 'status_id']
+        ];
+    }
+
+    /**
      * @return string Readable blog status
      */
     public function getStatus()
@@ -73,52 +99,5 @@ class Pages extends \common\models\Pages
             self::STATUS_UNPUBLISHED => Yii::t('backend', 'Скрыта'),
             self::STATUS_PUBLISHED => Yii::t('backend', 'Опубликована')
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        $rules = parent::rules();
-        $rules[] = ['status_id', 'in', 'range' => array_keys(self::getStatusArray())];
-
-        return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => Yii::t('backend', 'Идентификатор'),
-            'title' => Yii::t('backend', 'Название'),
-            'alias' => Yii::t('backend', 'Адрес (URL)'),
-            'content' => Yii::t('backend', 'Текст'),
-            'status_id' => Yii::t('backend', 'Статус'),
-            'created_at' => Yii::t('backend', 'Создана'),
-            'updated_at' => Yii::t('backend', 'Обнавлена'),
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['admin-create'] = [
-            'title',
-            'content',
-            'status_id',
-        ];
-        $scenarios['admin-update'] = [
-            'title',
-            'content',
-            'status_id',
-        ];
-
-        return $scenarios;
     }
 }

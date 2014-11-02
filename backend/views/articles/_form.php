@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
                 FileAPI::className(),
                 [
                     'settings' => [
-                        'url' => ['/articles/default/fileapi-upload']
+                        'url' => ['/articles/fileapi-upload']
                     ]
                 ]
             ) ?>
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
                 FileAPI::className(),
                 [
                     'settings' => [
-                        'url' => ['/articles/default/fileapi-upload']
+                        'url' => ['/articles/fileapi-upload']
                     ]
                 ]
             ) ?>
@@ -63,9 +63,9 @@ use yii\widgets\ActiveForm;
                 [
                     'settings' => [
                         'minHeight' => 200,
-                        'imageGetJson' => Url::to(['/articles/default/imperavi-get']),
-                        'imageUpload' => Url::to(['/articles/default/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/default/imperavi-file-upload'])
+                        'imageGetJson' => Url::to(['/articles/imperavi-get']),
+                        'imageUpload' => Url::to(['/articles/imperavi-image-upload']),
+                        'fileUpload' => Url::to(['/articles/imperavi-file-upload'])
                     ]
                 ]
             ) ?>
@@ -78,9 +78,9 @@ use yii\widgets\ActiveForm;
                 [
                     'settings' => [
                         'minHeight' => 300,
-                        'imageGetJson' => Url::to(['/articles/default/imperavi-get']),
-                        'imageUpload' => Url::to(['/articles/default/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/default/imperavi-file-upload'])
+                        'imageGetJson' => Url::to(['/articles/imperavi-get']),
+                        'imageUpload' => Url::to(['/articles/imperavi-image-upload']),
+                        'fileUpload' => Url::to(['/articles/imperavi-file-upload'])
                     ]
                 ]
             ) ?>
