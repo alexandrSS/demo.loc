@@ -26,10 +26,6 @@ use common\behaviors\PurifierBehavior;
  */
 class ArticlesCategory extends \common\models\ArticlesCategory
 {
-    /**
-     * Ключи кэша которые использует модель.
-     */
-    const CACHE_ARTICLE_CATEGORY_LIST_DATA = 'articleCategoriesListData';
 
     /**
      * @var Читабельный статус категории
@@ -185,29 +181,5 @@ class ArticlesCategory extends \common\models\ArticlesCategory
         ];
 
         return $scenarios;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            Yii::$app->getCache()->delete(self::CACHE_ARTICLE_CATEGORY_LIST_DATA);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeDelete()
-    {
-        if (parent::beforeDelete()) {
-            Yii::$app->getCache()->delete(self::CACHE_ARTICLE_CATEGORY_LIST_DATA);
-            return true;
-        }
-        return false;
     }
 }

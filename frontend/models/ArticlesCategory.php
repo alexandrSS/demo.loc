@@ -28,7 +28,16 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      */
     public static function getMenuArticleCategory()
     {
-        $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
+        $models = Yii::$app->cache->get(self::CACHE_MENU_ARTICLE_CATEGORY);
+        if($models === false)
+        {
+            // устанавливаем значение $value заново, т.к. оно не найдено в кэше,
+            // и сохраняем его в кэше для дальнейшего использования:
+            $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
+            Yii::$app->cache->set(self::CACHE_MENU_ARTICLE_CATEGORY,$models);
+        }
+
+        $array[]=[];
 
         foreach($models as $model)
         {
@@ -37,7 +46,6 @@ class ArticlesCategory extends \common\models\ArticlesCategory
                 'url' => ['/category/' . $model->alias]
             ];
         }
-
         return $array;
     }
 

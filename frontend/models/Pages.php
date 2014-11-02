@@ -25,7 +25,14 @@ class Pages extends \common\models\Pages
      */
     public static function getMenuPage()
     {
-        $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
+        $models = Yii::$app->cache->get(self::CACHE_MENU_PAGE);
+        if($models === false)
+        {
+            // устанавливаем значение $value заново, т.к. оно не найдено в кэше,
+            // и сохраняем его в кэше для дальнейшего использования:
+            $models = self::find()->where(['status_id' => self::STATUS_PUBLISHED])->all();
+            Yii::$app->cache->set(self::CACHE_MENU_PAGE,$models);
+        }
 
         $arrayPage = [];
 

@@ -9,12 +9,6 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="row">
 
     <aside class="col-sm-3 col-sm-push-9">
-        <pre>
-            <?= print_r(ArticlesCategory::getCategoryListArray())?>
-        </pre>
-        <pre>
-            <?= print_r(ArticlesCategory::getMenuArticleCategory())?>
-        </pre>
         <?=
         Menu::widget(
             [

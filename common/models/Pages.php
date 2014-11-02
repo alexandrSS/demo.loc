@@ -21,6 +21,7 @@ use Yii;
  */
 class Pages extends \yii\db\ActiveRecord
 {
+    const CACHE_MENU_PAGE = 'CACHE_MENU_PAGE';
     /**
      * Unpublished status
      */
@@ -98,11 +99,13 @@ class Pages extends \yii\db\ActiveRecord
 
     public function afterSave()
     {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_PAGE);
         Sitemap::init();
     }
 
     public function afterDelete()
     {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_PAGE);
         Sitemap::init();
     }
 }

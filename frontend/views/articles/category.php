@@ -5,7 +5,14 @@ use frontend\models\ArticlesCategory;
 use yii\widgets\ListView;
 
 $this->title = Yii::t('frontend', 'Статьи');
-$this->params['breadcrumbs'][] = $this->title; ?>
+$this->params['breadcrumbs']=[
+    [
+        'label' => $this->title,
+        'url' => ['/articles'],
+    ],
+    $category
+];
+?>
 <div class="row">
 
     <aside class="col-sm-3 col-sm-push-9">

@@ -2,7 +2,6 @@
 
 $this->title = Yii::$app->name;
 $this->params['noTitle'] = true; ?>
-
 <section id="main-slider" class="no-margin center">
     <div class="well">
         <p><img src="<?= $this->assetManager->publish('@frontend/themes/site/images/slider/bg2.png')[1] ?>" alt="Yii 2" /></p>
