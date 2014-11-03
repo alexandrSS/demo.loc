@@ -33,6 +33,7 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $model = new Category();
+        $statusArray = Category::getStatusArray();
         if ($model->load(Yii::$app->request->post())){
             $model->saveNode();
             Yii::$app->response->refresh();
@@ -40,7 +41,8 @@ class CategoryController extends Controller
         $categories = Category::find()->all();
         return $this->render('index', [
             'model' => $model,
-            'categories' => $categories
+            'categories' => $categories,
+            'statusArray' => $statusArray
         ]);
     }
 

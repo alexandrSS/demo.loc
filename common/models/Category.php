@@ -21,6 +21,14 @@ use common\behaviors\NestedSetBehavior;
 class Category extends \yii\db\ActiveRecord
 {
     /**
+     * Unpublished status
+     */
+    const STATUS_UNPUBLISHED = 0;
+    /**
+     * Published status
+     */
+    const STATUS_PUBLISHED = 1;
+    /**
      * @inheritdoc
      */
     public static function tableName()

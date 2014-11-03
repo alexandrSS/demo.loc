@@ -42,12 +42,13 @@ $this->params['breadcrumbs'] = [
         $form = ActiveForm::begin();
         echo $form->field($model, 'title')->textInput(['maxlength' => 100]);
         echo $form->field($model, 'alias')->textInput(['maxlength' => 100]);
-        echo $form->field($model, 'status_id')->textInput();
+        echo $form->field($model, 'status_id')->dropDownList($statusArray);
         echo Html::submitButton(Yii::t('backend', 'Создать'), ['class' => 'btn btn-success']);
         echo Html::submitButton(Yii::t('backend', 'Закрыть'), ['class' => 'btn btn-danger', 'data-dismiss' => 'modal']);
         ActiveForm::end();
         Modal::end();
         ?>
+        <hr>
         <?php
         $level=0;
 

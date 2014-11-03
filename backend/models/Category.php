@@ -74,7 +74,12 @@ class Category extends \common\models\Category
     {
         $rules = parent::rules();
 
-        return $rules;
+        return array_merge(
+            $rules,
+            [
+                ['status_id', 'in', 'range' => array_keys(self::getStatusArray())]
+            ]
+        );
     }
 
     /**
@@ -85,5 +90,26 @@ class Category extends \common\models\Category
         $attributeLabels = parent::attributeLabels();
 
         return $attributeLabels;
+    }
+
+    /**
+     * @return string Readable blog status
+     */
+    public function getStatus()
+    {
+        $statuses = self::getStatusArray();
+
+        return $statuses[$this->status_id];
+    }
+
+    /**
+     * @return array Status array.
+     */
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Скрыта'),
+            self::STATUS_PUBLISHED => Yii::t('backend', 'Опубликована')
+        ];
     }
 }
