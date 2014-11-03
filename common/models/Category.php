@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use common\behaviors\NestedSetBehavior;
 
 /**
  * This is the model class for table "category".
@@ -33,8 +34,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['lft', 'rgt', 'level', 'title', 'alias'], 'required'],
-            [['lft', 'rgt', 'level', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [['title'], 'required'],
+            [['status_id', 'created_at', 'updated_at'], 'integer'],
             [['title', 'alias'], 'string', 'max' => 100]
         ];
     }
@@ -45,15 +46,26 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'lft' => Yii::t('common', 'Lft'),
-            'rgt' => Yii::t('common', 'Rgt'),
-            'level' => Yii::t('common', 'Level'),
-            'title' => Yii::t('common', 'Title'),
-            'alias' => Yii::t('common', 'Alias'),
-            'status_id' => Yii::t('common', 'Status ID'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
+            'title' => Yii::t('common', 'Название'),
+            'alias' => Yii::t('common', 'Адрес (URL)'),
+            'status_id' => Yii::t('common', 'Статус'),
+            'created_at' => Yii::t('common', 'Создана'),
+            'updated_at' => Yii::t('common', 'Обнавлена'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'NestedSetBehavior' => [
+                'class'=> NestedSetBehavior::className(),
+                'leftAttribute'=>'lft',
+                'rightAttribute'=>'rgt',
+                'levelAttribute'=>'level',
+            ],
         ];
     }
 }

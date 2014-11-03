@@ -18,7 +18,7 @@ use yii\db\Query;
 class NestedSetBehavior extends Behavior
 {
     const EVENT_AFTER_CHANGE_NODE = 'afterChangeNode';
-    public $hasManyRoots = false;
+    public $hasManyRoots = true;
     public $rootAttribute = 'root';
     public $leftAttribute = 'lft';
     public $rightAttribute = 'rgt';

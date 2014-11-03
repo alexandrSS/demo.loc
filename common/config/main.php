@@ -15,12 +15,11 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
             'cachePath' => '@root/cache',
-            'keyPrefix' => 'yii2start'
+            'keyPrefix' => 'yii2Demo'
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName'=>false,
-            //'suffix' => '/'
         ],
         'assetManager' => [
             'linkAssets' => false   // TODO: Windows XP
