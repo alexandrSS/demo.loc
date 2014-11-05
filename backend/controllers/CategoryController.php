@@ -27,23 +27,48 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
-     * @return mixed
+     * @param null $id
+     * @return string|\yii\web\Response
      */
-    public function actionIndex()
+    public function actionIndex($id = null)
     {
         $model = new Category();
         $statusArray = Category::getStatusArray();
-        if ($model->load(Yii::$app->request->post())){
+        if ($model->load(Yii::$app->request->post('root'))){
             $model->saveNode();
-            Yii::$app->response->refresh();
+            return $this->redirect('index');
         }
+        if($model->load(Yii::$app->request->post())){
+            if (isset($_POST['root'])){
+                $model->saveNode();
+                Yii::$app->response->refresh();
+            }
+            if (isset($_POST['children'])){
+                //$root=Category::findOne($id);
+                //$model->prependTo($root);
+                //Yii::$app->response->refresh();
+            }
+        }
+        if(isset($id)){
+            $root=Category::find()->where(['id'=>$id])->one();
+            $model->appendTo($root);
+            //return $this->redirect('index');
+        }
+        $post = Yii::$app->request->post();
         $categories = Category::find()->all();
         return $this->render('index', [
             'model' => $model,
             'categories' => $categories,
-            'statusArray' => $statusArray
+            'statusArray' => $statusArray,
+            'post' => $post
         ]);
+    }
+
+    public function actionCreate($id)
+    {
+        //$model = new Category();
+        return $this->redirect('index');
+
     }
 
     /**
@@ -58,23 +83,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Category model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Category();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Updates an existing Category model.
@@ -103,7 +111,7 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->deleteNode();
 
         return $this->redirect(['index']);
     }
