@@ -1,7 +1,7 @@
 {
 	"name": "alexandrSS/demo.loc",
-	"description": "Yii2-Start it's a small Yii 2 application template for your fast project start.",
-	"keywords": ["yii2", "yii 2", "application", "start", "bootstrap"],
+	"description": "Yii2-Demo it's a small Yii 2 application template for your fast project start.",
+	"keywords": ["yii2", "yii 2", "application", "bootstrap"],
 	"homepage": "https://github.com/alexandrSS/demo.loc",
 	"type": "project",
     "license": "BSD-3-Clause",

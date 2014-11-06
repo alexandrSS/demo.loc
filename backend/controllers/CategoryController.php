@@ -30,45 +30,42 @@ class CategoryController extends Controller
      * @param null $id
      * @return string|\yii\web\Response
      */
-    public function actionIndex($id = null)
+    public function actionIndex()
     {
         $model = new Category();
         $statusArray = Category::getStatusArray();
-        if ($model->load(Yii::$app->request->post('root'))){
-            $model->saveNode();
-            return $this->redirect('index');
-        }
-        if($model->load(Yii::$app->request->post())){
-            if (isset($_POST['root'])){
-                $model->saveNode();
-                Yii::$app->response->refresh();
-            }
-            if (isset($_POST['children'])){
-                //$root=Category::findOne($id);
-                //$model->prependTo($root);
-                //Yii::$app->response->refresh();
-            }
-        }
-        if(isset($id)){
-            $root=Category::find()->where(['id'=>$id])->one();
-            $model->appendTo($root);
-            //return $this->redirect('index');
-        }
-        $post = Yii::$app->request->post();
+
         $categories = Category::find()->all();
         return $this->render('index', [
             'model' => $model,
             'categories' => $categories,
             'statusArray' => $statusArray,
-            'post' => $post
         ]);
     }
 
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        //$model = new Category();
-        return $this->redirect('index');
+        $get = Yii::$app->request->get();
+        $model = new Category();
+        $model->title = $get['Category']['title'];
+        $model->alias = $get['Category']['alias'];
+        $model->status_id = $get['Category']['status_id'];
+        $model->saveNode();
 
+        return $this->redirect('index');
+    }
+
+    public function actionCreate1()
+    {
+        $get = Yii::$app->request->get();
+        $model = new Category();
+        $model->title = $get['Category']['title'];
+        $model->alias = $get['Category']['alias'];
+        $model->status_id = $get['Category']['status_id'];
+        $root=Category::findOne($get['id']);
+        $model->prependTo($root);
+
+        return $this->redirect('index');
     }
 
     /**

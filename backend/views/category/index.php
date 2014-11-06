@@ -40,11 +40,15 @@ $this->params['breadcrumbs'] = [
                 'class' => 'btn btn-primary btn-lg'
             ],
         ]);
-        $form = ActiveForm::begin();
+        $form = ActiveForm::begin([
+            'method' => 'get',
+            'action' => ['create']
+        ]);
         echo $form->field($model, 'title')->textInput(['maxlength' => 100]);
         echo $form->field($model, 'alias')->textInput(['maxlength' => 100]);
         echo $form->field($model, 'status_id')->dropDownList($statusArray);
-        echo Html::submitButton(Yii::t('backend', 'Создать'), ['class' => 'btn btn-success','name' => 'root']);
+        //echo Html::a('Создать', ['create','title'=>$model['title'],'alias'=>$model['alias'],'status_id'=>$model['status_id']], ['class' => 'btn btn-success']);
+        echo Html::submitButton(Yii::t('backend', 'Создать'), ['class' => 'btn btn-success']);
         echo Html::submitButton(Yii::t('backend', 'Закрыть'), ['class' => 'btn btn-danger', 'data-dismiss' => 'modal']);
         ActiveForm::end();
         Modal::end();
@@ -61,7 +65,7 @@ $this->params['breadcrumbs'] = [
             else {
                 echo Html::endTag('li') . "\n";
 
-                for ($i = $level - $model->level; $i; $i--) {
+                for ($i=$level-$category->level;$i;$i--) {
                     echo Html::endTag('ul') . "\n";
                     echo Html::endTag('li') . "\n";
                 }
@@ -76,12 +80,15 @@ $this->params['breadcrumbs'] = [
                     'class' => 'btn btn-success'
                 ],
             ]);
-            $form1 = ActiveForm::begin();
+            $form1 = ActiveForm::begin([
+                'method' => 'get',
+                'action' => ['create1?id='.$category->id]
+            ]);
             echo $form1->field($model, 'title')->textInput(['maxlength' => 100]);
             echo $form1->field($model, 'alias')->textInput(['maxlength' => 100]);
             echo $form1->field($model, 'status_id')->dropDownList($statusArray);
-            echo Html::a('Создать', ['index','id'=>$category->id], ['class' => 'btn btn-success']);
-            echo Html::submitButton(Yii::t('backend', 'Создать'), ['class' => 'btn btn-success','name' => 'children','id'=>$category->id]);
+            //echo Html::a('Создать', ['index','id'=>$category->id], ['class' => 'btn btn-success']);
+            echo Html::submitButton(Yii::t('backend', 'Создать'), ['class' => 'btn btn-success']);
             echo Html::submitButton(Yii::t('backend', 'Закрыть'), ['class' => 'btn btn-danger', 'data-dismiss' => 'modal']);
             ActiveForm::end();
             Modal::end();
@@ -101,7 +108,7 @@ $this->params['breadcrumbs'] = [
         }
         ?>
         <pre>
-        <?php print_r($post) ?>
+        <?php //print_r($roots) ?>
         </pre>
         <?php Box::end(); ?>
 

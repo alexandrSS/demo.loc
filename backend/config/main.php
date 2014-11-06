@@ -12,7 +12,7 @@ return [
         'request' => [
             'cookieValidationKey' => '7fdsf%dbYd&djsb#sn0mlsfo(kj^kf98dfh',
             'baseUrl' => '/backend',
-            'enableCsrfValidation' => false,
+            'enableCsrfValidation' => true,
         ],
         'urlManager' => [
             'rules' => [
