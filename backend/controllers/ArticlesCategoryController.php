@@ -22,19 +22,49 @@ class ArticlesCategoryController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'index' => ['get'],
-                    'view' => ['get'],
-                    'create' => ['get', 'post'],
-                    'update' => ['get', 'put', 'post'],
-                    'delete' => ['post', 'delete'],
-                    'batch-delete' => ['post', 'delete']
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcArticleCategoryIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['create'],
+                'roles' => ['bcArticleCategoryCreate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['update'],
+                'roles' => ['bcArticleCategoryUpdate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcArticleCategoryDelete']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['bach-delete'],
+                'roles' => ['bcArticleCategoryBatchDelete']
+            ],
+            [
+                'allow' => false,
             ],
         ];
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'view' => ['get'],
+                'create' => ['get', 'post'],
+                'update' => ['get', 'put', 'post'],
+                'delete' => ['post', 'delete'],
+                'batch-delete' => ['post', 'delete']
+            ],
+        ];
+        return $behaviors;
     }
 
     /**

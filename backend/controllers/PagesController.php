@@ -24,7 +24,36 @@ class PagesController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcPagesIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['create'],
+                'roles' => ['bcPagesCreate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['update'],
+                'roles' => ['bcPagesUpdate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcPagesDelete']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['bach-delete'],
+                'roles' => ['bcPagesBatchDelete']
+            ],
+            [
+                'allow' => false,
+            ],
+        ];
         $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
             'actions' => [
@@ -36,7 +65,6 @@ class PagesController extends Controller
                 'batch-delete' => ['post', 'delete']
             ]
         ];
-
         return $behaviors;
     }
 

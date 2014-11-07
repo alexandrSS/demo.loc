@@ -25,18 +25,48 @@ class UserController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'index' => ['get'],
-                    'create' => ['get', 'post'],
-                    'update' => ['get', 'put', 'post'],
-                    'delete' => ['post', 'delete'],
-                    'batch-delete' => ['post', 'delete']
-                ]
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcUserIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['create','fileapi-upload'],
+                'roles' => ['bcUserCreate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['update'],
+                'roles' => ['bcUserUpdate','fileapi-upload']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcUserDelete','fileapi-upload']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['bach-delete'],
+                'roles' => ['bcUserBatchDelete','fileapi-upload']
+            ],
+            [
+                'allow' => false,
             ]
         ];
+        $behaviors['verbs']=[
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'create' => ['get', 'post'],
+                'update' => ['get', 'put', 'post'],
+                'delete' => ['post', 'delete'],
+                'batch-delete' => ['post', 'delete']
+            ]
+        ];
+        return $behaviors;
     }
 
     /**

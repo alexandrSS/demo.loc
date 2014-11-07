@@ -26,17 +26,21 @@ class LoginController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['?']
+        $behaviors = parent::behaviors();
+        return array_merge(
+            $behaviors,
+            [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['?']
+                        ]
                     ]
                 ]
             ]
-        ];
+        );
     }
 
     /**

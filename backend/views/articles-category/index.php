@@ -12,46 +12,47 @@ $this->params['breadcrumbs'] = [
     $this->title
 ];
 ?>
-<div class="row">
-    <div class="col-xs-12">
-        <?php Box::begin(
-            [
-                'title' => $this->params['subtitle'],
-                'bodyOptions' => [
-                    'class' => 'table-responsive'
-                ],
-                'buttonsTemplate' => '{create}',
-                'grid' => 'articlesCategory-grid'
-            ]
-        ); ?>
-        <?= GridView::widget([
-            'id' => 'articlesCategory-grid',
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                //['class' => CheckboxColumn::classname()],
-                'title',
-                'alias',
+<div class="articles-category-index">
+    <div class="row">
+        <div class="col-xs-12">
+            <?php Box::begin(
                 [
-                    'attribute' => 'parent_id',
-                    'value' => function ($model) {
-                        return $model->categoryList;
-                    },
-                    'filter' => Html::activeDropDownList(
-                        $searchModel,
-                        'parent_id',
-                        $categoryList,
-                        [
-                            'class' => 'form-control',
-                            'prompt' => Yii::t('backend', 'Выберите родителя')
-                        ]
-                    )
-                ],
-                [
-                    'attribute' => 'status_id',
-                    'format' => 'html',
-                    'value' => function ($model) {
+                    'title' => $this->params['subtitle'],
+                    'bodyOptions' => [
+                        'class' => 'table-responsive'
+                    ],
+                    'buttonsTemplate' => '{create}',
+                    'grid' => 'articlesCategory-grid'
+                ]
+            ); ?>
+            <?= GridView::widget([
+                'id' => 'articlesCategory-grid',
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    //['class' => CheckboxColumn::classname()],
+                    'title',
+                    'alias',
+                    [
+                        'attribute' => 'parent_id',
+                        'value' => function ($model) {
+                            return $model->categoryList;
+                        },
+                        'filter' => Html::activeDropDownList(
+                            $searchModel,
+                            'parent_id',
+                            $categoryList,
+                            [
+                                'class' => 'form-control',
+                                'prompt' => Yii::t('backend', 'Выберите родителя')
+                            ]
+                        )
+                    ],
+                    [
+                        'attribute' => 'status_id',
+                        'format' => 'html',
+                        'value' => function ($model) {
                             if ($model->status_id === $model::STATUS_PUBLISHED) {
                                 $class = 'label-success';
                             } elseif ($model->status_id === $model::STATUS_UNPUBLISHED) {
@@ -62,23 +63,24 @@ $this->params['breadcrumbs'] = [
 
                             return '<span class="label ' . $class . '">' . $model->status . '</span>';
                         },
-                    'filter' => Html::activeDropDownList(
+                        'filter' => Html::activeDropDownList(
                             $searchModel,
                             'status_id',
                             $statusArray,
                             ['class' => 'form-control', 'prompt' => Yii::t('backend', 'Выберите статус')]
                         )
+                    ],
+                    // 'created_at',
+                    // 'updated_at',
+
+                    [
+                        'class' => ActionColumn::className(),
+                        'template' => '{update} {delete}'
+                    ]
                 ],
-                // 'created_at',
-                // 'updated_at',
+            ]); ?>
 
-                [
-                    'class' => ActionColumn::className(),
-                    'template' => '{update} {delete}'
-                ]
-            ],
-        ]); ?>
-
-        <?php Box::end(); ?>
+            <?php Box::end(); ?>
+        </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\components\Controller;
 use yii\web\Response;
+use yii\filters\VerbFilter;
 
 /**
  * Системная информация
@@ -12,6 +13,28 @@ use yii\web\Response;
  */
 class SystemInformationController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        return array_merge(
+            $behaviors,
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'index' => ['get'],
+                    ],
+                ],
+            ]
+        );
+    }
+    /**
+     * @return array|float|string
+     */
     public function actionIndex()
     {
         if (\Yii::$app->request->isAjax) {

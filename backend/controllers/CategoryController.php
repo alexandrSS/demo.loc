@@ -4,8 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Category;
-use backend\models\search\CategorySearch;
-use yii\web\Controller;
+use backend\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -16,14 +15,23 @@ class CategoryController extends Controller
 {
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
+        $behaviors = parent::behaviors();
+        return array_merge(
+            $behaviors,
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'index' => ['get'],
+                        'view' => ['get'],
+                        'create' => ['get', 'post'],
+                        'update' => ['get', 'put', 'post'],
+                        'delete' => ['post', 'delete'],
+                        'batch-delete' => ['post', 'delete']
+                    ],
                 ],
-            ],
-        ];
+            ]
+        );
     }
 
     /**
@@ -34,12 +42,11 @@ class CategoryController extends Controller
     {
         $model = new Category();
         $statusArray = Category::getStatusArray();
-
         $categories = Category::find()->all();
         return $this->render('index', [
             'model' => $model,
             'categories' => $categories,
-            'statusArray' => $statusArray,
+            'statusArray' => $statusArray
         ]);
     }
 

@@ -62,7 +62,7 @@ return [
                 'frontend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
-                    'sourceLanguage' => 'ru-RU',
+                    'sourceLanguage' => 'ru',
                 ],
                 'themes' => [
                     'class' => 'yii\i18n\PhpMessageSource',

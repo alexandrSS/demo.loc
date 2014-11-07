@@ -18,10 +18,17 @@ class DefaultController extends Controller
     {
         $behaviors = parent::behaviors();
 
-        $behaviors['access']['rules'][] = [
-            'allow' => true,
-            'actions' => ['error'],
-            'roles' => ['@']
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['error'],
+                'roles' => ['@']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcDefaultController']
+            ],
         ];
 
         return $behaviors;

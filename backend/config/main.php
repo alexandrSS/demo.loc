@@ -16,7 +16,6 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '' => 'default/index',
                 'login' => 'login/login',
             ]
         ],
@@ -27,9 +26,6 @@ return [
                     '@backend/modules' => '@backend/themes/admin/modules'
                 ]
             ]
-        ],
-        'user' => [
-            'loginUrl' => ['login']
         ],
         'assetManager' => [
             'bundles' => [
@@ -54,7 +50,7 @@ return [
             'translations' => [
                 'backend' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'sourceLanguage' => 'ru-RU',
+                    'sourceLanguage' => 'ru',
                     'basePath' => '@backend/messages',
                 ],
                 'themes' => [

@@ -21,15 +21,15 @@ class LogController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'clear' => ['post'],
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['verbs']=[
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'delete' => ['post'],
+                'clear' => ['post'],
             ],
         ];
+        return $behaviors;
     }
 
     /**

@@ -28,19 +28,46 @@ class ArticlesController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcArticleIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['create','imperavi-get','imperavi-image-upload','imperavi-file-upload','fileapi-upload'],
+                'roles' => ['bcArticleCreate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['update','imperavi-get','imperavi-image-upload','imperavi-file-upload','fileapi-upload'],
+                'roles' => ['bcArticleUpdate']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcArticleDelete']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['bach-delete'],
+                'roles' => ['bcArticleBatchDelete']
+            ],
+            [
+                'allow' => false,
+            ]
+        ];
         $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
             'actions' => [
                 'index' => ['get'],
-                'view' => ['get'],
                 'create' => ['get', 'post'],
                 'update' => ['get', 'put', 'post'],
                 'delete' => ['post', 'delete'],
                 'batch-delete' => ['post', 'delete']
-            ]
+            ],
         ];
-
         return $behaviors;
     }
 

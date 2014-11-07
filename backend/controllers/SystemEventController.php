@@ -21,14 +21,19 @@ class SystemEventController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
+        $behaviors = parent::behaviors();
+
+        return array_merge(
+            $behaviors,
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['post'],
+                    ],
                 ],
-            ],
-        ];
+            ]
+        );
     }
 
     /**
@@ -47,6 +52,14 @@ class SystemEventController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionsBatchDelete()
+    {
+        $searchModel = new SystemEventSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        SystemEvent::deleteAll($dataProvider->query->where);
+        $this->redirect('index');
     }
 
     /**

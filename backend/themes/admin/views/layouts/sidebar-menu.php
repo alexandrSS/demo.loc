@@ -15,23 +15,23 @@ echo \common\components\widgets\menu\MenuWidget::widget([
         [
             'label' => Yii::t('themes', 'Панель управления'),
             'icon' => '<i class="fa fa-bar-chart-o"></i>',
-            'url' => Yii::$app->homeUrl
+            'url' => ['/default/index']
         ],
         [
             'label' => Yii::t('themes', 'Содержимое'),
             'icon' => '<i class="fa fa-edit"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
-                ['label' => Yii::t('themes', 'Категории'), 'url' => ['/category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Категории статей'), 'url' => ['/articles-category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Статьи'), 'url' => ['/articles'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Страницы'), 'url' => ['/pages'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                //['label' => Yii::t('themes', 'Категории'), 'url' => ['/category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Категории статей'), 'url' => ['/articles-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Статьи'), 'url' => ['/articles/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Страницы'), 'url' => ['/pages/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
             ]
         ],
         [
             'label' => Yii::t('themes', 'Пользователи'),
             'icon' => '<i class="fa fa-users"></i>',
-            'url' => ['/user']
+            'url' => ['/user/index']
         ],
         [
             'label' => Yii::t('themes', 'Система'),
