@@ -119,6 +119,40 @@ class RbacController extends Controller
         $bcUserBatchDelete->description = 'Удаление страниц';
         $auth->add($bcUserBatchDelete);
 
+        // События
+        $bcSystemEventIndex = $auth->createPermission('bcSystemEventIndex');
+        $bcSystemEventIndex->description = 'Список событий';
+        $auth->add($bcSystemEventIndex);
+
+        $bcSystemEventView = $auth->createPermission('bcSystemEventView');
+        $bcSystemEventView->description = 'Просмотр события';
+        $auth->add($bcSystemEventView);
+
+        $bcSystemEventDelete = $auth->createPermission('bcSystemEventDelete');
+        $bcSystemEventDelete->description = 'Удаление события';
+        $auth->add($bcSystemEventDelete);
+
+        $bcSystemEventBatchDelete = $auth->createPermission('bcSystemEventBatchDelete');
+        $bcSystemEventBatchDelete->description = 'Удаление событий';
+        $auth->add($bcSystemEventBatchDelete);
+
+        // События
+        $bcLogIndex = $auth->createPermission('bcLogIndex');
+        $bcLogIndex->description = 'Список событий';
+        $auth->add($bcLogIndex);
+
+        $bcLogView = $auth->createPermission('bcLogView');
+        $bcLogView->description = 'Просмотр события';
+        $auth->add($bcLogView);
+
+        $bcLogDelete = $auth->createPermission('bcLogDelete');
+        $bcLogDelete->description = 'Удаление события';
+        $auth->add($bcLogDelete);
+
+        $bcLogBatchDelete = $auth->createPermission('bcLogBatchDelete');
+        $bcLogBatchDelete->description = 'Удаление событий';
+        $auth->add($bcLogBatchDelete);
+
 
         // Roles
         // Пользователь
@@ -147,6 +181,10 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcUserIndex);
         $auth->addChild($admin, $bcUserCreate);
         $auth->addChild($admin, $bcUserUpdate);
+        $auth->addChild($admin, $bcSystemEventIndex);
+        $auth->addChild($admin, $bcSystemEventView);
+        $auth->addChild($admin, $bcLogIndex);
+        $auth->addChild($admin, $bcLogView);
 
         // Супер-Админ
         $superadmin = $auth->createRole('superadmin');
@@ -154,14 +192,18 @@ class RbacController extends Controller
         $superadmin->ruleName = $groupRule->name;
         $auth->add($superadmin);
         $auth->addChild($superadmin, $admin);
-        $auth->addChild($admin, $bcArticleCategoryDelete);
-        $auth->addChild($admin, $bcArticleCategoryBatchDelete);
-        $auth->addChild($admin, $bcArticleDelete);
-        $auth->addChild($admin, $bcArticleBatchDelete);
-        $auth->addChild($admin, $bcPagesDelete);
-        $auth->addChild($admin, $bcPagesBatchDelete);
-        $auth->addChild($admin, $bcUserDelete);
-        $auth->addChild($admin, $bcUserBatchDelete);
+        $auth->addChild($superadmin, $bcArticleCategoryDelete);
+        $auth->addChild($superadmin, $bcArticleCategoryBatchDelete);
+        $auth->addChild($superadmin, $bcArticleDelete);
+        $auth->addChild($superadmin, $bcArticleBatchDelete);
+        $auth->addChild($superadmin, $bcPagesDelete);
+        $auth->addChild($superadmin, $bcPagesBatchDelete);
+        $auth->addChild($superadmin, $bcUserDelete);
+        $auth->addChild($superadmin, $bcUserBatchDelete);
+        $auth->addChild($superadmin, $bcSystemEventDelete);
+        $auth->addChild($superadmin, $bcSystemEventBatchDelete);
+        $auth->addChild($superadmin, $bcLogDelete);
+        $auth->addChild($superadmin, $bcLogBatchDelete);
 
         // Superadmin assignments
         if ($id !== null) {

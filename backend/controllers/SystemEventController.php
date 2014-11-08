@@ -22,18 +22,42 @@ class SystemEventController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
-        return array_merge(
-            $behaviors,
+        $behaviors['access']['rules'] = [
             [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['post'],
-                    ],
-                ],
-            ]
-        );
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcSystemEventIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['view'],
+                'roles' => ['bcSystemEventView']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcSystemEventDelete']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['batch-delete'],
+                'roles' => ['bcSystemEventBatchDelete']
+            ],
+            [
+                'allow' => false,
+            ],
+        ];
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'view' => ['get'],
+                'delete' => ['post', 'delete'],
+                'batch-delete' => ['get', 'delete']
+            ],
+        ];
+
+        return $behaviors;
     }
 
     /**
@@ -52,14 +76,6 @@ class SystemEventController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
-
-    public function actionsBatchDelete()
-    {
-        $searchModel = new SystemEventSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        SystemEvent::deleteAll($dataProvider->query->where);
-        $this->redirect('index');
     }
 
     /**
@@ -91,43 +107,6 @@ class SystemEventController extends Controller
     }
 
     /**
-     * Создает новую модель SystemEvent.
-     * Если создано успешно, перенапровляет на действие 'view'
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new SystemEvent();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Обновляет существующию модель SystemEvent.
-     * Если обновлено успешно, перенапровляет на действие 'view'
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
      * Удаляет существующию модель SystemEvent.
      * Если удаление прошло успешно, перенаправляется на действие 'index'.
      * @param integer $id
@@ -138,5 +117,17 @@ class SystemEventController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Удаляет все
+     */
+    public function actionBatchDelete()
+    {
+        $searchModel = new SystemEventSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        SystemEvent::deleteAll($dataProvider->query->where);
+
+        $this->redirect('index');
     }
 }

@@ -22,13 +22,41 @@ class LogController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['verbs']=[
-            'class' => VerbFilter::className(),
-            'actions' => [
-                'delete' => ['post'],
-                'clear' => ['post'],
+        $behaviors['access']['rules'] = [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcLogIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['view'],
+                'roles' => ['bcLogView']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['delete'],
+                'roles' => ['bcLogDelete']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['batch-delete'],
+                'roles' => ['bcLogBatchDelete']
+            ],
+            [
+                'allow' => false,
             ],
         ];
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+                'view' => ['get'],
+                'delete' => ['post', 'delete'],
+                'batch-delete' => ['get', 'delete']
+            ],
+        ];
+
         return $behaviors;
     }
 
@@ -40,10 +68,6 @@ class LogController extends Controller
     {
         $searchModel = new SystemLogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        if (strcasecmp(Yii::$app->request->method, 'delete') == 0) {
-            SystemLog::deleteAll($dataProvider->query->where);
-        }
         $dataProvider->sort = [
             'defaultOrder' => ['log_time' => SORT_DESC]
         ];
@@ -93,5 +117,17 @@ class LogController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Удаляет все
+     */
+    public function actionBatchDelete()
+    {
+        $searchModel = new SystemLogSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        SystemLog::deleteAll($dataProvider->query->where);
+
+        $this->redirect('index');
     }
 }

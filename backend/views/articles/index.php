@@ -11,7 +11,8 @@ $this->title = Yii::t('backend', 'Статьи');
 $this->params['subtitle'] = Yii::t('backend', 'Список статей');
 $this->params['breadcrumbs'] = [
     $this->title
-]; ?>
+];
+?>
 
 <div class="row">
     <div class="col-xs-12">
@@ -32,7 +33,6 @@ $this->params['breadcrumbs'] = [
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-                    //['class' => CheckboxColumn::classname()],
                     [
                         'attribute' => 'title',
                         'format' => 'html',
