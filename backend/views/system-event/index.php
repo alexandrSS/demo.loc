@@ -19,13 +19,10 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
+                'buttonsTemplate' => '{all-delete}',
                 'grid' => 'articles-grid'
             ]
         ); ?>
-
-        <p>
-            <?= Html::a(Yii::t('backend', 'Очистить всё'), ['batch-delete'], ['class' => 'btn btn-danger']) ?>
-        </p>
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,

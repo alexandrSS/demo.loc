@@ -3,7 +3,6 @@
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
-use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 

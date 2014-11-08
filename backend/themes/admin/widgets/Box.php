@@ -160,7 +160,7 @@ class Box extends Widget
                 'url' => ['create'],
                 'icon' => 'fa-plus',
                 'options' => [
-                    'class' => 'btn-default',
+                    'class' => 'btn-success',
                     'title' => Yii::t('themes', 'Create')
                 ]
             ];
@@ -171,7 +171,7 @@ class Box extends Widget
                 'url' => ['delete', 'id' => Yii::$app->request->get('id')],
                 'icon' => 'fa-trash-o',
                 'options' => [
-                    'class' => 'btn-default',
+                    'class' => 'btn-danger',
                     'title' => Yii::t('themes', 'Delete'),
                     'data-confirm' => Yii::t('themes', 'Are you sure you want to delete this item?'),
                     'data-method' => 'delete'
@@ -185,8 +185,22 @@ class Box extends Widget
                 'icon' => 'fa-trash-o',
                 'options' => [
                     'id' => 'batch-delete',
-                    'class' => 'btn-default',
+                    'class' => 'btn-danger',
                     'title' => Yii::t('themes', 'Delete selected')
+                ]
+            ];
+        }
+
+        if (!isset($this->buttons['all-delete'])) {
+            $this->buttons['all-delete'] = [
+                'label' => Yii::t('themes', 'Delete all'),
+                'url' => ['all-delete'],
+                'icon' => 'fa-trash-o',
+                'options' => [
+                    'class' => 'btn-danger',
+                    'title' => Yii::t('themes', 'Delete all'),
+                    'data-confirm' => Yii::t('themes', 'Are you sure you want to delete all?'),
+                    'data-method' => 'delete'
                 ]
             ];
         }
@@ -196,7 +210,7 @@ class Box extends Widget
                 'url' => ['index'],
                 'icon' => 'fa-reply',
                 'options' => [
-                    'class' => 'btn-default',
+                    'class' => 'btn-info',
                     'title' => Yii::t('themes', 'Cancel')
                 ]
             ];
@@ -226,7 +240,7 @@ class Box extends Widget
                             ['class' => 'fa ' . $this->buttons[$name]['icon']]
                         ) : '';
                         $label = $icon . ' ' . $label;
-                        $this->buttons[$name]['options']['class'] = isset($this->buttons[$name]['options']['class']) ? 'btn btn-sm ' . $this->buttons[$name]['options']['class'] : 'btn btn-sm';
+                        $this->buttons[$name]['options']['class'] = isset($this->buttons[$name]['options']['class']) ? 'btn ' . $this->buttons[$name]['options']['class'] : 'btn';
 
                         return Html::a($label, $url, $this->buttons[$name]['options']);
                     } else {

@@ -40,7 +40,7 @@ class LogController extends Controller
             ],
             [
                 'allow' => true,
-                'actions' => ['batch-delete'],
+                'actions' => ['all-delete'],
                 'roles' => ['bcLogBatchDelete']
             ],
             [
@@ -53,7 +53,7 @@ class LogController extends Controller
                 'index' => ['get'],
                 'view' => ['get'],
                 'delete' => ['post', 'delete'],
-                'batch-delete' => ['get', 'delete']
+                'all-delete' => ['get', 'delete']
             ],
         ];
 
@@ -122,7 +122,7 @@ class LogController extends Controller
     /**
      * Удаляет все
      */
-    public function actionBatchDelete()
+    public function actionAllDelete()
     {
         $searchModel = new SystemLogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

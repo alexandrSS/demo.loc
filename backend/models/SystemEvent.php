@@ -63,7 +63,7 @@ class SystemEvent extends \yii\db\ActiveRecord
     {
         $names = [
             'users' => [
-                User::EVENT_AFTER_SIGNUP => Yii::t('backend', 'New user')
+                User::EVENT_AFTER_SIGNUP => Yii::t('backend', 'Новый ')
             ]
         ];
         return ArrayHelper::getValue($names, $this->getFullEventName(), $this->getFullEventName());
