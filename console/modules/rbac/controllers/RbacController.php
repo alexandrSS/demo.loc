@@ -154,6 +154,13 @@ class RbacController extends Controller
         $auth->add($bcLogBatchDelete);
 
 
+        // Системная информация
+        $bcSystemInformationIndex = $auth->createPermission('bcSystemInformationIndex');
+        $bcSystemInformationIndex->description = 'Список событий';
+        $auth->add($bcSystemInformationIndex);
+
+
+
         // Roles
         // Пользователь
         $user = $auth->createRole('user');
@@ -185,6 +192,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcSystemEventView);
         $auth->addChild($admin, $bcLogIndex);
         $auth->addChild($admin, $bcLogView);
+        $auth->addChild($admin, $bcSystemInformationIndex);
 
         // Супер-Админ
         $superadmin = $auth->createRole('superadmin');

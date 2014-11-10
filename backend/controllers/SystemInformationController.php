@@ -19,18 +19,24 @@ class SystemInformationController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
-        return array_merge(
-            $behaviors,
+        $behaviors['access']['rules'] = [
             [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'index' => ['get'],
-                    ],
-                ],
-            ]
-        );
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcSystemInformationIndex']
+            ],
+            [
+                'allow' => false,
+            ],
+        ];
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'index' => ['get'],
+            ],
+        ];
+
+        return $behaviors;
     }
     /**
      * @return array|float|string

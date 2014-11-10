@@ -19,7 +19,7 @@
 return [
     'Are you sure you want to delete selected items?' => 'Вы уверены, что хотите удалить выбранные элементы?',
     'Are you sure you want to delete this item?' => 'Вы уверены, что хотите удалить этот пункт?',
-    'Are you sure you want to delete all' => 'Вы уверены, что хотите удалить всё?',
+    'Are you sure you want to delete all?' => 'Вы уверены, что хотите удалить всё?',
     'Article Categories' => 'Категории стататей',
     'Articles' => 'Статьи',
     'Articles category' => 'Категории статей',

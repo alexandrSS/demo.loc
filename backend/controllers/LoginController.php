@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
 
 /**
  * Контроллер авторизации и деавторизации
@@ -26,21 +27,30 @@ class LoginController extends Controller
      */
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        return array_merge(
-            $behaviors,
-            [
+        return [
                 'access' => [
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
                             'allow' => true,
+                            'actions' => ['login'],
                             'roles' => ['?']
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['logout'],
+                            'roles' => ['@']
                         ]
                     ]
+                ],
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'login' => ['get', 'post'],
+                        'logout' => ['get'],
+                    ],
                 ]
-            ]
-        );
+            ];
     }
 
     /**
