@@ -153,11 +153,15 @@ class RbacController extends Controller
         $bcLogBatchDelete->description = 'Удаление событий';
         $auth->add($bcLogBatchDelete);
 
-
         // Системная информация
         $bcSystemInformationIndex = $auth->createPermission('bcSystemInformationIndex');
         $bcSystemInformationIndex->description = 'Список событий';
         $auth->add($bcSystemInformationIndex);
+
+        // Карта сайта
+        $bcSiteMapIndex = $auth->createPermission('bcSiteMapIndex');
+        $bcSiteMapIndex->description = 'Список событий';
+        $auth->add($bcSiteMapIndex);
 
 
 
@@ -193,6 +197,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcLogIndex);
         $auth->addChild($admin, $bcLogView);
         $auth->addChild($admin, $bcSystemInformationIndex);
+        $auth->addChild($admin, $bcSiteMapIndex);
 
         // Супер-Админ
         $superadmin = $auth->createRole('superadmin');

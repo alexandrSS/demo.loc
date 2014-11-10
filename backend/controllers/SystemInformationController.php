@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\components\Controller;
+use backend\helpers\SystemInfo;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 

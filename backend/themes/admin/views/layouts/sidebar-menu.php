@@ -34,30 +34,42 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'url' => ['/user/index']
         ],
         [
-            'label' => Yii::t('themes', 'Система'),
-            'icon' => '<i class="fa fa-cogs"></i>',
+            'label' => Yii::t('themes', 'Настройки'),
+            'icon' => '<i class="fa fa-gear"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
                 [
-                    'label' => Yii::t('themes', 'Информация о системе'),
-                    'url' => ['/system-information/index'],
-                    'icon' => '<i class="fa fa-angle-double-right"></i>'
-                ],
-                [
-                    'label' => Yii::t('themes', 'Системные события'),
-                    'url' => ['/system-event/index'],
-                    'icon' => '<i class="fa fa-angle-double-right"></i>',
-                    'badge' => \backend\models\SystemEvent::find()->today()->count(),
-                    'badgeBgClass' => 'bg-green',
-                ],
-                [
-                    'label' => Yii::t('themes', 'Журнал'),
-                    'url' => ['/log/index'],
-                    'icon' => '<i class="fa fa-angle-double-right"></i>',
-                    'badge' => \backend\models\SystemLog::find()->count(),
-                    'badgeBgClass' => 'bg-red',
+                    'label' => Yii::t('themes', 'Карта сайта'),
+                    'url' => ['/site-map/index'],
+                    'icon' => '<i class="fa fa-sitemap"></i>',
                 ],
             ]
+        ],
+        [
+        'label' => Yii::t('themes', 'Система'),
+        'icon' => '<i class="fa fa-cogs"></i>',
+        'options' => ['class' => 'treeview'],
+        'items' => [
+            [
+                'label' => Yii::t('themes', 'Информация о системе'),
+                'url' => ['/system-information/index'],
+                'icon' => '<i class="fa fa-angle-double-right"></i>'
+            ],
+            [
+                'label' => Yii::t('themes', 'События'),
+                'url' => ['/system-event/index'],
+                'icon' => '<i class="fa fa-angle-double-right"></i>',
+                'badge' => \backend\models\SystemEvent::find()->today()->count(),
+                'badgeBgClass' => 'bg-green',
+            ],
+            [
+                'label' => Yii::t('themes', 'Журнал'),
+                'url' => ['/log/index'],
+                'icon' => '<i class="fa fa-angle-double-right"></i>',
+                'badge' => \backend\models\SystemLog::find()->count(),
+                'badgeBgClass' => 'bg-red',
+            ],
         ]
+    ]
     ]
 ]);

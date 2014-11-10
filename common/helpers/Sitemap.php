@@ -14,12 +14,14 @@ class Sitemap
 {
     const HEAD = "<\x3Fxml version=\"1.0\" encoding=\"UTF-8\"\x3F>\n\t<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">";
     const FOOT = "\t</urlset>";
+    const PAGES_CACHE = 'SITE_MAP_PAGES_CACHE';
+    const ARTICLES_CACHE = 'SITE_MAP_ARTICLES_CACHE';
+
     private $items = array();
 
-    public static function init()
+    public static function init($data = null)
     {
         $host = Yii::$app->request->hostInfo;
-        // Создаём класс.
         $sitemap = new Sitemap();
 
         // Добавим страничку
@@ -31,7 +33,12 @@ class Sitemap
 //        ));
 
         // Страницы сайта
-        $pages = Pages::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all();
+        $pages = Yii::$app->cache->get(self::PAGES_CACHE);
+        if($pages === false)
+        {
+            $pages = Pages::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all();
+            Yii::$app->cache->set(self::PAGES_CACHE,$pages);
+        }
 
         foreach ($pages as $page) {
             $sitemap->addItem(new SitemapItem(
@@ -42,7 +49,12 @@ class Sitemap
         }
 
         // Статьи
-        $articles = Articles::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all();
+        $articles = Yii::$app->cache->get(self::ARTICLES_CACHE);
+        if($articles === false)
+        {
+            $articles = Articles::find()->where(['status_id' => Pages::STATUS_PUBLISHED])->all();
+            Yii::$app->cache->set(self::ARTICLES_CACHE,$articles);
+        }
 
         foreach ($articles as $article) {
             $sitemap->addItem(new SitemapItem(
@@ -53,7 +65,11 @@ class Sitemap
         }
 
         // Сгенерим sitemap в файл sitemap.xml.
-        $sitemap->generate();
+        if(!is_null($data)){
+            return $sitemap->generate(1);
+        }else{
+            $sitemap->generate();
+        }
     }
 
     /**
@@ -72,7 +88,7 @@ class Sitemap
      * @access public
      * @return [void|string]
      */
-    function generate()
+    function generate($data = null)
     {
         ob_start();
         echo self::HEAD, "\n";
@@ -98,7 +114,12 @@ class Sitemap
         echo self::FOOT, "\n";
         $map = ob_get_clean();
 
-        file_put_contents(Yii::getAlias('@frontend/web/sitemap.xml'), $map);
+        if(!is_null($data)){
+            return htmlspecialchars($map);
+        }
+        else{
+            file_put_contents(Yii::getAlias('@frontend/web/sitemap.xml'), $map);
+        }
     }
 
     /**

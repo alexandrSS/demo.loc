@@ -4,10 +4,10 @@ namespace common\models;
 
 use common\helpers\Sitemap;
 use common\models\query\ArticlesQuery;
-use yii\db\ActiveRecord;
-use Yii;
 use common\behaviors\PurifierBehavior;
 use common\widget\fileapi\behaviors\UploadBehavior;
+use Yii;
+use yii\db\ActiveRecord;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -28,6 +28,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Articles extends ActiveRecord
 {
+    const CACHE_MENU_ARTICLES = 'CACHE_MENU_ARTICLES';
     /**
      * Unpublished status
      */
@@ -160,18 +161,38 @@ class Articles extends ActiveRecord
     public function rules()
     {
         return [
-            // Required
-            [['title', 'category_id', 'content'], 'required'],
-            // Trim
-            [['title', 'snippet', 'content'], 'trim'],
-            // CreatedAtJui and UpdatedAtJui
-            [['createdAtJui', 'updatedAtJui'], 'date', 'format' => 'd.m.Y'],
+            // Title
+            ['title', 'required'],
+            ['title', 'trim'],
+            ['title', 'string', 'length' => [1,100]],
+
+            // Alias
+            ['alias', 'trim'],
+            ['alias', 'string', 'length' => [1,100]],
+
+            // Category_id
+            ['category_id', 'required'],
+            ['category_id', 'integer'],
+
+            // Author_id
+            ['author_id', 'integer'],
+
+            // Snippet
+            ['snippet', 'required'],
+
+            // Content
+            ['content', 'required'],
+
             // Status
+            ['status_id', 'integer'],
             [
                 'status_id',
                 'default',
                 'value' => self::MODERATION ? self::STATUS_PUBLISHED : self::STATUS_UNPUBLISHED
-            ]
+            ],
+
+            // CreatedAtJui and UpdatedAtJui
+            [['createdAtJui', 'updatedAtJui'], 'date', 'format' => 'd.m.Y'],
         ];
     }
 
@@ -198,11 +219,15 @@ class Articles extends ActiveRecord
 
     public function afterSave()
     {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLES);
+        Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }
 
     public function afterDelete()
     {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLES);
+        Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use backend\models\User;
-use backend\controllers\SystemInfo;
+use backend\helpers\SystemInfo;
 use backend\themes\admin\widgets\GridView;
 use backend\themes\admin\widgets\Box;
 

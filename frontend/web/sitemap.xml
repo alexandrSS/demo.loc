@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 		<url>
-			<loc>http://demo.loc/svchs</loc>
-			<lastmod>2014-11-07T22:52:35+04:00</lastmod>
+			<loc>http://demo.loc/test1</loc>
+			<lastmod>2014-11-10T22:07:17+03:00</lastmod>
+			<changefreq>monthly</changefreq>
+		</url>
+		<url>
+			<loc>http://demo.loc/test</loc>
+			<lastmod>2014-11-10T22:04:10+03:00</lastmod>
 			<changefreq>monthly</changefreq>
 		</url>
 	</urlset>
