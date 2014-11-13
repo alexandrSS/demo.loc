@@ -22,6 +22,7 @@ use yii\db\ActiveRecord;
  */
 class ArticlesCategory extends ActiveRecord
 {
+    const CACHE_MENU_ARTICLE_CATEGORY = 'CACHE_MENU_ARTICLE_CATEGORY';
     /**
      * Unpublished status
      */
@@ -92,5 +93,16 @@ class ArticlesCategory extends ActiveRecord
     public function getArticlesCategories()
     {
         return $this->hasMany(ArticlesCategory::className(), ['parent_id' => 'id']);
+    }
+
+
+    public function afterSave()
+    {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLE_CATEGORY);
+    }
+
+    public function afterDelete()
+    {
+        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLE_CATEGORY);
     }
 }

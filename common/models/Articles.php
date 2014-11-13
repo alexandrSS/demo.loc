@@ -28,7 +28,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Articles extends ActiveRecord
 {
-    const CACHE_MENU_ARTICLES = 'CACHE_MENU_ARTICLES';
     /**
      * Unpublished status
      */
@@ -219,14 +218,12 @@ class Articles extends ActiveRecord
 
     public function afterSave()
     {
-        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLES);
         Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }
 
     public function afterDelete()
     {
-        Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLES);
         Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }

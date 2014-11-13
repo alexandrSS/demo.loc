@@ -22,7 +22,7 @@ return [
             'showScriptName'=>false,
         ],
         'assetManager' => [
-            'linkAssets' => false   // TODO: Windows XP
+            'linkAssets' => true   // TODO: Windows XP
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
