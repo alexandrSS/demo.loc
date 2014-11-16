@@ -77,7 +77,7 @@ class ResendForm extends Model
      */
     public function send()
     {
-        return $this->module->mail
+        return User::getMail()
             ->compose('signup', ['model' => $this->_model])
             ->setTo($this->email)
             ->setSubject(Yii::t('frontend', 'Код подтверждения новой учётной записи.') . ' ' . Yii::$app->name)

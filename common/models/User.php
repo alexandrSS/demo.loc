@@ -41,7 +41,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @var boolean If true after registration user will be required to confirm his e-mail address.
      */
-    const REQUIRE_EMAIL_CONFIGURATION = false;
+    const REQUIRE_EMAIL_CONFIGURATION = true;
 
     /**
      * Default role

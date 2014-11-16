@@ -1,5 +1,11 @@
 <?php
 return [
+    'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'allowedIPs' => ['*']
+        ],
+    ],
     'components' => [
         'db' => require(__DIR__ . '/db-local.php')
     ],
