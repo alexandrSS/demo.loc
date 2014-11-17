@@ -5,7 +5,6 @@ namespace backend\models;
 use Yii;
 use common\behaviors\PurifierBehavior;
 use yii\behaviors\SluggableBehavior;
-use common\widget\fileapi\behaviors\UploadBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use common\behaviors\TransliterateBehavior;
@@ -66,21 +65,6 @@ class Articles extends \common\models\Articles
                     'class' => SluggableBehavior::className(),
                     'attribute' => 'title',
                     'slugAttribute' => 'alias'
-                ],
-                'uploadBehavior' => [
-                    'class' => UploadBehavior::className(),
-                    'attributes' => [
-                        'preview_url' => [
-                            'path' => self::PREVIEW_PATH,
-                            'tempPath' => self::IMAGES_TEMP_PATH,
-                            'url' => self::PREVIEW_URL
-                        ],
-                        'image_url' => [
-                            'path' => self::IMAGE_PATH,
-                            'tempPath' => self::IMAGES_TEMP_PATH,
-                            'url' => self::IMAGE_URL
-                        ]
-                    ]
                 ],
             ]
         );
@@ -158,8 +142,6 @@ class Articles extends \common\models\Articles
                 'snippet',
                 'content',
                 'status_id',
-                'preview_url',
-                'image_url',
             ],
             'admin-update' => [
                 'title',
@@ -168,8 +150,6 @@ class Articles extends \common\models\Articles
                 'snippet',
                 'content',
                 'status_id',
-                'preview_url',
-                'image_url',
             ]
         ];
     }

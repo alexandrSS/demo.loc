@@ -5,7 +5,7 @@ namespace common\models;
 use common\helpers\Sitemap;
 use common\models\query\ArticlesQuery;
 use common\behaviors\PurifierBehavior;
-use common\widget\fileapi\behaviors\UploadBehavior;
+use vova07\fileapi\behaviors\UploadBehavior;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\SluggableBehavior;
@@ -47,16 +47,6 @@ class Articles extends ActiveRecord
     const MODERATION = true;
 
     /**
-     * Preview path
-     */
-    const PREVIEW_PATH = '@statics/web/articles/previews';
-
-    /**
-     * Image path
-     */
-    const IMAGE_PATH = '@statics/web/articles/images';
-
-    /**
      * @var string Files path
      */
     const FILE_PATH = '@statics/web/articles/files';
@@ -65,21 +55,6 @@ class Articles extends ActiveRecord
      * @var string Files path
      */
     const CONTENT_PATH = '@statics/web/articles/content';
-
-    /**
-     * @var string Images temporary path
-     */
-    const IMAGES_TEMP_PATH = '@statics/temp/articles/images';
-
-    /**
-     * @var string Preview URL
-     */
-    const PREVIEW_URL = '/statics/articles/previews';
-
-    /**
-     * @var string Image URL
-     */
-    const IMAGE_URL = '/statics/articles/images';
 
     /**
      * @var string Files URL
@@ -120,21 +95,6 @@ class Articles extends ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
                 'slugAttribute' => 'alias'
-            ],
-            'uploadBehavior' => [
-                'class' => UploadBehavior::className(),
-                'attributes' => [
-                    'preview_url' => [
-                        'path' => self::PREVIEW_PATH,
-                        'tempPath' => self::IMAGES_TEMP_PATH,
-                        'url' => self::PREVIEW_URL
-                    ],
-                    'image_url' => [
-                        'path' => self::IMAGE_PATH,
-                        'tempPath' => self::IMAGES_TEMP_PATH,
-                        'url' => self::IMAGE_URL
-                    ]
-                ]
             ],
             'purifierBehavior' => [
                 'class' => PurifierBehavior::className(),

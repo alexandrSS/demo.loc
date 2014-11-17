@@ -34,8 +34,6 @@ class m141021_070637_articles extends Migration
             'author_id' => Schema::TYPE_INTEGER,
             'snippet' => Schema::TYPE_TEXT . ' NOT NULL',
             'content' => 'longtext NOT NULL',
-            'image_url' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'preview_url' => Schema::TYPE_STRING . '(64) NOT NULL',
             'status_id' => 'tinyint(4) NOT NULL DEFAULT 0',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL'

@@ -4,8 +4,8 @@ return [
     'id' => 'app-frontend',
     'name' => 'Yii2-Demo',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'site/index',
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'site/index',
     'components' => [
         'request' => [
             'cookieValidationKey' => '7MGUCaKyJbDJJuY1fxiUnJMmmUUzyA',

@@ -58,8 +58,8 @@ class Articles extends \common\models\Articles
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['title', 'snippet', 'content', 'preview_url', 'image_url'];
-        $scenarios['update'] = ['title', 'snippet', 'content', 'preview_url', 'image_url'];
+        $scenarios['create'] = ['title', 'snippet', 'content'];
+        $scenarios['update'] = ['title', 'snippet', 'content'];
 
         return $scenarios;
     }

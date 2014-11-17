@@ -13,6 +13,9 @@ return [
             'cookieValidationKey' => '7fdsf%dbYd&djsb#sn0mlsfo(kj^kf98dfh',
             'baseUrl' => '/backend',
         ],
+        'user' => [
+            'loginUrl' => ['login']
+        ],
         'urlManager' => [
             'rules' => [
                 'login' => 'login/login',

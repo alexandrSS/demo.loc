@@ -1,7 +1,7 @@
 <?php
 
-use common\widget\fileapi\Widget as FileAPI;
-use backend\widget\imperavi\Widget as Imperavi;
+use vova07\fileapi\Widget as FileAPI;
+use vova07\imperavi\Widget as Imperavi;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
@@ -32,28 +32,6 @@ use yii\widgets\ActiveForm;
         <div class="col-sm-12">
             <?= $form->field($model, 'status_id')->dropDownList($statusArray) ?>
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($model, 'preview_url')->widget(
-                FileAPI::className(),
-                [
-                    'settings' => [
-                        'url' => ['/articles/fileapi-upload']
-                    ]
-                ]
-            ) ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'image_url')->widget(
-                FileAPI::className(),
-                [
-                    'settings' => [
-                        'url' => ['/articles/fileapi-upload']
-                    ]
-                ]
-            ) ?>
         </div>
     </div>
     <div class="row">

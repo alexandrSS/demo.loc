@@ -23,7 +23,9 @@
         "yiisoft/yii2-jui": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "swiftmailer/swiftmailer": "*",
-        "bower-asset/jquery-ui": "*"
+        "bower-asset/jquery-ui": "*",
+        "vova07/yii2-imperavi-widget": "*",
+        "vova07/yii2-fileapi-widget": "*"
     },
     "require-dev": {
     	"yiisoft/yii2-debug": "*",

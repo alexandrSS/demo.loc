@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
+use vova07\fileapi\actions\UploadAction as FileAPIUpload;
 use frontend\models\Email;
 use frontend\models\PasswordForm;
 use common\models\Profile;

@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
+use vova07\fileapi\actions\UploadAction as FileAPIUpload;
 use frontend\models\ActivationForm;
 use frontend\models\RecoveryConfirmationForm;
 use frontend\models\RecoveryForm;

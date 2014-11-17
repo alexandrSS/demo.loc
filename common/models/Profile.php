@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\widget\fileapi\behaviors\UploadBehavior;
+use vova07\fileapi\behaviors\UploadBehavior;
 use yii\db\ActiveRecord;
 use Yii;
 

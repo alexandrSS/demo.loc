@@ -1,6 +1,6 @@
 <?php
 
-use common\widget\fileapi\Widget;
+use vova07\fileapi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

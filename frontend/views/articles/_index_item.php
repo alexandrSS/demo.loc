@@ -13,16 +13,6 @@ use yii\helpers\Html;
         <span><i class="icon-calendar"></i> <?= $model->created ?></span>
     </div>
 
-    <?php if ($model->preview_url) : ?>
-        <?= Html::a(
-            Html::img(
-                $model->urlAttribute('preview_url'),
-                ['class' => 'img-responsive img-blog', 'width' => '100%', 'alt' => $model->title]
-            ),
-            ['/articles/'.$model->alias]
-        ) ?>
-    <?php endif; ?>
-
     <?= $model->snippet ?>
     <?= Html::a(
         Yii::t('frontend', 'Читать далее') . ' <i class="icon-angle-right"></i>',

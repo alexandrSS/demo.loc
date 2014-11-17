@@ -10,7 +10,6 @@ return [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'common\models\User',
-            'loginUrl' => ['login']
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -22,7 +21,7 @@ return [
             'showScriptName'=>false,
         ],
         'assetManager' => [
-            'linkAssets' => true   // TODO: Windows XP
+            'linkAssets' => true
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
@@ -42,7 +41,7 @@ return [
                 'db'=>[
                     'class' => 'yii\log\DbTarget',
                     'levels' => ['error', 'warning'],
-                    'except'=>['yii\web\HttpException:404', 'yii\i18n\I18N::format'], // todo: DbTarget для 404 и 403
+                    'except'=>['yii\web\HttpException:*', 'yii\i18n\I18N::*'],
                     'prefix'=>function(){
                             $url = !Yii::$app->request->isConsoleRequest ? Yii::$app->request->getUrl() : null;
                             return sprintf('[%s][%s]', Yii::$app->id, $url);

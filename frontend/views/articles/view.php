@@ -40,13 +40,6 @@ $this->params['breadcrumbs'] = [
                         </span>
                     </div>
 
-                    <?php if ($model->preview_url) : ?>
-                        <?= Html::img(
-                            $model->urlAttribute('preview_url'),
-                            ['class' => 'img-responsive img-blog', 'width' => '100%', 'alt' => $model->title]
-                        ) ?>
-                    <?php endif; ?>
-
                     <?= $model->content ?>
                 </div>
             </div><!--/.blog-item-->

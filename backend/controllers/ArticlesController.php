@@ -6,9 +6,9 @@ use backend\components\Controller;
 use backend\models\Articles;
 use backend\models\ArticlesCategory;
 use backend\models\search\ArticlesSearch;
-use backend\widget\imperavi\actions\GetAction as ImperaviGet;
-use backend\widget\imperavi\actions\UploadAction as ImperaviUpload;
-use common\widget\fileapi\actions\UploadAction as FileAPIUpload;
+use vova07\imperavi\actions\GetAction as ImperaviGet;
+use vova07\imperavi\actions\UploadAction as ImperaviUpload;
+use vova07\fileapi\actions\UploadAction as FileAPIUpload;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\HttpException;
@@ -93,10 +93,6 @@ class ArticlesController extends Controller
                 'path' => Articles::FILE_PATH,
                 'uploadOnlyImage' => false
             ],
-            'fileapi-upload' => [
-                'class' => FileAPIUpload::className(),
-                'path' => Articles::IMAGES_TEMP_PATH
-            ]
         ];
     }
 
