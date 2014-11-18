@@ -37,6 +37,7 @@ $this->params['breadcrumbs'] = [
                     <div class="entry-meta">
                         <span>
                             <i class="icon-calendar"></i> <?= $model->created ?>
+                            <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
                         </span>
                     </div>
 

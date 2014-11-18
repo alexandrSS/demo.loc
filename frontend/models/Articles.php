@@ -63,4 +63,14 @@ class Articles extends \common\models\Articles
 
         return $scenarios;
     }
+
+    /**
+     * Update views counter.
+     *
+     * @return boolean Whether views counter was updated or not
+     */
+    public function updateViews()
+    {
+        return $this->updateCounters(['views' => 1]);
+    }
 }

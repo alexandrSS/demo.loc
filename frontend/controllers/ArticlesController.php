@@ -4,9 +4,11 @@ namespace frontend\controllers;
 
 use frontend\models\Articles;
 use frontend\models\ArticlesCategory;
-use yii\data\ActiveDataProvider;
+use Yii;
+use yii\web\Cookie;
 use yii\web\Controller;
 use yii\web\HttpException;
+use yii\data\ActiveDataProvider;
 
 /**
  * Контроллер для вывода статей
@@ -58,7 +60,6 @@ class ArticlesController extends Controller
     }
 
     /**
-     * @param $id
      * @param $alias
      * @return string
      * @throws \yii\web\HttpException
@@ -66,6 +67,7 @@ class ArticlesController extends Controller
     public function actionView($alias)
     {
         if (($model = Articles::findOne(['alias' => $alias])) !== null) {
+            $this->counter($model);
             return $this->render(
                 'view',
                 [
@@ -74,6 +76,42 @@ class ArticlesController extends Controller
             );
         } else {
             throw new HttpException(404);
+        }
+    }
+    /**
+     * Update blog views counter.
+     *
+     * @param Articles $model Model
+     */
+    protected function counter($model)
+    {
+        $cookieName = 'articles-views';
+        $shouldCount = false;
+        $views = Yii::$app->request->cookies->getValue($cookieName);
+
+        if ($views !== null) {
+            if (is_array($views)) {
+                if (!in_array($model->id, $views)) {
+                    $views[] = $model->id;
+                    $shouldCount = true;
+                }
+            } else {
+                $views = [$model->id];
+                $shouldCount = true;
+            }
+        } else {
+            $views = [$model->id];
+            $shouldCount = true;
+        }
+
+        if ($shouldCount === true) {
+            if ($model->updateViews()) {
+                Yii::$app->response->cookies->add(new Cookie([
+                    'name' => $cookieName,
+                    'value' => $views,
+                    'expire' => time() + 86400 * 365
+                ]));
+            }
         }
     }
 }

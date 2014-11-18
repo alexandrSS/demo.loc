@@ -35,6 +35,7 @@ class m141021_070637_articles extends Migration
             'snippet' => Schema::TYPE_TEXT . ' NOT NULL',
             'content' => 'longtext NOT NULL',
             'status_id' => 'tinyint(4) NOT NULL DEFAULT 0',
+            'views' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL'
         ], $tableOptions);
