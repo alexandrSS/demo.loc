@@ -35,15 +35,15 @@ $this->params['breadcrumbs'] = [
                     <h3><?= $model->title ?></h3>
 
                     <div class="entry-meta">
-                        <span>
-                            <i class="icon-calendar"></i> <?= $model->created ?>
-                            <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
-                        </span>
+                        <span><i class="icon-calendar"></i> <?= $model->created ?></span>
+                        <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
                     </div>
 
                     <?= $model->content ?>
                 </div>
-            </div><!--/.blog-item-->
+            </div>
+            <!--/.blog-item-->
         </div>
-    </div><!--/.col-md-8-->
+    </div>
+    <!--/.col-md-8-->
 </div><!--/.row-->
