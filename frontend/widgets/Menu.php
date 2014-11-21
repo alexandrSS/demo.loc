@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\themes\site\widgets;
+namespace frontend\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 /**
  * Class Menu
- * @package frontend\themes\site\widgets
+ * @package frontend\widgets
  * Theme menu widget.
  */
 class Menu extends \yii\widgets\Menu

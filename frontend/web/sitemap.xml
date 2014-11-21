@@ -2,12 +2,17 @@
 	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 		<url>
 			<loc>http://demo.loc/articles/yii2-testiruem-na-hhvm</loc>
-			<lastmod>2014-11-17T19:17:11+03:00</lastmod>
+			<lastmod>2014-11-19T18:52:41+03:00</lastmod>
 			<changefreq>monthly</changefreq>
 		</url>
 		<url>
 			<loc>http://demo.loc/articles/prostoy-eksport-v-excel-xlsx</loc>
 			<lastmod>2014-11-17T19:41:25+03:00</lastmod>
+			<changefreq>monthly</changefreq>
+		</url>
+		<url>
+			<loc>http://demo.loc/articles/dgdsfhg</loc>
+			<lastmod>2014-11-19T18:53:07+03:00</lastmod>
 			<changefreq>monthly</changefreq>
 		</url>
 	</urlset>

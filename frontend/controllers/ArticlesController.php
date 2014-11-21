@@ -2,8 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use frontend\models\Articles;
 use frontend\models\ArticlesCategory;
+use frontend\models\Comments;
 use Yii;
 use yii\web\Cookie;
 use yii\web\Controller;
@@ -68,10 +70,17 @@ class ArticlesController extends Controller
     {
         if (($model = Articles::findOne(['alias' => $alias])) !== null) {
             $this->counter($model);
+            $username = User::getUsername($model->author_id);
+            $comments = Comments::find()->where(['model_id' => $model->id])->all();
+            $modelComment = new Comments();
+
             return $this->render(
                 'view',
                 [
-                    'model' => $model
+                    'model' => $model,
+                    'username' => $username,
+                    'comments' => $comments,
+                    'modelComment' => $modelComment
                 ]
             );
         } else {

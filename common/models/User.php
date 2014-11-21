@@ -228,6 +228,15 @@ class User extends ActiveRecord implements IdentityInterface
         return $query->one();
     }
 
+    public static function getUsername($id)
+    {
+        if($model = self::find()->where(['id' => $id])->one()){
+            return $model->username;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * @inheritdoc
      */

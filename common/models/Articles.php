@@ -19,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $id ID
  * @property string $title Title
  * @property string $alias Alias
+ * @property integer $category_id Articles Category
+ * @property integer $author_id Author
  * @property string $snippet Intro text
  * @property string $content Content
  * @property integer $views Views
@@ -175,6 +177,22 @@ class Articles extends ActiveRecord
         ];
     }
 
+    /**
+     * @param bool $insert
+     * @return bool|void
+     */
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert)){
+            if($this->isNewRecord){
+                if(!$this->author_id){
+                    $this->author_id = Yii::$app->getUser()->id;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
     public function afterSave()
     {

@@ -90,11 +90,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{update} {delete}'
                 ]
             ],
-        ]);
+        ]); ?>
 
-        Box::end();
-        ?>
-
+        <?php Box::end() ?>
 
     </div>
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-use frontend\themes\site\widgets\Menu;
+use frontend\widgets\Menu;
 use frontend\models\Pages;
 
 echo Menu::widget(

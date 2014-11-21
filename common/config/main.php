@@ -53,7 +53,7 @@ return [
         ],
 
         'formatter' => [
-            'dateFormat' => 'dd.MM.y',
+            'dateFormat' => 'dd.MM.y HH:mm',
             'datetimeFormat' => 'HH:mm:ss dd.MM.y'
         ],
 

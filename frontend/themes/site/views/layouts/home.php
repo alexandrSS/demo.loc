@@ -7,7 +7,7 @@
  * @var string $content Content
  */
 
-use frontend\themes\site\widgets\Alert;
+use frontend\widgets\Alert;
 
 ?>
 <?php $this->beginPage(); ?>

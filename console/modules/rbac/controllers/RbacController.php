@@ -98,6 +98,19 @@ class RbacController extends Controller
         $bcPagesBatchDelete->description = 'Удаление страниц';
         $auth->add($bcPagesBatchDelete);
 
+        // Комментарии
+        $bcCommentsIndex = $auth->createPermission('bcCommentsIndex');
+        $bcCommentsIndex->description = 'Список комментариев';
+        $auth->add($bcCommentsIndex);
+
+        $bcCommentsDelete = $auth->createPermission('bcCommentsDelete');
+        $bcCommentsDelete->description = 'Удаление комментария';
+        $auth->add($bcCommentsDelete);
+
+        $bcCommentsBatchDelete = $auth->createPermission('bcCommentsBatchDelete');
+        $bcCommentsBatchDelete->description = 'Удаление комментариев';
+        $auth->add($bcCommentsBatchDelete);
+
         // Пользователи
         $bcUserIndex = $auth->createPermission('bcUserIndex');
         $bcUserIndex->description = 'Список страниц';
@@ -189,6 +202,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcPagesIndex);
         $auth->addChild($admin, $bcPagesCreate);
         $auth->addChild($admin, $bcPagesUpdate);
+        $auth->addChild($admin, $bcCommentsIndex);
         $auth->addChild($admin, $bcUserIndex);
         $auth->addChild($admin, $bcUserCreate);
         $auth->addChild($admin, $bcUserUpdate);
@@ -211,6 +225,8 @@ class RbacController extends Controller
         $auth->addChild($superadmin, $bcArticleBatchDelete);
         $auth->addChild($superadmin, $bcPagesDelete);
         $auth->addChild($superadmin, $bcPagesBatchDelete);
+        $auth->addChild($superadmin, $bcCommentsDelete);
+        $auth->addChild($superadmin, $bcCommentsBatchDelete);
         $auth->addChild($superadmin, $bcUserDelete);
         $auth->addChild($superadmin, $bcUserBatchDelete);
         $auth->addChild($superadmin, $bcSystemEventDelete);

@@ -1,6 +1,6 @@
 <?php
 
-use frontend\themes\site\widgets\Alert;
+use frontend\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 
 ?>

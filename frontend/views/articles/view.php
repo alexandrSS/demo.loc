@@ -1,7 +1,6 @@
 <?php
 
-use yii\helpers\Html;
-use frontend\themes\site\widgets\Menu;
+use frontend\widgets\Menu;
 use frontend\models\ArticlesCategory;
 
 $this->title = $model['title'];
@@ -37,9 +36,18 @@ $this->params['breadcrumbs'] = [
                     <div class="entry-meta">
                         <span><i class="icon-calendar"></i> <?= $model->created ?></span>
                         <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
+                        <span><i class="icon-user"></i> <?= $username ?></span>
                     </div>
 
                     <?= $model->content ?>
+
+                    <div id="comments">
+                        <?= $this->render('_comment_item',['comments' => $comments]) ?>
+
+                        <h3><?= Yii::t('frontend', 'Оставить сомментарий') ?></h3>
+                        <?= $this->render('_comments_form',['model_id' => $model->id, 'modelComment' => $modelComment]) ?>
+                    </div>
+
                 </div>
             </div>
             <!--/.blog-item-->

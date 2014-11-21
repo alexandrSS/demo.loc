@@ -22,10 +22,10 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'icon' => '<i class="fa fa-edit"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
-                //['label' => Yii::t('themes', 'Категории'), 'url' => ['/category'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
                 ['label' => Yii::t('themes', 'Категории статей'), 'url' => ['/articles-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
                 ['label' => Yii::t('themes', 'Статьи'), 'url' => ['/articles/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
                 ['label' => Yii::t('themes', 'Страницы'), 'url' => ['/pages/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                ['label' => Yii::t('themes', 'Комментарии'), 'url' => ['/comments/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
             ]
         ],
         [
