@@ -28,18 +28,6 @@ class CommentsController extends Controller
     }
 
     /**
-     * Displays a single Comments model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Comments model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -52,14 +40,17 @@ class CommentsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    return $this->tree($model);
+                    //return $this->tree($model);
+                    return $this->render('create1');
                 } else {
                     Yii::$app->response->setStatusCode(500);
-                    return Yii::t('frontend', 'Не удалось сохранить комментарий. Попробуйте пожалуйста еще раз!');
+                    //return Yii::t('frontend', 'Не удалось сохранить комментарий. Попробуйте пожалуйста еще раз!');
+                    return $this->render('create2');
                 }
             } elseif (Yii::$app->request->isAjax) {
                 Yii::$app->response->setStatusCode(400);
-                return ActiveForm::validate($model);
+                //return ActiveForm::validate($model);
+                return $this->render('create3');
             }
         }
     }

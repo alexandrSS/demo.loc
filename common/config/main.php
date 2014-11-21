@@ -21,7 +21,7 @@ return [
             'showScriptName'=>false,
         ],
         'assetManager' => [
-            'linkAssets' => true
+            'linkAssets' => false   // TODO: Windows xp
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',

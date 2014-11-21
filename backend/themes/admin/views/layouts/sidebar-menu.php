@@ -51,6 +51,11 @@ echo \common\components\widgets\menu\MenuWidget::widget([
         'options' => ['class' => 'treeview'],
         'items' => [
             [
+                'label' => Yii::t('themes', 'Кэш'),
+                'url' => ['/cache/index'],
+                'icon' => '<i class="fa fa-angle-double-right"></i>'
+            ],
+            [
                 'label' => Yii::t('themes', 'Информация о системе'),
                 'url' => ['/system-information/index'],
                 'icon' => '<i class="fa fa-angle-double-right"></i>'

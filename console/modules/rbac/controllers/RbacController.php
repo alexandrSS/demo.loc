@@ -132,6 +132,15 @@ class RbacController extends Controller
         $bcUserBatchDelete->description = 'Удаление страниц';
         $auth->add($bcUserBatchDelete);
 
+        // Кэш
+        $bcCacheIndex = $auth->createPermission('bcCacheIndex');
+        $bcCacheIndex->description = 'Кэш';
+        $auth->add($bcCacheIndex);
+
+        $bcCacheDelete = $auth->createPermission('bcCacheDelete');
+        $bcCacheDelete->description = 'Удаление Кэша';
+        $auth->add($bcCacheDelete);
+
         // События
         $bcSystemEventIndex = $auth->createPermission('bcSystemEventIndex');
         $bcSystemEventIndex->description = 'Список событий';
@@ -206,6 +215,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcUserIndex);
         $auth->addChild($admin, $bcUserCreate);
         $auth->addChild($admin, $bcUserUpdate);
+        $auth->addChild($admin, $bcCacheIndex);
         $auth->addChild($admin, $bcSystemEventIndex);
         $auth->addChild($admin, $bcSystemEventView);
         $auth->addChild($admin, $bcLogIndex);
@@ -229,6 +239,7 @@ class RbacController extends Controller
         $auth->addChild($superadmin, $bcCommentsBatchDelete);
         $auth->addChild($superadmin, $bcUserDelete);
         $auth->addChild($superadmin, $bcUserBatchDelete);
+        $auth->addChild($superadmin, $bcCacheDelete);
         $auth->addChild($superadmin, $bcSystemEventDelete);
         $auth->addChild($superadmin, $bcSystemEventBatchDelete);
         $auth->addChild($superadmin, $bcLogDelete);
