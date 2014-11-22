@@ -3,6 +3,7 @@
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
+use yii\grid\SerialColumn;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 
@@ -11,7 +12,18 @@ $this->params['subtitle'] = Yii::t('backend', 'Список котегорий')
 $this->params['breadcrumbs'] = [
     $this->title
 ];
+
+if(Yii::$app->user->can('bcArticleCategoryCreate')){
+    $buttonsTemplate[]='{create}';
+}
+
+if(Yii::$app->user->can('bcArticleCategoryBatchDelete')){
+    $buttonsTemplate[]='{batch-delete}';
+}
+
+$buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
 ?>
+
 <div class="articles-category-index">
     <div class="row">
         <div class="col-xs-12">
@@ -21,7 +33,7 @@ $this->params['breadcrumbs'] = [
                     'bodyOptions' => [
                         'class' => 'table-responsive'
                     ],
-                    'buttonsTemplate' => '{create}',
+                    'buttonsTemplate' => $buttonsTemplate,
                     'grid' => 'articlesCategory-grid'
                 ]
             ); ?>
@@ -30,8 +42,8 @@ $this->params['breadcrumbs'] = [
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-                    //['class' => CheckboxColumn::classname()],
+                    ['class' => SerialColumn::classname()],
+                    ['class' => CheckboxColumn::classname()],
                     'title',
                     'alias',
                     [
@@ -67,12 +79,14 @@ $this->params['breadcrumbs'] = [
                             $searchModel,
                             'status_id',
                             $statusArray,
-                            ['class' => 'form-control', 'prompt' => Yii::t('backend', 'Выберите статус')]
+                            [
+                                'class' => 'form-control',
+                                'prompt' => Yii::t('backend', 'Выберите статус')
+                            ]
                         )
                     ],
                     // 'created_at',
                     // 'updated_at',
-
                     [
                         'class' => ActionColumn::className(),
                         'template' => '{update} {delete}'

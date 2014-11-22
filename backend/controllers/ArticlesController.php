@@ -51,7 +51,7 @@ class ArticlesController extends Controller
             ],
             [
                 'allow' => true,
-                'actions' => ['bach-delete'],
+                'actions' => ['batch-delete'],
                 'roles' => ['bcArticleBatchDelete']
             ],
             [
@@ -103,7 +103,7 @@ class ArticlesController extends Controller
     public function actionIndex()
     {
         $searchModel = new ArticlesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $statusArray = Articles::getStatusArray();
         $categoryList = ArticlesCategory::getCategoryListArray();
 

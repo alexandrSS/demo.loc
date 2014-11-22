@@ -11,6 +11,11 @@ $this->params['breadcrumbs'] = [
     ],
     $this->params['subtitle']
 ];
+
+$buttonsTemplate[]='{cancel}';
+
+$buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
+
 ?>
 <div class="row">
     <div class="col-sm-12">
@@ -24,7 +29,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{cancel}'
+                'buttonsTemplate' => $buttonsTemplate
             ]
         );
         echo $this->render(

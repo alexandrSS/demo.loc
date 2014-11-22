@@ -3,6 +3,8 @@
 use backend\themes\admin\widgets\Box;
 use backend\themes\admin\widgets\GridView;
 use yii\grid\ActionColumn;
+use yii\grid\SerialColumn;
+use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 
@@ -11,6 +13,16 @@ $this->params['subtitle'] = Yii::t('backend', 'Список статей');
 $this->params['breadcrumbs'] = [
     $this->title
 ];
+
+if(Yii::$app->user->can('bcArticleCreate')){
+    $buttonsTemplate[]='{create}';
+}
+
+if(Yii::$app->user->can('bcArticleBatchDelete')){
+    $buttonsTemplate[]='{batch-delete}';
+}
+
+$buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
 ?>
 
 <div class="row">
@@ -21,7 +33,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{create}',
+                'buttonsTemplate' => $buttonsTemplate,
                 'grid' => 'articles-grid'
             ]
         ); ?>
@@ -31,7 +43,8 @@ $this->params['breadcrumbs'] = [
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+                    ['class' => SerialColumn::classname()],
+                    ['class' => CheckboxColumn::classname()],
                     [
                         'attribute' => 'title',
                         'format' => 'html',
@@ -84,7 +97,7 @@ $this->params['breadcrumbs'] = [
                     [
                         'attribute' => 'created_at',
                         'format' => 'date',
-                        'filter' => DatePicker::widget(
+/*                        'filter' => DatePicker::widget(
                             [
                                 'model' => $searchModel,
                                 'attribute' => 'created_at',
@@ -95,12 +108,12 @@ $this->params['breadcrumbs'] = [
                                     'dateFormat' => 'dd.mm.yy',
                                 ]
                             ]
-                        )
+                        )*/
                     ],
                     [
                         'attribute' => 'updated_at',
                         'format' => 'date',
-                        'filter' => DatePicker::widget(
+/*                        'filter' => DatePicker::widget(
                             [
                                 'model' => $searchModel,
                                 'attribute' => 'updated_at',
@@ -111,7 +124,7 @@ $this->params['breadcrumbs'] = [
                                     'dateFormat' => 'dd.mm.yy',
                                 ]
                             ]
-                        )
+                        )*/
                     ],
                     [
                         'class' => ActionColumn::className(),

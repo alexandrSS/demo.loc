@@ -22,10 +22,26 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'icon' => '<i class="fa fa-edit"></i>',
             'options' => ['class' => 'treeview'],
             'items' => [
-                ['label' => Yii::t('themes', 'Категории статей'), 'url' => ['/articles-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Статьи'), 'url' => ['/articles/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Страницы'), 'url' => ['/pages/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                ['label' => Yii::t('themes', 'Комментарии'), 'url' => ['/comments/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                [
+                    'label' => Yii::t('themes', 'Категории статей'),
+                    'url' => ['/articles-category/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+                [
+                    'label' => Yii::t('themes', 'Статьи'),
+                    'url' => ['/articles/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+                [
+                    'label' => Yii::t('themes', 'Страницы'),
+                    'url' => ['/pages/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+                [
+                    'label' => Yii::t('themes', 'Комментарии'),
+                    'url' => ['/comments/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
             ]
         ],
         [
@@ -46,35 +62,47 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             ]
         ],
         [
-        'label' => Yii::t('themes', 'Система'),
-        'icon' => '<i class="fa fa-cogs"></i>',
-        'options' => ['class' => 'treeview'],
-        'items' => [
-            [
-                'label' => Yii::t('themes', 'Кэш'),
-                'url' => ['/cache/index'],
-                'icon' => '<i class="fa fa-angle-double-right"></i>'
-            ],
-            [
-                'label' => Yii::t('themes', 'Информация о системе'),
-                'url' => ['/system-information/index'],
-                'icon' => '<i class="fa fa-angle-double-right"></i>'
-            ],
-            [
-                'label' => Yii::t('themes', 'События'),
-                'url' => ['/system-event/index'],
-                'icon' => '<i class="fa fa-angle-double-right"></i>',
-                'badge' => \backend\models\SystemEvent::find()->today()->count(),
-                'badgeBgClass' => 'bg-green',
-            ],
-            [
-                'label' => Yii::t('themes', 'Журнал'),
-                'url' => ['/log/index'],
-                'icon' => '<i class="fa fa-angle-double-right"></i>',
-                'badge' => \backend\models\SystemLog::find()->count(),
-                'badgeBgClass' => 'bg-red',
-            ],
+            'label' => Yii::t('themes', 'Система'),
+            'icon' => '<i class="fa fa-cogs"></i>',
+            'options' => ['class' => 'treeview'],
+            'items' => [
+                [
+                    'label' => Yii::t('themes', 'Кэш'),
+                    'url' => ['/cache/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+                [
+                    'label' => Yii::t('themes', 'Информация о системе'),
+                    'url' => ['/system-information/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+                [
+                    'label' => Yii::t('themes', 'События'),
+                    'url' => ['/system-event/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>',
+                    'badge' => \backend\models\SystemEvent::find()->today()->count(),
+                    'badgeBgClass' => 'bg-green',
+                ],
+                [
+                    'label' => Yii::t('themes', 'Журнал'),
+                    'url' => ['/log/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>',
+                    'badge' => \backend\models\SystemLog::find()->count(),
+                    'badgeBgClass' => 'bg-red',
+                ],
+            ]
+        ],
+        [
+            'label' => Yii::t('themes', 'Институт'),
+            'icon' => '<i class="fa fa-briefcase"></i>',
+            'options' => ['class' => 'treeview'],
+            'items' => [
+                [
+                    'label' => Yii::t('themes', 'Мет. и ср. защиты комп. информации'),
+                    'url' => ['/security/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                ],
+            ]
         ]
-    ]
     ]
 ]);

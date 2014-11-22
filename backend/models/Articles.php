@@ -112,6 +112,7 @@ class Articles extends \common\models\Articles
                 ['status_id', 'in', 'range' => array_keys(self::getStatusArray())],
             ]
         );
+
     }
 
     /**

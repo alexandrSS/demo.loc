@@ -47,7 +47,7 @@ class PagesController extends Controller
             ],
             [
                 'allow' => true,
-                'actions' => ['bach-delete'],
+                'actions' => ['batch-delete'],
                 'roles' => ['bcPagesBatchDelete']
             ],
             [

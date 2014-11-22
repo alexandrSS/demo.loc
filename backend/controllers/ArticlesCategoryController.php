@@ -46,7 +46,7 @@ class ArticlesCategoryController extends Controller
             ],
             [
                 'allow' => true,
-                'actions' => ['bach-delete'],
+                'actions' => ['batch-delete'],
                 'roles' => ['bcArticleCategoryBatchDelete']
             ],
             [

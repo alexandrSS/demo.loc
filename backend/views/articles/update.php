@@ -10,7 +10,20 @@ $this->params['breadcrumbs'] = [
         'url' => ['index'],
     ],
     $this->params['subtitle']
-]; ?>
+];
+
+$buttonsTemplate[]='{cancel}';
+
+if(Yii::$app->user->can('bcArticleCreate')){
+    $buttonsTemplate[]='{create}';
+}
+
+if(Yii::$app->user->can('bcArticleDelete')){
+    $buttonsTemplate[]='{delete}';
+}
+
+$buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
+?>
 <div class="row">
     <div class="col-sm-12">
         <?php $box = Box::begin(
@@ -23,7 +36,7 @@ $this->params['breadcrumbs'] = [
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{cancel} {create} {delete}'
+                'buttonsTemplate' => $buttonsTemplate
             ]
         );
         echo $this->render(

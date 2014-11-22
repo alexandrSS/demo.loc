@@ -10,6 +10,17 @@ use yii\jui\DatePicker;
 $this->title = Yii::t('backend', 'Страницы');
 $this->params['subtitle'] = Yii::t('backend', 'Список страниц');
 $this->params['breadcrumbs'][] = $this->title;
+
+if(Yii::$app->user->can('bcPagesCreate')){
+    $buttonsTemplate[]='{create}';
+}
+
+if(Yii::$app->user->can('bcPagesBatchDelete')){
+    $buttonsTemplate[]='{batch-delete}';
+}
+
+$buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
+
 ?>
 <div class="row">
     <div class="col-xs-12">
@@ -20,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'bodyOptions' => [
                     'class' => 'table-responsive'
                 ],
-                'buttonsTemplate' => '{create}',
+                'buttonsTemplate' => $buttonsTemplate,
                 'grid' => 'pages-grid'
             ]
         ); ?>

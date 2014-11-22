@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use backend\widget\imperavi\Widget as Imperavi;
+use vova07\imperavi\Widget as Imperavi;
 use yii\helpers\Url;
-use yii\jui\DatePicker;
 
 ?>
 

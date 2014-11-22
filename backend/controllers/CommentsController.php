@@ -40,7 +40,7 @@ class CommentsController extends Controller
             ],
             [
                 'allow' => true,
-                'actions' => ['bach-delete'],
+                'actions' => ['batch-delete'],
                 'roles' => ['bcCommentsBatchDelete']
             ],
             [

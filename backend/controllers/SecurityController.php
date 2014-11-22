@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
  * Class SiteMapController
  * @package backend\controllers
  */
-class CacheController extends Controller
+class SecurityController extends Controller
 {
     /**
      * @return array
@@ -22,19 +22,13 @@ class CacheController extends Controller
             [
                 'allow' => true,
                 'actions' => ['index'],
-                'roles' => ['bcCacheIndex']
+                'roles' => ['bcSecurityIndex']
             ],
-            [
-                'allow' => true,
-                'actions' => ['delete'],
-                'roles' => ['bcCacheDelete']
-            ]
         ];
         $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
             'actions' => [
                 'index' => ['get'],
-                'delete' => ['get'],
             ]
         ];
 
@@ -47,14 +41,5 @@ class CacheController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
-    }
-
-    /**
-     * @return string
-     */
-    public function actionDelete()
-    {
-        Yii::$app->cache->flush();
-        return $this->redirect('index');
     }
 }
