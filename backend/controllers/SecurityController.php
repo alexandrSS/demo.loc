@@ -40,6 +40,28 @@ class SecurityController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $messagePart1 = 'Сообщение';
+        $key = 'key';
+        $ctx = new \backend\helpers\AES\Context\ECB($key);
+        $ctr = new \backend\helpers\AES\Mode\ECB();
+        $cipherText = $ctr->encrypt($ctx, $messagePart1);
+
+        return $this->render(
+                'index',
+                [
+                    'cipherText' => $cipherText
+                ]
+            );
     }
 }
+/*// Instantiate a context
+$ctx = new AES\Context\CTR($key, $nonce);
+
+// Instantiate a cipher mode
+$ctr = new AES\Mode\CTR();
+
+// Encrypt / decrypt a message
+$cipherText = $ctr->encrypt($ctx, $messagePart1);
+
+// Encrypt / decrypt more of a message
+$cipherText .= $ctr->encrypt($ctx, $messagePart2);*/

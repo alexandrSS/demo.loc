@@ -30,8 +30,7 @@
     "require-dev": {
     	"yiisoft/yii2-debug": "*",
     	"yiisoft/yii2-gii": "*",
-        "rubaxa/fileapi": "*",
-        "lt/PHP-AES": "*"
+        "rubaxa/fileapi": "*"
     },
     "config": {
         "process-timeout": 1800

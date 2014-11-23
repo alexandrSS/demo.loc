@@ -21,7 +21,7 @@ $this->params['breadcrumbs'] = [
             ]
         ); ?>
 
-
+        <?php print_r($cipherText) ?>
 
         <?php Box::end(); ?>
     </div>
