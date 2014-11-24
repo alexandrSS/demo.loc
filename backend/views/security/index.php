@@ -21,7 +21,47 @@ $this->params['breadcrumbs'] = [
             ]
         ); ?>
 
-        <?php print_r($cipherText) ?>
+
+        <?php //print_r($cipherText) ?>
+
+        <?php //print_r($cipherText1) ?>
+        <?php
+
+            $messagePart = 'Сообщение';
+            echo '<pre>"';print_r($messagePart); echo '"</pre>';
+
+            $key = '111111111111111111111111';
+            echo '<pre>"';print_r($key); echo '"</pre>';
+
+            $ctx = new \backend\helpers\AES\Context\ECB($key);
+            $ctr = new \backend\helpers\AES\Mode\ECB();
+
+            $countxx = strlen(utf8_decode($messagePart));
+            echo '<pre>"'; print($countxx); echo '"</pre>';
+
+            $i = $countxx % 8;
+            echo '<pre>"'; print($i); echo '"</pre>';
+
+            $i = 8 - $i;
+            echo '<pre>"'; print($i); echo '"</pre>';
+
+            $a = $i + $countxx;
+            $messagePart = str_pad($messagePart, $a);
+            echo '<pre>"'; print($messagePart); echo '"</pre>';
+
+
+            $cipherText = $ctr->encrypt($ctx, $messagePart);
+            echo '<pre>"'; print($cipherText); echo '"</pre>';
+
+            $cipherText1 = $ctr->decrypt($ctx, $cipherText);
+            echo '<pre>"'; print($cipherText1); echo '"</pre>';
+
+        print '"'.strlen('Сообщение').'"';
+        print '"'.strlen('ааа').'"';
+        print '"'.strlen('с с').'"';
+
+        ?>
+
 
         <?php Box::end(); ?>
     </div>
