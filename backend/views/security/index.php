@@ -27,7 +27,7 @@ $this->params['breadcrumbs'] = [
         <?php //print_r($cipherText1) ?>
         <?php
 
-            $messagePart = 'Сообщение';
+            $messagePart = "Большинство моих профессиональных Java проектов за последнее десятилетие были основаны на Sring или JEE. Обе платформы развиваются достаточно уверенно, однако все ещё страдают от различных проблем.";
             echo '<pre>"';print_r($messagePart); echo '"</pre>';
 
             $key = '111111111111111111111111';
@@ -42,23 +42,27 @@ $this->params['breadcrumbs'] = [
             $i = $countxx % 8;
             echo '<pre>"'; print($i); echo '"</pre>';
 
-            $i = 8 - $i;
+            if($i > 0)
+                $i = 8 - $i;
+
             echo '<pre>"'; print($i); echo '"</pre>';
 
             $a = $i + $countxx;
-            $messagePart = str_pad($messagePart, $a);
+            $messagePart = str_pad($messagePart, strlen($messagePart)+$i);
             echo '<pre>"'; print($messagePart); echo '"</pre>';
+            //////////////////////
 
+
+
+            ////////////////////////
 
             $cipherText = $ctr->encrypt($ctx, $messagePart);
-            echo '<pre>"'; print($cipherText); echo '"</pre>';
+            echo '<pre>';
+            print_r('<<'.$cipherText.'>>>');
+            echo '</pre>';
 
             $cipherText1 = $ctr->decrypt($ctx, $cipherText);
             echo '<pre>"'; print($cipherText1); echo '"</pre>';
-
-        print '"'.strlen('Сообщение').'"';
-        print '"'.strlen('ааа').'"';
-        print '"'.strlen('с с').'"';
 
         ?>
 

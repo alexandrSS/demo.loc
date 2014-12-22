@@ -99,8 +99,16 @@ echo \common\components\widgets\menu\MenuWidget::widget([
             'items' => [
                 [
                     'label' => Yii::t('themes', 'Мет. и ср. защиты комп. информации'),
-                    'url' => ['/security/index'],
-                    'icon' => '<i class="fa fa-angle-double-right"></i>'
+                    //'url' => ['/security/index'],
+                    'icon' => '<i class="fa fa-angle-double-right"></i>',
+                    'options' => ['class' => 'treeview'],
+                    'items' => [
+                        [
+                            'label' => Yii::t('themes', 'Шифрование'),
+                            'url' => ['/security/encrypt'],
+                            'icon' => '<i class="fa fa-angle-double-right"></i>',
+                        ],
+                    ]
                 ],
             ]
         ]

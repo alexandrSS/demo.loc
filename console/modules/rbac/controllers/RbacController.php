@@ -190,6 +190,14 @@ class RbacController extends Controller
         $bcSecurityIndex->description = 'Методы и средства защиты компьютерной информации';
         $auth->add($bcSecurityIndex);
 
+        $bcSecurityEncrypt = $auth->createPermission('bcSecurityEncrypt');
+        $bcSecurityEncrypt->description = 'Методы и средства защиты компьютерной информации';
+        $auth->add($bcSecurityEncrypt);
+
+        $bcSecurityDecrypt = $auth->createPermission('bcSecurityDecrypt');
+        $bcSecurityDecrypt->description = 'Методы и средства защиты компьютерной информации';
+        $auth->add($bcSecurityDecrypt);
+
 
 
         // Roles
@@ -228,6 +236,8 @@ class RbacController extends Controller
         $auth->addChild($admin, $bcSystemInformationIndex);
         $auth->addChild($admin, $bcSiteMapIndex);
         $auth->addChild($admin, $bcSecurityIndex);
+        $auth->addChild($admin, $bcSecurityEncrypt);
+        $auth->addChild($admin, $bcSecurityDecrypt);
 
         // Супер-Админ
         $superadmin = $auth->createRole('superadmin');

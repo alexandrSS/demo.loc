@@ -3,7 +3,9 @@
 namespace backend\controllers;
 
 use backend\components\Controller;
+use backend\models\SecurityForm;
 use Yii;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 
 /**
@@ -24,6 +26,16 @@ class SecurityController extends Controller
                 'actions' => ['index'],
                 'roles' => ['bcSecurityIndex']
             ],
+            [
+                'allow' => true,
+                'actions' => ['encrypt'],
+                'roles' => ['bcSecurityEncrypt']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['bcSecurityDecrypt']
+            ],
         ];
         $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
@@ -34,6 +46,34 @@ class SecurityController extends Controller
 
         return $behaviors;
     }
+
+
+    public function actionEncrypt()
+{
+    $model = new SecurityForm();
+
+    if ($model->load(Yii::$app->request->post())) {
+        $model->file = UploadedFile::getInstance($model, 'file');
+        if ($model->validate()) {
+            $dir = Yii::getAlias('@statics/security');
+            $model->file->saveAs($dir . '/' . $model->file->baseName . '.' . $model->file->extension);
+
+            //<a href="/statics/articles/files/549865c1dc0ed.txt">549865c1dc0ed.txt</a>
+
+            $href = '<a href="' . $dir . '/' . $model->file->baseName . '.' . $model->file->extension . '">' . $model->file->baseName . '.' . $model->file->extension . '</a>';
+
+            return $this->render('encrypt', [
+                'model' => $model,
+                'href' => $href
+            ]);
+        }
+    }
+
+    return $this->render('encrypt', [
+        'model' => $model,
+    ]);
+}
+
 
     /**
      * @return string
