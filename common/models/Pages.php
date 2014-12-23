@@ -88,7 +88,7 @@ class Pages extends \yii\db\ActiveRecord
     }
 
 
-    public function afterSave()
+    public function afterSave($insert, $changedAttributes)
     {
         Yii::$app->getCache()->delete(self::CACHE_MENU_PAGE);
         Yii::$app->getCache()->delete(Sitemap::PAGES_CACHE);

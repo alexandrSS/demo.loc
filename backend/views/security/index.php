@@ -55,7 +55,7 @@ $this->params['breadcrumbs'] = [
 
 
             ////////////////////////
-
+            echo '$cipherText';
             $cipherText = $ctr->encrypt($ctx, $messagePart);
             echo '<pre>';
             print_r('<<'.$cipherText.'>>>');

@@ -96,7 +96,7 @@ class ArticlesCategory extends ActiveRecord
     }
 
 
-    public function afterSave()
+    public function afterSave($insert, $changedAttributes)
     {
         Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLE_CATEGORY);
     }

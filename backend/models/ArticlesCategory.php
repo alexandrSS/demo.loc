@@ -64,7 +64,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
      * Читабельный статус котегории
      * @return mixed
      */
-/*    public function getCategoryList()
+    public function getCategoryList()
     {
         if(!empty($this->parent_id)){
             if($this->_categoryList === NULL){
@@ -74,7 +74,7 @@ class ArticlesCategory extends \common\models\ArticlesCategory
             return $this->_categoryList;
         }
         return $this->_categoryList = NULL;
-    }*/
+    }
 
     /**
      * @param null $parent_id

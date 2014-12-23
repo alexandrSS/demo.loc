@@ -108,6 +108,11 @@ echo \common\components\widgets\menu\MenuWidget::widget([
                             'url' => ['/security/encrypt'],
                             'icon' => '<i class="fa fa-angle-double-right"></i>',
                         ],
+                        [
+                            'label' => Yii::t('themes', 'Дешифрование'),
+                            'url' => ['/security/decrypt'],
+                            'icon' => '<i class="fa fa-angle-double-right"></i>',
+                        ],
                     ]
                 ],
             ]

@@ -12,7 +12,6 @@ use Yii;
 class SecurityForm extends Model
 {
     public $key;
-    public $text;
     public $file;
 
     /**
@@ -21,8 +20,11 @@ class SecurityForm extends Model
     public function rules()
     {
         return [
-            [['key', 'text'], 'required'],
-            [['file'], 'file']
+            [['key', 'file'], 'required'],
+            [['file'], 'file'],
+            // Username
+            ['key', 'match', 'pattern' => '/^[a-zA-Z0-9_-]+$/'],
+            ['key', 'string', 'min' => 3, 'max' => 30],
         ];
     }
 
@@ -33,7 +35,6 @@ class SecurityForm extends Model
     {
         return [
             'key' => 'Ключ',
-            'text' => 'Текст для шифрования',
             'file' => 'Файл',
         ];
     }

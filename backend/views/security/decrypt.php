@@ -15,12 +15,12 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'key') ?>
     
         <div class="form-group">
-            <?= Html::submitButton('Зашифровать', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Дешифровать', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>
-<?= $model->file !== null ? Html::a('Скачать файл - "' . $model->file->baseName . '.encrypt.' . $model->file->extension . '"',
-    ['download', 'file' => 'C:/wamp/www/demo.loc/statics/web/' . $model->file->baseName . '.encrypt.' . $model->file->extension],
+<?= $model->file !== null ? Html::a('Скачать файл - "' . $model->file->baseName . '.decrypt.' . $model->file->extension . '"',
+    ['download', 'file' => 'C:/wamp/www/demo.loc/statics/web/' . $model->file->baseName . '.decrypt.' . $model->file->extension],
     ['class' => 'btn btn-primary']
 ) : null
 ?>

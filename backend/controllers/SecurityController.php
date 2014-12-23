@@ -29,12 +29,17 @@ class SecurityController extends Controller
             [
                 'allow' => true,
                 'actions' => ['encrypt'],
-                'roles' => ['bcSecurityEncrypt']
+                'roles' => ['bcSecurityIndex']
             ],
             [
                 'allow' => true,
-                'actions' => ['index'],
-                'roles' => ['bcSecurityDecrypt']
+                'actions' => ['decrypt'],
+                'roles' => ['bcSecurityIndex']
+            ],
+            [
+                'allow' => true,
+                'actions' => ['download'],
+                'roles' => ['bcSecurityIndex']
             ],
         ];
         $behaviors['verbs'] = [
@@ -49,30 +54,99 @@ class SecurityController extends Controller
 
 
     public function actionEncrypt()
-{
-    $model = new SecurityForm();
+    {
+        $model = new SecurityForm();
 
-    if ($model->load(Yii::$app->request->post())) {
-        $model->file = UploadedFile::getInstance($model, 'file');
-        if ($model->validate()) {
-            $dir = Yii::getAlias('@statics/security');
-            $model->file->saveAs($dir . '/' . $model->file->baseName . '.' . $model->file->extension);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->validate()) {
+                $dir = Yii::getAlias('@statics');
+                $model->file->saveAs($dir . '/web/' . $model->file->baseName . '.encrypt.' . $model->file->extension);
 
-            //<a href="/statics/articles/files/549865c1dc0ed.txt">549865c1dc0ed.txt</a>
+                $messagePart = file_get_contents($dir . '/web/' . $model->file->baseName . '.encrypt.' . $model->file->extension);
 
-            $href = '<a href="' . $dir . '/' . $model->file->baseName . '.' . $model->file->extension . '">' . $model->file->baseName . '.' . $model->file->extension . '</a>';
+                $ctx = new \backend\helpers\AES\Context\ECB($model->key);
+                $ctr = new \backend\helpers\AES\Mode\ECB();
 
-            return $this->render('encrypt', [
-                'model' => $model,
-                'href' => $href
-            ]);
+                $countText = strlen($messagePart);
+
+                $i = $countText % 8;
+
+                if($i > 0)
+                    $i = 8 - $i;
+
+                $a = $i + $countText;
+                $messagePart = str_pad($messagePart, $i);
+
+
+
+                $cipherText = $ctr->encrypt($ctx, $messagePart);
+
+                file_put_contents($dir . '/web/' . $model->file->baseName . '.encrypt.' . $model->file->extension, $cipherText);
+
+                return $this->render('encrypt', [
+                    'model' => $model,
+                ]);
+            }
         }
+
+        return $this->render('encrypt', [
+            'model' => $model,
+        ]);
     }
 
-    return $this->render('encrypt', [
-        'model' => $model,
-    ]);
-}
+    public function actionDecrypt()
+    {
+        $model = new SecurityForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->validate()) {
+                $dir = Yii::getAlias('@statics');
+                $model->file->saveAs($dir . '/web/' . $model->file->baseName . '.decrypt.' . $model->file->extension);
+
+                $messagePart = file_get_contents('C:/wamp/www/demo.loc/statics/web/' . $model->file->baseName . '.decrypt.' . $model->file->extension);
+
+                $ctx = new \backend\helpers\AES\Context\ECB($model->key);
+                $ctr = new \backend\helpers\AES\Mode\ECB();
+                $cipherText = $ctr->decrypt($ctx, $messagePart);
+
+                file_put_contents('C:/wamp/www/demo.loc/statics/web/' . $model->file->baseName . '.decrypt.' . $model->file->extension, $cipherText);
+
+                return $this->render('decrypt', [
+                    'model' => $model,
+                ]);
+            }
+        }
+
+        return $this->render('decrypt', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionDownload($file)
+    {
+        if (file_exists($file)) {
+            // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
+            // если этого не сделать файл будет читаться в память полностью!
+            if (ob_get_level()) {
+                ob_end_clean();
+            }
+            // заставляем браузер показать окно сохранения файла
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            // читаем файл и отправляем его пользователю
+            readfile($file);
+            exit;
+        }
+    }
 
 
     /**
@@ -80,29 +154,30 @@ class SecurityController extends Controller
      */
     public function actionIndex()
     {
-/*        $messagePart = 'Сообщение';
-        $key = '111111111111111111111111';
+        /*        $messagePart = 'Сообщение';
+                $key = '111111111111111111111111';
 
-        $ctx = new \backend\helpers\AES\Context\ECB($key);
-        $ctr = new \backend\helpers\AES\Mode\ECB();
+                $ctx = new \backend\helpers\AES\Context\ECB($key);
+                $ctr = new \backend\helpers\AES\Mode\ECB();
 
-        $count = strlen($messagePart);
-        $i = $count % 8;
-        $i = 8 - $i;
-        $messagePart = str_pad($messagePart, $i);
+                $count = strlen($messagePart);
+                $i = $count % 8;
+                $i = 8 - $i;
+                $messagePart = str_pad($messagePart, $i);
 
-        $cipherText = $ctr->encrypt($ctx, $messagePart);
-        $cipherText1 = $ctr->decrypt($ctx, $cipherText);*/
+                $cipherText = $ctr->encrypt($ctx, $messagePart);
+                $cipherText1 = $ctr->decrypt($ctx, $cipherText);*/
 
         return $this->render(
-                'index',
-                [
-/*                    'cipherText' => $cipherText,
-                    'cipherText1' => $cipherText1,*/
-                ]
-            );
+            'index',
+            [
+                /*                    'cipherText' => $cipherText,
+                                    'cipherText1' => $cipherText1,*/
+            ]
+        );
     }
 }
+
 /*// Instantiate a context
 $ctx = new AES\Context\CTR($key, $nonce);
 

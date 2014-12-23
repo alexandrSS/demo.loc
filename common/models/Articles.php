@@ -194,7 +194,7 @@ class Articles extends ActiveRecord
         return false;
     }
 
-    public function afterSave()
+    public function afterSave($insert, $changedAttributes)
     {
         Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
